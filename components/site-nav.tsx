@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 
 const NAV_ITEMS = [
   { label: "Home", href: "#home", id: "home" },
+  { label: "Professional Experience", href: "#experience", id: "experience" },
+  { label: "Awards & Honours", href: "#awards-honours", id: "awards-honours" },
   { label: "Education", href: "#education", id: "education" },
   { label: "Research Projects", href: "#research", id: "research" },
   { label: "Publications", href: "#publications", id: "publications" },
@@ -43,7 +45,7 @@ export function SiteNav() {
 
   return (
     <nav aria-label="Primary" className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
-      <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+      <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
         {NAV_ITEMS.map((item, i) => {
           const isActive = activeId === item.id
           return (
@@ -53,6 +55,7 @@ export function SiteNav() {
                 "border-border border-b",
                 "border-r",
                 i % 2 === 1 ? "max-sm:border-r-0" : "",
+                i === NAV_ITEMS.length - 1 ? "lg:border-r-0" : "",
                 "lg:border-b-0",
               ].join(" ")}
             >

@@ -9,6 +9,7 @@ export type Publication = {
   cite: string
   abstract?: string
   date?: string
+  url?: string
 }
 
 export function PublicationsAccordion({
@@ -71,16 +72,31 @@ export function PublicationsAccordion({
                       </p>
                     </>
                   )}
-                  <a
-                    href="#"
-                    className="group mt-6 inline-flex items-center gap-2 font-sans text-xs font-medium tracking-wide text-primary hover:text-primary/80"
-                  >
-                    Download PDF
-                    <ArrowRight
-                      className="size-4 transition-transform group-hover:translate-x-1"
-                      aria-hidden="true"
-                    />
-                  </a>
+                  {p.url ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mt-6 inline-flex items-center gap-2 font-sans text-xs font-medium tracking-wide text-primary hover:text-primary/80"
+                    >
+                      View on ResearchGate
+                      <ArrowRight
+                        className="size-4 transition-transform group-hover:translate-x-1"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ) : (
+                    <a
+                      href="#"
+                      className="group mt-6 inline-flex items-center gap-2 font-sans text-xs font-medium tracking-wide text-primary hover:text-primary/80"
+                    >
+                      Download PDF
+                      <ArrowRight
+                        className="size-4 transition-transform group-hover:translate-x-1"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  )}
                 </div>
               </div>
             )}

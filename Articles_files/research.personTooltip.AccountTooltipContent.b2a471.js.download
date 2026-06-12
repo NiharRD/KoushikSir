@@ -1,0 +1,423 @@
+(window.wjp=window.wjp||[]).push([[606],{1174:function(e,t,n){},1220:function(e,t,n){"use strict";var i=n(2),o=n(4),a=n(8),c=n.n(a),r=n(1),l=n(5),s=n(7),u=n(540),d=n(9),m=n(6),b=n(1262),j=n(0);const p=["id"];var I=Object(s.a)(Object(m.h)(r.EntityItemInfo),Object(l.withQuery)(l.gql`query AccountPersonItemJournalEditorRoles($id: ID!) {
+  account(id: $id) {
+    id
+    ...ProfileJournalEditorRoles @embed
+    __typename
+  }
+  __typename
+}
+`))(e=>{let{id:t}=e,n=Object(d.a)(e,p);return Object(j.jsx)(r.EntityItemInfo,{children:Object(j.jsx)(r.EntityItemInfoItem,{children:Object(j.jsx)(b.a,Object(i.a)({accountId:t},n))})})}),f=n(17),y=n.n(f);var O=Object(s.a)(Object(m.h)(r.EntityItemInfo),Object(l.withQuery)(l.gql`query StandardPersonItemSharedConnections($id: ID!) {
+  account(id: $id) {
+    id
+    standardPersonItemSharedConnections: sharedConnections(first: 1) {
+      nodes {
+        id
+        fullName
+        __typename
+      }
+      pageInfo {
+        totalItems
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t,n,i,o,a;return{name:null==e||null===(t=e.standardPersonItemSharedConnections)||void 0===t||null===(n=t.nodes)||void 0===n||null===(i=n[0])||void 0===i?void 0:i.fullName,totalItems:(null==e||null===(o=e.standardPersonItemSharedConnections)||void 0===o||null===(a=o.pageInfo)||void 0===a?void 0:a.totalItems)||null}}}))(({name:e,totalItems:t})=>e?Object(j.jsx)(r.EntityItemInfo,{title:"Shared connections",children:Object(j.jsx)(r.EntityItemInfoItem,{children:`${e}${t>1?" + "+y()("other",t-1,!0):""}`})}):null);var h=Object(s.a)(Object(m.h)(r.EntityItemInfo),Object(l.withQuery)(l.gql`query StandardPersonItemSkills($id: ID!) {
+  account(id: $id) {
+    id
+    skillsNewNew {
+      keyword {
+        id
+        name
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t,n;return{keywords:null!==(t=null==e||null===(n=e.skillsNewNew)||void 0===n?void 0:n.filter(e=>!!e.keyword).map(({keyword:e})=>e))&&void 0!==t?t:[]}}}))(({keywords:e})=>{const t=e.slice(0,3);if(0===t.length)return null;const n=e.length-t.length;let i=t.map(({name:e})=>e).join(" · ");return n>0&&(i+=" + "+y()("other",n,!0)),Object(j.jsx)(r.EntityItemInfo,{title:"Skills",children:i})}),_=n(3),x=n.n(_),g=n(40),P=n(12),v=n(627),w=n(153),A=n(171),E=n(104);const $=["onAttentionChange"];var D=(e,t=(({context:e})=>e),n=(({currentAccountId:e})=>e),a=(({accountId:e})=>e))=>c=>{class r extends o.Component{render(){const e=this.props,{onAttentionChange:t}=e,n=Object(d.a)(e,$);return Object(j.jsx)(w.a,{onChange:t,children:Object(j.jsx)(c,Object(i.a)({},n))})}}return r.displayName="DecoratedComponent",r.propTypes={onAttentionChange:x.a.func.isRequired},Object(s.a)(Object(m.n)(Object(E.a)(c,"withBusinessCardAttentionTracking")),Object(A.a)(i=>{const o=t(i);return Object(v.a)(o,"business card tracking needs a context"),{context:o,currentAccountId:n(i),parentId:a(i),rgKey:new g.a("noid",P.RgType.TYPE_BUSINESSCARD).toString(),componentIdentifier:e}}))(r)};n(1961);const S=new c.a("standard-person-item-image");class k extends o.Component{render(){const{accountId:e,fullNameParams:t,imageParams:n,size:o,additionalInfo:a,actions:c,areLinksDisabled:l,context:s,areSharedConnectionsVisible:d,onClick:m,withProfileVerifiedIcon:b}=this.props,p={utm_content:"businessCard",utm_source:s,rgutm_meta1:e};return Object(j.jsxs)(r.EntityItem,Object(i.a)(Object(i.a)({size:o},b?S():{}),{},{children:[Object(j.jsx)(u.f,{id:e,params:Object(i.a)(Object(i.a)({},t),p),isLinkDisabled:l,onClick:m,withProfileVerifiedIcon:b}),Object(j.jsx)(u.g,{id:e,params:Object(i.a)(Object(i.a)({},n),p),isLinkDisabled:l,onClick:m}),Object(j.jsx)(u.i,{id:e,isPositionVisible:!0,isDegreeVisible:!0,isInstitutionVisible:!1}),Object(j.jsx)(I,{id:e,tooltipsEnabled:!1,businessCardsEnabled:!1}),Object(j.jsx)(u.e,{id:e}),d&&Object(j.jsx)(O,{id:e}),Object(j.jsx)(u.h,{isInstitutionVisible:!0,isDepartmentVisible:!0,id:e,clamp:"3"}),Object(j.jsx)(h,{id:e}),a,c]}))}}k.displayName="StandardPersonItem",k.defaultProps={size:"m",areSharedConnectionsVisible:!1,withProfileVerifiedIcon:!1};t.a=Object(s.a)(Object(l.withQuery)(l.gql`query StandardPersonItem($accountId: ID!, $areSharedConnectionsVisible: Boolean = false) {
+  account(id: $accountId) {
+    id
+    ...AccountPersonItemFullName @embed
+    ...AccountPersonItemImage @embed
+    ...AccountPersonItemMetaItems @embed
+    ...AccountPersonItemBlurb @embed
+    ...AccountPersonItemDepartment @embed
+    ...StandardPersonItemSkills @embed
+    ...AccountPersonItemInstitution @embed
+    ...AccountPersonItemInstitutionAndDepartment @embed
+    ...StandardPersonItemSharedConnections @embed @include(if: $areSharedConnectionsVisible)
+    ...AccountPersonItemJournalEditorRoles @embed
+    __typename
+  }
+  __typename
+}
+`),D("StandardPersonItem"))(k)},1245:function(e,t,n){},1262:function(e,t,n){"use strict";var i=n(2),o=n(8),a=n.n(o),c=n(1),r=n(5),l=n(91),s=n(0);const u=({journalTitlesAsLinks:e,journal:{url:t,title:n}})=>e&&t?Object(s.jsx)(l.a,{type:"link",color:"inherit",href:t,children:Object(s.jsx)(c.Text,{clamp:"1",children:n})}):Object(s.jsx)(c.Text,{clamp:"1",children:n});u.defaultProps={journalTitlesAsLinks:!0};var d=Object(r.withQuery)(r.gql`query ProfileJournalEditorRolesJournalTitle($journalId: ID!) {
+  journal(id: $journalId) {
+    id
+    title
+    url
+    __typename
+  }
+  __typename
+}
+`)(u),m=n(285),b=n(711);function j(e){return e.length>2?1:2}n(1245);const p=new a.a("profile-journal-editor-roles"),I=({enableEditorRolesOnProfile:e,editorRoles:t,tooltipsEnabled:n,businessCardsEnabled:o,journalTitlesAsLinks:a})=>{if(!e||(null==t?void 0:t.length)<1)return null;const r=function(e){return null==e?void 0:e.slice(0,j(e))}(t),l=function(e){return null==e?void 0:e.slice(j(e))}(t);return Object(s.jsxs)(c.Flex,{gutter:"xxs",wrap:"wrap",children:[r.map(({journal:e},t)=>{const n=Object(s.jsx)(d,{journalId:e.id,journalTitlesAsLinks:a}),r=o?Object(s.jsx)(m.a,{id:e.id,target:Object(s.jsx)("div",{children:n}),scope:"global"}):n;return Object(s.jsx)(c.Flex.Item,Object(i.a)(Object(i.a)({},p("journal")),{},{children:Object(s.jsxs)(c.Flex,{gutter:"xxs",alignItems:"center",children:[0===t?Object(s.jsx)(c.Flex.Item,{shrink:0,children:Object(s.jsx)(c.Text,{children:"Editor In"})}):Object(s.jsx)(c.Flex.Item,{shrink:0,children:Object(s.jsx)(c.Text,{children:"and "})}),Object(s.jsx)(c.Flex.Item,Object(i.a)(Object(i.a)({},p("journal-title")),{},{children:Object(s.jsx)(b.a,{children:r})}))]})}),e.url)}),l.length>0?Object(s.jsx)(c.Flex.Item,{children:n?Object(s.jsxs)(c.Text,{children:["and"," ",Object(s.jsx)(c.Tooltip,{spacing:"xs",position:"below",target:Object(s.jsxs)(c.Link,{type:"button",children:[l.length," more"]}),children:Object(s.jsx)(c.Tooltip.Body,Object(i.a)(Object(i.a)({},p("more-tooltip-body")),{},{children:Object(s.jsxs)(c.Flex,{direction:"column",gutter:"xs",children:[Object(s.jsx)(c.Flex.Item,{children:Object(s.jsx)(c.Flex,{gutter:"xxs",alignItems:"center",children:Object(s.jsx)(c.Flex.Item,{children:Object(s.jsx)(c.Text,{color:"grey-700",children:"This researcher is an editor in"})})})}),l.map(({journal:e})=>Object(s.jsx)(c.Flex.Item,{children:Object(s.jsx)(d,{journalId:e.id,journalTitlesAsLinks:a})},e.id))]})}))})]}):Object(s.jsxs)(c.Text,{children:["and ",l.length," more"]})}):null]})};I.defaultProps={tooltipsEnabled:!0,businessCardsEnabled:!0};var f=Object(r.withQuery)(r.gql`query ProfileJournalEditorRoles($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    profile {
+      journals {
+        editors {
+          id
+          journal {
+            id
+            ...JournalBusinessCard @embed
+            ...ProfileJournalEditorRolesJournalTitle @embed
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    enableEditorRolesOnProfile: isFeatureFlagActive(featureName: "enableEditorRolesOnProfile")
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t,n,i;return{enableEditorRolesOnProfile:null==e?void 0:e.enableEditorRolesOnProfile,editorRoles:(i=null==e||null===(t=e.profile)||void 0===t||null===(n=t.journals)||void 0===n?void 0:n.editors,null==i?void 0:i.sort((e,t)=>e.journal.title.localeCompare(t.journal.title)))}}})(I);t.a=f},1316:function(e,t,n){"use strict";n.d(t,"a",(function(){return o})),n.d(t,"c",(function(){return a})),n.d(t,"b",(function(){return c}));var i=n(5);const o=(e,t)=>({mutation:i.gql`mutation TrackBusinessCardFollowReact($accountId: ID!, $context: String!) {
+  personReactBusinessCardPerson(accountId: $accountId, context: $context, interactionType: FOLLOW)
+  __typename
+}
+`,variables:{accountId:e,context:t}}),a=(e,t)=>({mutation:i.gql`mutation TrackBusinessCardUnfollowReact($accountId: ID!, $context: String!) {
+  personReactBusinessCardPerson(accountId: $accountId, context: $context, interactionType: UNFOLLOW)
+  __typename
+}
+`,variables:{accountId:e,context:t}}),c=(e,t)=>({mutation:i.gql`mutation TrackBusinessCardMessageReact($accountId: ID!, $context: String!) {
+  personReactBusinessCardPerson(accountId: $accountId, context: $context, interactionType: MESSAGE)
+  __typename
+}
+`,variables:{accountId:e,context:t}})},1403:function(e,t,n){"use strict";n.r(t);var i=n(5),o=n(85),a=n(2877),c=n(1220),r=n(0);t.default=Object(i.withQuery)(i.gql`query AccountTooltipContent($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    ...StandardPersonItem @embed
+    ...StandardPersonItemActionsFollowAndPrivateMessage @embed
+    __typename
+  }
+  __typename
+}
+`,{preloader:o.b})(({accountId:e,context:t,afterFollowAction:n,afterUnfollowAction:i,onMessageDialogMount:o,onSendMessage:l,fullNameParams:s,imageParams:u,onVisitProfile:d})=>Object(r.jsx)(c.a,{accountId:e,context:t,fullNameParams:s,imageParams:u,areSharedConnectionsVisible:!0,onClick:d,withProfileVerifiedIcon:!0,actions:Object(r.jsx)(a.a,{accountId:e,context:t,afterFollowAction:n,afterUnfollowAction:i,onMessageDialogMount:o,onSendMessage:l})}))},1961:function(e,t,n){},2877:function(e,t,n){"use strict";var i=n(1),o=n(5),a=n(7),c=n(6),r=n(24),l=n(1316),s=n(540),u=n(0);const d=({accountId:e,context:t,afterUnfollowAction:n,afterFollowAction:o,onMessageDialogMount:a,onSendMessage:c,account:d,mutate:m})=>d.hasPermissionToFollow||d.hasPermissionToSendMessage?Object(u.jsxs)(i.EntityItemActions,{children:[Object(u.jsx)(s.a,{id:e,context:t,afterFollowAction:()=>{m(Object(l.a)(e,t)).then(()=>null==o?void 0:o()).catch(e=>{Object(r.default)(e),null==o||o()})},afterUnfollowAction:()=>{m(Object(l.c)(e,t)).then(()=>null==n?void 0:n()).catch(e=>{Object(r.default)(e),null==n||n()})},priority:"secondary"}),Object(u.jsx)(s.b,{accountId:e,context:t,onDialogMount:a,onSendMessage:()=>m(Object(l.b)(e,t)).then(()=>null==c?void 0:c()).catch(e=>{Object(r.default)(e),null==c||c()}),priority:"tertiary"})]}):null;d.defaultProps={hasMessageAction:!0},t.a=Object(a.a)(Object(c.h)(i.EntityItemActions),Object(o.withQuery)(o.gql`query StandardPersonItemActionsFollowAndPrivateMessage($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    hasPermissionToFollow
+    hasPermissionToSendMessage
+    ...AccountPersonItemActionFollow @embed
+    ...AccountPersonItemActionPrivateMessage @embed
+    __typename
+  }
+  __typename
+}
+`))(d)},540:function(e,t,n){"use strict";n.d(t,"f",(function(){return $})),n.d(t,"i",(function(){return M})),n.d(t,"g",(function(){return D})),n.d(t,"m",(function(){return Q})),n.d(t,"l",(function(){return N})),n.d(t,"a",(function(){return b})),n.d(t,"d",(function(){return x})),n.d(t,"k",(function(){return V})),n.d(t,"j",(function(){return F})),n.d(t,"b",(function(){return y})),n.d(t,"c",(function(){return h})),n.d(t,"e",(function(){return g})),n.d(t,"h",(function(){return S}));var i=n(10),o=n(1),a=n(5),c=n(7),r=n(6),l=n(11),s=n(409),u=n(436),d=n(0);const m=({isFollowing:e,labelFollowing:t,labelFollow:n,onFollow:i,onUnfollow:a,isVisible:c,priority:r})=>c?Object(d.jsx)(o.EntityItemAction,{priority:r,onClick:e?a:i,icon:e?"check":null,children:e?t:n}):null;m.defaultProps={labelFollow:"Follow",labelFollowing:"Following",isVisible:!0};var b=Object(c.a)(Object(r.h)(o.EntityItemAction),Object(i.connect)(),Object(a.withQuery)(a.gql`query AccountPersonItemActionFollow($id: ID!) {
+  account(id: $id) {
+    id
+    hasPermissionToFollow
+    isFollowing
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:{hasPermissionToFollow:e,isFollowing:t}})=>({isFollowing:t,isVisible:e||t})}),Object(r.r)({onFollow:({id:e,context:t,mutate:n,afterFollowAction:i,dispatch:o})=>()=>{n(Object(s.a)({id:e,context:t})).then(()=>{o(Object(l.pushAlert)(()=>Object(d.jsx)(u.a,{}))),null==i||i()})},onUnfollow:({id:e,context:t,mutate:n,dispatch:i,afterUnfollowAction:o})=>()=>{n(Object(s.b)({id:e,context:t})).then(()=>{i(Object(l.pushAlert)(()=>Object(d.jsx)(u.b,{}))),null==o||o()})}}))(m),j=n(40),p=n(72),I=n(16),f=()=>Promise.all([n.e(1),n.e(3),n.e(5),n.e(534)]).then(n.bind(null,2802));var y=Object(c.a)(Object(r.h)(o.EntityItemAction),Object(i.connect)(),Object(a.withQuery)(a.gql`query AccountPersonItemActionPrivateMessage($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    hasPermissionToSendMessage
+    __typename
+  }
+  __typename
+}
+`),Object(r.r)({onClick:({dispatch:e,accountId:t,onDialogMount:n,onSendMessage:i,context:o})=>()=>{e(Object(I.mountModal)(()=>Object(d.jsx)(p.a,{url:"messages.MessageCreateModal.html",widgetParams:{targetAccountId:j.a.parse(t).id,event:o},onSubmit:i,__internalLoadComponent:f}))),null==n||n()}}))(({account:e,priority:t,onClick:n})=>null!=e&&e.hasPermissionToSendMessage?Object(d.jsx)(o.EntityItemAction,{priority:t,onClick:n,children:"Send message"}):null),O=()=>Promise.all([n.e(1),n.e(3),n.e(5),n.e(534)]).then(n.bind(null,2802));var h=Object(c.a)(Object(r.h)(o.EntityItemAction),Object(i.connect)(),Object(a.withQuery)(a.gql`query AccountPersonItemActionPrivateMessageForPublicationFeedback_Account($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    hasPermissionToSendMessage
+    __typename
+  }
+  __typename
+}
+`),Object(a.withQuery)(a.gql`query AccountPersonItemActionPrivateMessageForPublicationFeedback_Publication($publicationId: ID!) {
+  publication(id: $publicationId) {
+    id
+    title
+    __typename
+  }
+  __typename
+}
+`),Object(r.r)({onClick:({dispatch:e,accountId:t,publication:n,onDialogMount:i,onSendMessage:o,context:a})=>()=>{e(Object(I.mountModal)(()=>Object(d.jsx)(p.a,{url:"messages.MessageCreateModal.html",widgetParams:{targetAccountId:j.a.parse(t).id,subject:"I'm interested in getting your feedback on: "+n.title,event:a},onSubmit:o,__internalLoadComponent:O}))),null==i||i()}}))(({account:e,priority:t,onClick:n})=>null!=e&&e.hasPermissionToSendMessage?Object(d.jsx)(o.EntityItemAction,{priority:t,onClick:n,children:"Send message"}):null),_=n(18);var x=Object(c.a)(Object(r.h)(o.EntityItemAction),Object(a.withQuery)(a.gql`query AccountPersonItemActionViewProfile($id: ID!) {
+  account(id: $id) {
+    id
+    url
+    __typename
+  }
+  __typename
+}
+`))(({account:e,params:t,priority:n,target:i})=>Object(d.jsx)(o.EntityItemAction,{priority:n,href:t?Object(_.b)(e.url,t):e.url,target:i,children:"View profile"}));var g=Object(c.a)(Object(r.h)(o.EntityItemBlurb),Object(a.withQuery)(a.gql`query AccountPersonItemBlurb($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      blurb
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{blurb:null==e||null===(t=e.profile)||void 0===t?void 0:t.blurb}}}))(({blurb:e})=>e?Object(d.jsx)(o.EntityItemBlurb,{children:e}):null);Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemDegree($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      degree
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{degree:null==e||null===(t=e.profile)||void 0===t?void 0:t.degree}}}))(({clamp:e,degree:t})=>t?Object(d.jsx)(o.EntityItemInfo,{title:"Degree",clamp:e,children:Object(d.jsx)(o.EntityItemInfoItem,{children:t})}):null);Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemDepartment($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      affiliation {
+        department: departmentNew {
+          name
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{department:null===(t=e.profile.affiliation.department)||void 0===t?void 0:t.name}}}))(({clamp:e,department:t})=>t?Object(d.jsx)(o.EntityItemInfo,{title:"Department",clamp:e,children:Object(d.jsx)(o.EntityItemInfoItem,{children:t})}):null);var P=n(2),v=n(8),w=n.n(v),A=n(857);n(1174);const E=w()("account-peron-item-full-name");var $=Object(c.a)(Object(r.h)(o.EntityItemTitle),Object(a.withQuery)(a.gql`query AccountPersonItemFullName($id: ID!) {
+  account(id: $id) {
+    id
+    isSelf
+    fullName
+    url
+    ...VerifiedProfileBadge @embed
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>Object(P.a)({},e)}))(({fullName:e,url:t,params:n,clamp:i,target:a,isLinkDisabled:c,onClick:r,id:l,withProfileVerifiedIcon:s})=>{const u=n?Object(_.b)(t,n):t,m=c?null:u;return Object(d.jsxs)(o.Pack,Object(P.a)(Object(P.a)({gutter:"xxs",verticalAlign:"baseline"},E()),{},{children:[Object(d.jsx)(o.Pack.Item,{children:Object(d.jsx)(o.EntityItemTitle,{href:m,clamp:i,target:a,onClick:r,children:e})}),s&&Object(d.jsx)(o.Pack.Item,{children:Object(d.jsx)(A.a,{accountId:l,isHoverable:!1})})]}))});var D=Object(c.a)(Object(r.h)(o.EntityItemImage),Object(a.withQuery)(a.gql`query AccountPersonItemImage($id: ID!) {
+  account(id: $id) {
+    id
+    fullName
+    image {
+      urlQ128: url(size: "Q128")
+      __typename
+    }
+    url
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>Object(P.a)({},e)}))(({fullName:e,url:t,image:n,params:i,isLinkDisabled:a,onClick:c})=>{const r=i?Object(_.b)(t,i):t,l=a?null:r;return Object(d.jsx)(o.EntityItemImage,{href:l,alt:e,imageUrl:null==n?void 0:n.urlQ128,onClick:c})});Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemInstitution($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      affiliation {
+        institution {
+          name
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{institution:null==e||null===(t=e.profile.affiliation.institution)||void 0===t?void 0:t.name}}}))(({clamp:e,institution:t})=>t?Object(d.jsx)(o.EntityItemInfo,{title:"Institution",clamp:e,children:Object(d.jsx)(o.EntityItemInfoItem,{children:t})}):null);var S=Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemInstitutionAndDepartment($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      affiliation {
+        institution {
+          name
+          __typename
+        }
+        department: departmentNew {
+          name
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t,n;return{institution:null==e||null===(t=e.profile.affiliation.institution)||void 0===t?void 0:t.name,department:null==e||null===(n=e.profile.affiliation.department)||void 0===n?void 0:n.name}}}))(({clamp:e,institution:t,department:n,isInstitutionVisible:i,isDepartmentVisible:a})=>{const c=(t,n)=>Object(d.jsx)(o.EntityItemInfo,{title:t,clamp:e,children:n.map((e,t)=>Object(d.jsx)(o.EntityItemInfoItem,{children:e},`insitution-department-key-${e}-${t}`))});return t&&n&&i&&a?c("Institution and department",[t,n]):t&&i?c("Institution",[t]):n&&a?c("Department",[n]):null});var k=Object(c.a)(Object(r.h)(o.EntityItemMetaItem),Object(a.withQuery)(a.gql`query AccountPersonItemMetaItemDegree($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      degree
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{degree:null==e||null===(t=e.profile)||void 0===t?void 0:t.degree}}}))(({degree:e})=>e?Object(d.jsx)(o.EntityItemMetaItem,{title:e,children:e}):null);var C=Object(c.a)(Object(r.h)(o.EntityItemMetaItem),Object(a.withQuery)(a.gql`query AccountPersonItemMetaItemInstitution($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      affiliation {
+        institution {
+          name
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{institution:null==e||null===(t=e.profile.affiliation.institution)||void 0===t?void 0:t.name}}}))(({institution:e})=>e?Object(d.jsx)(o.EntityItemMetaItem,{title:e,children:e}):null);var q=Object(c.a)(Object(r.h)(o.EntityItemMetaItem),Object(a.withQuery)(a.gql`query AccountPersonItemMetaItemPosition($id: ID!) {
+  account(id: $id) {
+    id
+    profile {
+      affiliation {
+        position: positionNewNew {
+          jobPosition {
+            id
+            position
+            __typename
+          }
+          profilePosition
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t,n,i,o,a,c,r,l;return{position:null!==(t=null==e||null===(n=e.profile)||void 0===n||null===(i=n.affiliation)||void 0===i||null===(o=i.position)||void 0===o||null===(a=o.jobPosition)||void 0===a?void 0:a.position)&&void 0!==t?t:null==e||null===(c=e.profile)||void 0===c||null===(r=c.affiliation)||void 0===r||null===(l=r.position)||void 0===l?void 0:l.profilePosition}}}))(({position:e})=>e?Object(d.jsx)(o.EntityItemMetaItem,{title:e,children:e}):null);const T=({id:e,isInstitutionVisible:t,isPositionVisible:n,isDegreeVisible:i})=>{const a=t&&Object(d.jsx)(C,{id:e}),c=n&&Object(d.jsx)(q,{id:e}),r=i&&Object(d.jsx)(k,{id:e});return a||c||r?Object(d.jsxs)(o.EntityItemMetaItems,{children:[r,c,a]}):null};T.defaultProps={isInstitutionVisible:!0,isPositionVisible:!1,isDegreeVisible:!1};var M=Object(c.a)(Object(r.h)(o.EntityItemMetaItems),Object(a.withQuery)(a.gql`query AccountPersonItemMetaItems($id: ID!) {
+  account(id: $id) {
+    id
+    ...AccountPersonItemMetaItemInstitution @embed
+    ...AccountPersonItemMetaItemPosition @embed
+    ...AccountPersonItemMetaItemDegree @embed
+    __typename
+  }
+  __typename
+}
+`))(T);var F=Object(c.a)(Object(r.h)(o.EntityItemMetric),Object(a.withQuery)(a.gql`query AccountPersonItemMetricCitationCount($id: ID!) {
+  account(id: $id) {
+    id
+    authorStats {
+      citationCount
+      __typename
+    }
+    url
+    __typename
+  }
+  __typename
+}
+`))(({account:e})=>{var t,n;const i=null!==(t=null==e||null===(n=e.authorStats)||void 0===n?void 0:n.citationCount)&&void 0!==t?t:0;return i<1?null:Object(d.jsx)(o.EntityItemMetric,{href:e.url,children:`${i} ${i>1?"Citations":"Citation"}`})});var V=Object(c.a)(Object(r.h)(o.EntityItemMetric),Object(a.withQuery)(a.gql`query AccountPersonItemMetricPublicationCount($id: ID!) {
+  account(id: $id) {
+    id
+    publicationCount
+    url
+    __typename
+  }
+  __typename
+}
+`))(({account:e})=>!e||!e.publicationCount||!e.publicationCount>0?null:Object(d.jsx)(o.EntityItemMetric,{href:e.url,children:`${e.publicationCount} ${e.publicationCount>1?"Publications":"Publication"}`}));var N=Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemMostRecentPublication($id: ID!) {
+  account(id: $id) {
+    id
+    publications(offset: 0, limit: 1) {
+      id
+      title
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`))(({account:e})=>!e||!e.publications||!e.publications.length>0?null:Object(d.jsx)(o.EntityItemInfo,{title:"Most Recent Research Contribution",children:Object(d.jsx)(o.ExpandableText,{spacing:"s",clamp:"2",children:e.publications[0].title})}));Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemSciences($id: ID!) {
+  account(id: $id) {
+    id
+    sciences {
+      id
+      name
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:e})=>{var t;return{sciences:null!==(t=null==e?void 0:e.sciences)&&void 0!==t?t:[]}}}))(({clamp:e,sciences:t})=>t.length>0?Object(d.jsx)(o.EntityItemInfo,{title:"Disciplines",clamp:e,children:t.map(e=>Object(d.jsx)(o.EntityItemInfoItem,{children:e.name},e.id))}):null);var Q=Object(c.a)(Object(r.h)(o.EntityItemInfo),Object(a.withQuery)(a.gql`query AccountPersonItemSkills($id: ID!) {
+  account(id: $id) {
+    id
+    skills(limit: 10) {
+      keyword {
+        id
+        name
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:function(e){var t,n;return{skills:(null!==(t=null==e||null===(n=e.account)||void 0===n?void 0:n.skills)&&void 0!==t?t:[]).filter(e=>!!e.keyword)}}}))(({skills:e,clamp:t})=>!e||!e.length>0?null:Object(d.jsx)(o.EntityItemInfo,{title:"Skills",clamp:t,children:e.map(e=>Object(d.jsx)(o.EntityItemInfoItem,{children:e.keyword.name},e.keyword.id))}))},688:function(e,t,n){"use strict";var i=n(1),o=n(0);t.a=()=>Object(o.jsx)(i.Text,{color:"blue-600",size:"m",children:Object(o.jsx)(i.Icon,{identifier:"institution-verified",luminosity:"medium",size:"s",theme:"bare"})})},711:function(e,t,n){"use strict";var i=n(2),o=n(8),a=n.n(o),c=n(1),r=(n(981),n(0));const l=new a.a("journal-title-verified");t.a=({children:e})=>Object(r.jsxs)(c.Flex,Object(i.a)(Object(i.a)({alignItems:"center",gutter:"xxs"},l()),{},{children:[Object(r.jsx)(c.Flex.Item,Object(i.a)(Object(i.a)({},l("truncation-container")),{},{children:e})),Object(r.jsx)(c.Flex.Item,{children:Object(r.jsx)(c.Icon,{identifier:"institution-verified",color:"green"})})]}))},733:function(e,t,n){"use strict";var i=n(2),o=n(9),a=n(14),c=n(1),r=n(5),l=n(7),s=n(6),u=n(688),d=n(0);const m=["accountId","target","isSelf","firstName","institution"],b=e=>{let{accountId:t,target:n,isSelf:r,firstName:l,institution:s}=e,b=Object(o.a)(e,m);if(!t||!s)return null;const j=b||{};return Object(d.jsx)(c.Tooltip,Object(i.a)(Object(i.a)({target:n},j),{},{children:Object(d.jsx)(c.Tooltip.Body,{children:Object(d.jsxs)(c.Stack,{gutter:"xs",children:[Object(d.jsx)(c.Stack.Item,{children:Object(d.jsxs)(c.Flex,{gutter:"xxs",children:[Object(d.jsx)(c.Flex.Item,{children:Object(d.jsx)(u.a,{})}),Object(d.jsx)(c.Flex.Item,{children:Object(d.jsx)(c.Text,{color:"grey-900",size:"m",children:Object(d.jsx)("b",{children:Object(a.a)("Verified")})})})]})}),Object(d.jsx)(c.Stack.Item,{children:Object(d.jsx)(c.Text,{clamp:"2",children:r?Object(a.a)("You verified your affiliation via your institutional email.",{institutionName:s.name}):Object(a.a)("{firstName} verified their affiliation via an institutional email.",{firstName:l,institutionName:s.name})})}),Object(d.jsx)(c.Stack.Item,{children:Object(d.jsx)(c.Text,{children:Object(d.jsx)(c.Link,{href:Object(a.a)("https://help.researchgate.net/profile/verification-on-researchgate"),target:"_blank",children:Object(a.a)("Learn more")})})})]})})}))};b.defaultProps={position:"below-left",offset:{left:-13,top:-10},scope:"global",spacing:"xs"},t.a=Object(l.a)(Object(r.withQuery)(r.gql`query VerifiedProfileInfoCard($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    isSelf
+    firstName
+    profile {
+      affiliation {
+        institution {
+          name
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps({account:{profile:e,isSelf:t,firstName:n}}){var i;return{isSelf:t,firstName:n,institution:null==e||null===(i=e.affiliation)||void 0===i?void 0:i.institution}}}),s.m)(b)},857:function(e,t,n){"use strict";var i=n(2),o=n(8),a=n.n(o),c=n(1),r=n(5),l=n(733),s=(n(941),n(0));const u=a()("verified-profile-badge");t.a=Object(r.withQuery)(r.gql`query VerifiedProfileBadge($accountId: ID!) {
+  account(id: $accountId) {
+    id
+    ...VerifiedProfileInfoCard @embed
+    profile {
+      isProfileVerificationIconEnabled
+      verificationState {
+        isVerified
+        __typename
+      }
+      __typename
+    }
+    isProfileVerificationStateEnabled: isFeatureFlagActive(featureName: "enableProfileVerificationState")
+    __typename
+  }
+  __typename
+}
+`,{mapDataToProps:({account:{fullName:e,profile:t,isProfileVerificationStateEnabled:n}})=>{var i,o;return{fullName:e,isVerified:null!==(i=null==t||null===(o=t.verificationState)||void 0===o?void 0:o.isVerified)&&void 0!==i&&i,isProfileVerificationIconEnabled:!1!==(null==t?void 0:t.isProfileVerificationIconEnabled),isProfileVerificationStateEnabled:n}}})(({accountId:e,isProfileVerificationStateEnabled:t,isVerified:n,isHoverable:o=!0,isProfileVerificationIconEnabled:a})=>{if(!n||!t||!a)return null;const r=Object(s.jsx)(c.Text,Object(i.a)(Object(i.a)({color:"blue-600",size:"m"},u()),{},{children:Object(s.jsx)(c.Icon,{identifier:"institution-verified",luminosity:"medium",size:"s",theme:"bare"})}));return o?Object(s.jsx)(l.a,{accountId:e,target:r}):r})},941:function(e,t,n){},981:function(e,t,n){}}]);
