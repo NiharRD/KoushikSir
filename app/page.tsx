@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 import { SiteNav } from "@/components/site-nav"
 import { Section } from "@/components/section"
 import { PublicationsAccordion, type Publication } from "@/components/publications-accordion"
+import { ResearchItems } from "@/components/research-items"
 
 const DEGREES = [
   { degree: "Ph.D.", place: "IIT Kanpur" },
@@ -200,32 +201,8 @@ const INTERESTS = [
   "Stochastic Structural Dynamics",
 ]
 
-const RESEARCH = [
-  {
-    code: "RP-01",
-    title: "Structural Health Monitoring of Long-Span Bridges",
-    desc: "Distributed fiber-optic and accelerometer sensing for real-time fatigue and damage assessment of cable-stayed bridge decks.",
-    status: "Active",
-  },
-  {
-    code: "RP-02",
-    title: "Seismic Resilience of RC Frame Structures",
-    desc: "Performance-based design and shake-table validation of reinforced concrete frames in high-seismicity zones.",
-    status: "Active",
-  },
-  {
-    code: "RP-03",
-    title: "Vibration-Based Damage Detection",
-    desc: "Machine-learning-driven modal analysis for early identification of structural degradation in civil infrastructure.",
-    status: "Ongoing",
-  },
-  {
-    code: "RP-04",
-    title: "Soil–Structure Interaction Under Cyclic Loading",
-    desc: "Centrifuge modelling of pile foundations subjected to repeated lateral and seismic loads.",
-    status: "Review",
-  },
-]
+
+
 
 const PUBLICATIONS: Publication[] = [
   {
@@ -608,12 +585,54 @@ const CONFERENCES = [
 ]
 
 const STUDENTS = [
-  { name: "K. Osei", role: "Ph.D. Candidate", topic: "Coupled shear wall systems" },
-  { name: "T. Nguyen", role: "Ph.D. Candidate", topic: "Deep learning for SHM" },
-  { name: "A. Roy", role: "Postdoctoral Fellow", topic: "Bridge instrumentation" },
-  { name: "L. Fernández", role: "M.Tech. Researcher", topic: "Pile dynamics" },
-  { name: "J. Mbeki", role: "M.Tech. Researcher", topic: "Modal analysis" },
-  { name: "H. Sato", role: "Ph.D. Candidate", topic: "Seismic retrofitting" },
+  {
+    name: "Saranika Das",
+    role: "PhD student, 2019 to present",
+    education: "",
+    topic: "Damage identification in structures through flexibility based methods.",
+    photo: "/images/students/saranika_das.jpg",
+    type: "current"
+  },
+  {
+    name: "Md Arif Faridi",
+    role: "PhD student",
+    education: "B.Tech (NIT Patna), M.Tech (AMU)",
+    topic: "",
+    photo: "/images/students/md_arif_faridi.jpg",
+    type: "current"
+  },
+  {
+    name: "Kumar Anjneya",
+    role: "Master's student (2017-2019)",
+    education: "B.E. ( BIT MESRA), M.Tech (Silver medal, IIT Patna)",
+    topic: "Response surface methodology based Damage quantification in building model, Spectral element methodology, Probability density evolution method (PDEM), Principal Component analysis (PCA)",
+    photo: "/images/students/kumar_anjneya.jpg",
+    type: "alumni"
+  },
+  {
+    name: "Divya Grover",
+    role: "Master's student (2018-2020)",
+    education: "M.tech (Gold Medal, IIT Patna )",
+    topic: "Probability density evolution method (PDEM), Soil Structure Interaction",
+    photo: "/images/students/divya_grover.jpeg",
+    type: "alumni"
+  },
+  {
+    name: "Purushottam Kumar Chowdhury",
+    role: "Master's student (2016-2018)",
+    education: "M.Tech (IIT Patna)",
+    topic: "Damage identification using Spectral element methodology (SEM), Principal component analysis (PCA)",
+    photo: "/images/students/purushottam_kumar_chowdhury.jpeg",
+    type: "alumni"
+  },
+  {
+    name: "Eshwar Kunchan",
+    role: "JRF (2017-2018)",
+    education: "(IIT Patna)",
+    topic: "Monitoring of bridge in Bihar, Damage identification in beam using mode shape curvature",
+    photo: "/images/students/eshwar_kunchan.jpg",
+    type: "alumni"
+  }
 ]
 
 const GALLERY = [
@@ -625,11 +644,7 @@ const GALLERY = [
   { src: "/gallery-blueprint.png", alt: "Structural blueprint drawing", cap: "Fig. 06 — Frame elevation" },
 ]
 
-const STATUS_STYLES: Record<string, string> = {
-  Active: "bg-green/15 text-green",
-  Ongoing: "bg-blue/15 text-blue",
-  Review: "bg-orange/15 text-orange",
-}
+
 
 export default function Home() {
   return (
@@ -661,9 +676,9 @@ export default function Home() {
                     <span className="text-orange">SHM Lab</span>
                   </h1>
                   <p className="mt-6 max-w-xl text-pretty leading-relaxed text-muted-foreground">
-                    Advancing the safety and resilience of civil infrastructure through
-                    structural health monitoring, seismic engineering, and the dynamics of
-                    the built environment.
+                    Focusing on vibration-based structural health monitoring, dynamic damage
+                    detection using response surface and spectral element methodologies, seismic
+                    resilience of structures, and soil-structure interaction under cyclic loads.
                   </p>
                   <dl className="mt-10 border-t border-border">
                     {DEGREES.map((d) => (
@@ -885,33 +900,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Research projects */}
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {RESEARCH.map((r, i) => (
-              <article
-                key={r.code}
-                className={[
-                  "group relative flex flex-col gap-4 px-6 py-8 sm:px-10 transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.08)]",
-                  "border-border",
-                  i % 2 === 0 ? "md:border-r" : "",
-                  i < RESEARCH.length - 2 ? "border-b" : "",
-                  i === RESEARCH.length - 2 ? "border-b md:border-b-0" : "",
-                  "hover:border-transparent"
-                ].join(" ")}
-              >
-                <div className="flex items-center justify-between font-mono text-[0.7rem] uppercase tracking-widest">
-                  <span className="text-primary">{r.code}</span>
-                  <span className={`rounded-sm px-2 py-0.5 ${STATUS_STYLES[r.status] ?? "bg-muted text-muted-foreground"}`}>
-                    {r.status}
-                  </span>
-                </div>
-                <h3 className="font-serif text-xl font-medium leading-snug tracking-tight text-balance">
-                  {r.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{r.desc}</p>
-              </article>
-            ))}
-          </div>
+
+
+          <ResearchItems />
         </Section>
 
         {/* Publications */}
@@ -929,24 +920,110 @@ export default function Home() {
 
         {/* Students */}
         <Section id="students" index="07" title="Students">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {STUDENTS.map((s, i) => (
-              <article
-                key={s.name}
-                className={[
-                  "group relative px-6 py-8 sm:px-10 border-border transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.08)]",
-                  "border-b hover:border-transparent",
-                  i % 2 === 0 ? "sm:border-r" : "sm:border-r-0",
-                  (i + 1) % 3 === 0 ? "lg:border-r-0" : "lg:border-r",
-                ].join(" ")}
-              >
-                <p className="font-serif text-xl font-medium tracking-tight text-primary">{s.name}</p>
-                <p className="mt-2 font-mono text-[0.7rem] uppercase tracking-widest text-orange">
-                  {s.role}
-                </p>
-                <p className="mt-4 text-sm text-muted-foreground">{s.topic}</p>
-              </article>
-            ))}
+          {/* Current Scholars */}
+          <div className="px-6 py-4 sm:px-10 border-b border-border bg-secondary/10">
+            <h3 className="font-mono text-[0.75rem] uppercase tracking-widest text-primary font-bold">Current Scholars</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {STUDENTS.filter((s) => s.type === "current").map((s, i, arr) => {
+              const isLastRowMd = i >= arr.length - (arr.length % 2 === 0 ? 2 : 1);
+              const isLastItem = i === arr.length - 1;
+              return (
+                <article
+                  key={s.name}
+                  className={[
+                    "group relative px-6 py-8 sm:px-10 border-border transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/55 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06)]",
+                    isLastItem ? "border-b-0" : "border-b",
+                    isLastRowMd ? "md:border-b-0" : "md:border-b",
+                    i % 2 === 0 ? "md:border-r" : "",
+                  ].join(" ")}
+                >
+                  <div className="flex gap-5 sm:gap-6 items-start">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border border-primary/15 shrink-0 shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <Image
+                        src={s.photo || "/placeholder.svg"}
+                        alt={s.name}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 640px) 80px, 64px"
+                      />
+                    </div>
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <p className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary truncate">
+                        {s.name}
+                      </p>
+                      <p className="font-mono text-[0.65rem] sm:text-[0.7rem] uppercase tracking-widest text-orange leading-tight">
+                        {s.role}
+                      </p>
+                      {s.education && (
+                        <p className="text-[0.7rem] sm:text-[0.75rem] text-muted-foreground/80 italic leading-snug">
+                          {s.education}
+                        </p>
+                      )}
+                      {s.topic && (
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-2 pt-1 border-t border-border/40 leading-relaxed">
+                          <span className="font-medium text-primary/70 text-[0.7rem] uppercase tracking-wider block mb-0.5">Research Focus</span>
+                          {s.topic}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+
+          {/* Alumni */}
+          <div className="px-6 py-4 sm:px-10 border-y border-border bg-secondary/10">
+            <h3 className="font-mono text-[0.75rem] uppercase tracking-widest text-primary font-bold">Alumni</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {STUDENTS.filter((s) => s.type === "alumni").map((s, i, arr) => {
+              const isLastRowMd = i >= arr.length - (arr.length % 2 === 0 ? 2 : 1);
+              const isLastItem = i === arr.length - 1;
+              return (
+                <article
+                  key={s.name}
+                  className={[
+                    "group relative px-6 py-8 sm:px-10 border-border transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/55 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06)]",
+                    isLastItem ? "border-b-0" : "border-b",
+                    isLastRowMd ? "md:border-b-0" : "md:border-b",
+                    i % 2 === 0 ? "md:border-r" : "",
+                  ].join(" ")}
+                >
+                  <div className="flex gap-5 sm:gap-6 items-start">
+                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border border-primary/15 shrink-0 shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <Image
+                        src={s.photo || "/placeholder.svg"}
+                        alt={s.name}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 640px) 80px, 64px"
+                      />
+                    </div>
+                    <div className="space-y-1 min-w-0 flex-1">
+                      <p className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary truncate">
+                        {s.name}
+                      </p>
+                      <p className="font-mono text-[0.65rem] sm:text-[0.7rem] uppercase tracking-widest text-orange leading-tight">
+                        {s.role}
+                      </p>
+                      {s.education && (
+                        <p className="text-[0.7rem] sm:text-[0.75rem] text-muted-foreground/80 italic leading-snug">
+                          {s.education}
+                        </p>
+                      )}
+                      {s.topic && (
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-2 pt-1 border-t border-border/40 leading-relaxed">
+                          <span className="font-medium text-primary/70 text-[0.7rem] uppercase tracking-wider block mb-0.5">Research Focus</span>
+                          {s.topic}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </Section>
 

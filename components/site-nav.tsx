@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { label: "Professional Experience", href: "#experience", id: "experience" },
   { label: "Awards & Honours", href: "#awards-honours", id: "awards-honours" },
   { label: "Education", href: "#education", id: "education" },
-  { label: "Research Projects", href: "#research", id: "research" },
+  { label: "Research", href: "#research", id: "research" },
   { label: "Publications", href: "#publications", id: "publications" },
   { label: "Students", href: "#students", id: "students" },
   { label: "Gallery", href: "#gallery", id: "gallery" },
