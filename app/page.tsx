@@ -1,9 +1,27 @@
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, GraduationCap, BookOpen, School, Mail, Phone } from "lucide-react"
 import { SiteNav } from "@/components/site-nav"
 import { Section } from "@/components/section"
 import { PublicationsAccordion, type Publication } from "@/components/publications-accordion"
 import { ResearchItems } from "@/components/research-items"
+
+function LinkedinIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  )
+}
 
 const DEGREES = [
   { degree: "Ph.D.", place: "IIT Kanpur" },
@@ -18,6 +36,7 @@ const EXPERIENCE = [
     period: "Aug 2015 - Present",
     location: "",
     description: "",
+    logo: "/images/education/iit_patna.png",
   },
   {
     role: "Project Engineer",
@@ -25,6 +44,7 @@ const EXPERIENCE = [
     period: "Oct 2014 - Apr 2015",
     location: "Greater Lucknow Area",
     description: "Working on analytical as well as simulation part of an industrial project",
+    logo: "/images/education/iit_kanpur.svg",
   }
 ]
 
@@ -171,6 +191,7 @@ const EDUCATION = [
     degree: "Doctor of Philosophy (PhD), Structural Engineering",
     place: "Indian Institute of Technology, Kanpur",
     thesis: "Vibration-based Structural Damage Localization and Characterization using Output-only Measurements",
+    logo: "/images/education/iit_kanpur.svg",
     activities: [
       "Red one belt holder in Tae-Kwon-Do, a Korean Marshal Art",
       "DPGC (Departmental Post Graduate Committee) Student Member, Departmental of Civil Engineering (October 2010 – September 2012)",
@@ -181,6 +202,7 @@ const EDUCATION = [
     year: "2008 - 2010",
     degree: "Master of Technology (MTech), Structural Dynamics",
     place: "Indian Institute of Technology, Roorkee",
+    logo: "/images/education/iit_roorkee.svg",
     activities: [
       "DAAD (Deutscher Akademischer Austausch Dienst) fellow for Master Sandwich Program (MSP–2009) in Germany (September 2009–May 2010)",
     ],
@@ -189,6 +211,7 @@ const EDUCATION = [
     year: "2007",
     degree: "B.E. Civil Engineering",
     place: "Bengal Engineering & Science University, Shibpur",
+    logo: "/images/education/iiest_shibpur.png",
   },
 ]
 
@@ -636,12 +659,26 @@ const STUDENTS = [
 ]
 
 const GALLERY = [
-  { src: "/gallery-bridge.png", alt: "Cable-stayed bridge under construction", cap: "Fig. 01 — Cable-stayed deck" },
-  { src: "/gallery-lab.png", alt: "Structural testing laboratory", cap: "Fig. 02 — Beam load testing" },
-  { src: "/gallery-rebar.png", alt: "Steel reinforcement grid", cap: "Fig. 03 — Reinforcement" },
-  { src: "/gallery-sensor.png", alt: "Bridge monitoring sensors", cap: "Fig. 04 — SHM sensors" },
-  { src: "/gallery-shake.png", alt: "Shake table seismic test", cap: "Fig. 05 — Shake table test" },
-  { src: "/gallery-blueprint.png", alt: "Structural blueprint drawing", cap: "Fig. 06 — Frame elevation" },
+  {
+    src: "/images/gallery/1.png",
+    alt: "MATLAB Training session at LNPIT jan 2019",
+    cap: "MATLAB Training session at LNPIT, January 2019"
+  },
+  {
+    src: "/images/gallery/2.png",
+    alt: "Faculty development program",
+    cap: "Faculty Development Program"
+  },
+  {
+    src: "/images/gallery/3.avif",
+    alt: "Expert Lecture at IIT Mandi",
+    cap: "Expert Lecture on Recent Revision on Seismic Design Codes, IIT Mandi, July 2018"
+  },
+  {
+    src: "/images/gallery/5.avif",
+    alt: "Awesome Team",
+    cap: "SHM Lab Team — Awesome Team"
+  },
 ]
 
 
@@ -665,11 +702,38 @@ export default function Home() {
             <div className="border-border bg-gradient-to-br from-secondary/30 via-transparent to-orange/5 lg:col-span-2 lg:border-r">
               <div className="flex h-full flex-col justify-between gap-10 px-6 py-10 sm:px-10 sm:py-14">
                 <div>
+                  <a
+                    href="https://www.iitp.ac.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 mb-6 group/iitw inline-flex hover:opacity-95 transition-opacity"
+                  >
+                    <div className="relative w-12 h-12 overflow-hidden rounded-full border border-border bg-white p-1 shadow-sm shrink-0 transition-transform duration-300 group-hover/iitw:scale-105">
+                      <Image
+                        src="/images/education/iit_patna.png"
+                        alt="IIT Patna Logo"
+                        fill
+                        className="object-contain p-0.5"
+                        sizes="48px"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[0.75rem] uppercase tracking-widest text-primary font-semibold leading-tight group-hover/iitw:text-orange transition-colors">
+                        Indian Institute of Technology Patna
+                      </p>
+                      <p className="text-[0.65rem] font-mono text-muted-foreground uppercase tracking-widest">
+                        Bihta, Bihar, India
+                      </p>
+                    </div>
+                  </a>
                   <p className="font-mono text-[0.7rem] uppercase tracking-widest text-primary">
-                    Professor of Civil Engineering
+                    Assistant Professor of Civil Engineering
                   </p>
                   <p className="mt-6 font-serif text-3xl font-medium tracking-tight text-primary sm:text-4xl">
                     Dr. Koushik Roy
+                  </p>
+                  <p className="mt-2.5 font-mono text-[0.65rem] sm:text-[0.7rem] uppercase tracking-widest text-muted-foreground/80">
+                    {DEGREES.map((d) => `${d.degree} (${d.place})`).join(" \u2022 ")}
                   </p>
                   <h1 className="mt-4 text-balance font-serif text-4xl font-medium leading-[1.05] tracking-tight sm:text-6xl">
                     Structural Dynamics &amp;{" "}
@@ -680,21 +744,45 @@ export default function Home() {
                     detection using response surface and spectral element methodologies, seismic
                     resilience of structures, and soil-structure interaction under cyclic loads.
                   </p>
-                  <dl className="mt-10 border-t border-border">
-                    {DEGREES.map((d) => (
-                      <div
-                        key={d.place}
-                        className="flex flex-col gap-1 border-b border-border py-4 sm:flex-row sm:items-baseline sm:justify-between"
-                      >
-                        <dt className="font-serif text-base font-medium tracking-tight text-primary">
-                          {d.degree}
-                        </dt>
-                        <dd className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                          {d.place}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <a
+                      href="https://www.linkedin.com/in/dr-koushik-roy-2b87768a/?originalSubdomain=in"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 border border-border bg-secondary/20 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/40 hover:text-orange"
+                    >
+                      <LinkedinIcon className="h-3.5 w-3.5" />
+                      LinkedIn
+                    </a>
+                    <a
+                      href="https://scholar.google.com/citations?user=j3-TJncAAAAJ&hl=en"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 border border-border bg-secondary/20 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/40 hover:text-orange"
+                    >
+                      <GraduationCap className="h-3.5 w-3.5" />
+                      Google Scholar
+                    </a>
+                    <a
+                      href="https://www.researchgate.net/profile/Koushik-Roy-10"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 border border-border bg-secondary/20 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/40 hover:text-orange"
+                    >
+                      <BookOpen className="h-3.5 w-3.5" />
+                      ResearchGate
+                    </a>
+                    <a
+                      href="https://iitp.academia.edu/KoushikRoy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 border border-border bg-secondary/20 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/40 hover:text-orange"
+                    >
+                      <School className="h-3.5 w-3.5" />
+                      Academia.edu
+                    </a>
+                  </div>
+                  {/* Degrees table removed from here */}
                 </div>
                 <dl className="grid grid-cols-3 border-t border-border">
                   {[
@@ -746,17 +834,34 @@ export default function Home() {
                     {exp.period}
                   </span>
                 </div>
-                <div className="px-6 py-6 sm:px-10">
-                  <p className="font-serif text-xl font-medium tracking-tight text-primary">{exp.role}</p>
-                  <p className="mt-1 text-base text-foreground">{exp.organization}</p>
-                  {exp.location && (
-                    <p className="mt-1 text-sm text-muted-foreground">{exp.location}</p>
+                <div className="px-6 py-6 sm:px-10 flex gap-5 sm:gap-6 items-start">
+                  {exp.logo && (
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded border border-border bg-white shrink-0 p-1 flex items-center justify-center shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <Image
+                        src={exp.logo || "/placeholder.svg"}
+                        alt={`${exp.organization} Logo`}
+                        fill
+                        className="object-contain p-1 bg-white"
+                        sizes="(min-width: 640px) 56px, 48px"
+                      />
+                    </div>
                   )}
-                  {exp.description && (
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                      {exp.description}
+                  <div className="space-y-1 min-w-0 flex-1">
+                    <p className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary leading-tight">
+                      {exp.role}
                     </p>
-                  )}
+                    <p className="mt-1 text-sm sm:text-base text-foreground font-medium">
+                      {exp.organization}
+                    </p>
+                    {exp.location && (
+                      <p className="text-xs sm:text-sm text-muted-foreground">{exp.location}</p>
+                    )}
+                    {exp.description && (
+                      <p className="mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground pt-1 border-t border-border/40">
+                        {exp.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </li>
             ))}
@@ -845,24 +950,41 @@ export default function Home() {
                 <span className="border-border px-6 py-6 font-mono text-sm uppercase tracking-widest text-orange sm:border-r sm:px-10 transition-colors duration-500 group-hover:border-transparent">
                   {e.year}
                 </span>
-                <div className="px-6 py-6 sm:px-10">
-                  <p className="font-serif text-xl font-medium tracking-tight text-primary">{e.degree}</p>
-                  <p className="mt-1 text-base text-foreground">{e.place}</p>
-                  {e.thesis && (
-                    <p className="mt-4 text-sm text-muted-foreground">
-                      <strong className="font-medium text-foreground">Thesis:</strong> {e.thesis}
-                    </p>
-                  )}
-                  {e.activities && e.activities.length > 0 && (
-                    <div className="mt-3 text-sm text-muted-foreground">
-                      <strong className="font-medium text-foreground">Activities & Societies:</strong>
-                      <ul className="mt-2 ml-4 list-outside list-disc space-y-1">
-                        {e.activities.map((act, j) => (
-                          <li key={j}>{act}</li>
-                        ))}
-                      </ul>
+                <div className="px-6 py-6 sm:px-10 flex gap-5 sm:gap-6 items-start">
+                  {e.logo && (
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded border border-border bg-white shrink-0 p-1 flex items-center justify-center shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <Image
+                        src={e.logo || "/placeholder.svg"}
+                        alt={`${e.place} Logo`}
+                        fill
+                        className="object-contain p-1 bg-white"
+                        sizes="(min-width: 640px) 56px, 48px"
+                      />
                     </div>
                   )}
+                  <div className="space-y-1 min-w-0 flex-1">
+                    <p className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary leading-tight">
+                      {e.degree}
+                    </p>
+                    <p className="mt-1 text-sm sm:text-base text-foreground font-medium">
+                      {e.place}
+                    </p>
+                    {e.thesis && (
+                      <p className="mt-4 text-sm text-muted-foreground">
+                        <strong className="font-medium text-foreground">Thesis:</strong> {e.thesis}
+                      </p>
+                    )}
+                    {e.activities && e.activities.length > 0 && (
+                      <div className="mt-3 text-sm text-muted-foreground">
+                        <strong className="font-medium text-foreground">Activities & Societies:</strong>
+                        <ul className="mt-2 ml-4 list-outside list-disc space-y-1">
+                          {e.activities.map((act, j) => (
+                            <li key={j}>{act}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </li>
             ))}
@@ -1057,10 +1179,80 @@ export default function Home() {
           </div>
         </Section>
 
+        {/* Contact */}
+        <Section id="contact" index="09" title="Contact">
+          <div className="flex justify-center px-6 py-12 sm:px-10">
+            <div className="w-full max-w-2xl border border-border bg-secondary/15 backdrop-blur-md p-8 sm:p-12 transition-all duration-500 hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.04)]">
+              <div className="flex flex-col items-center text-center">
+                {/* Custom Envelope Icon */}
+                <div className="flex items-center justify-center w-12 h-12 rounded bg-primary text-primary-foreground mb-6 shadow-sm">
+                  <Mail className="h-6 w-6" />
+                </div>
+                
+                <h3 className="font-serif text-2xl font-medium tracking-tight text-primary">
+                  Dr. Koushik Roy
+                </h3>
+                <p className="mt-1 font-mono text-[0.7rem] uppercase tracking-widest text-orange">
+                  Assistant Professor
+                </p>
+                <div className="mt-4 space-y-1 text-sm text-muted-foreground max-w-md">
+                  <p>Department of Civil and Environmental Engineering,</p>
+                  <p>IIT Patna, Bihta, Bihar, India, 801103</p>
+                </div>
+
+                <div className="w-full border-t border-border/60 my-8"></div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full text-sm">
+                  <div className="flex flex-col items-center sm:items-end sm:border-r sm:border-border/60 sm:pr-8">
+                    <div className="flex items-center gap-2 text-primary font-medium mb-1">
+                      <Phone className="h-4 w-4 text-orange" />
+                      <span>Phone</span>
+                    </div>
+                    <a
+                      href="tel:+916115233197"
+                      className="font-mono text-muted-foreground hover:text-orange transition-colors"
+                    >
+                      +91 6115 233197
+                    </a>
+                  </div>
+                  <div className="flex flex-col items-center sm:items-start sm:pl-8">
+                    <div className="flex items-center gap-2 text-primary font-medium mb-1">
+                      <Mail className="h-4 w-4 text-orange" />
+                      <span>Email</span>
+                    </div>
+                    <div className="flex flex-col items-center sm:items-start font-mono text-muted-foreground gap-1">
+                      <a
+                        href="mailto:koushik@iitp.ac.in"
+                        className="hover:text-orange transition-colors"
+                      >
+                        koushik@iitp.ac.in
+                      </a>
+                      <a
+                        href="mailto:koushikbesus@gmail.com"
+                        className="hover:text-orange transition-colors"
+                      >
+                        koushikbesus@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
         {/* Footer */}
-        <footer className="flex flex-col justify-between gap-2 border-t border-primary/15 bg-primary px-6 py-8 font-mono text-[0.7rem] uppercase tracking-widest text-primary-foreground sm:flex-row sm:px-10">
-          <span>&copy; {new Date().getFullYear()} Dr. Koushik Roy</span>
-          <span>Structural Dynamics &amp; SHM Lab</span>
+        <footer className="flex flex-col justify-between gap-6 border-t border-primary/15 bg-primary px-6 py-8 font-mono text-[0.7rem] uppercase tracking-widest text-primary-foreground sm:flex-row sm:px-10 items-center">
+          <div className="flex flex-col gap-1">
+            <span>&copy; {new Date().getFullYear()} Dr. Koushik Roy</span>
+            <span className="text-primary-foreground/60 text-[0.65rem]">Structural Dynamics &amp; SHM Lab</span>
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center">
+            <a href="https://www.linkedin.com/in/dr-koushik-roy-2b87768a/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="hover:text-orange transition-colors">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=j3-TJncAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="hover:text-orange transition-colors">Google Scholar</a>
+            <a href="https://www.researchgate.net/profile/Koushik-Roy-10" target="_blank" rel="noopener noreferrer" className="hover:text-orange transition-colors">ResearchGate</a>
+            <a href="https://iitp.academia.edu/KoushikRoy" target="_blank" rel="noopener noreferrer" className="hover:text-orange transition-colors">Academia</a>
+          </div>
         </footer>
       </div>
     </div>

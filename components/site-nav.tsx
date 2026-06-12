@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: "Publications", href: "#publications", id: "publications" },
   { label: "Students", href: "#students", id: "students" },
   { label: "Gallery", href: "#gallery", id: "gallery" },
+  { label: "Contact", href: "#contact", id: "contact" },
 ]
 
 export function SiteNav() {
@@ -45,17 +46,17 @@ export function SiteNav() {
 
   return (
     <nav aria-label="Primary" className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
-      <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+      <ul className="grid grid-cols-3 lg:grid-cols-9">
         {NAV_ITEMS.map((item, i) => {
           const isActive = activeId === item.id
           return (
             <li
               key={item.href}
               className={[
-                "border-border border-b",
-                "border-r",
-                i % 2 === 1 ? "max-sm:border-r-0" : "",
+                "border-border border-b border-r",
+                i % 3 === 2 ? "max-lg:border-r-0" : "",
                 i === NAV_ITEMS.length - 1 ? "lg:border-r-0" : "",
+                i >= 6 ? "max-lg:border-b-0" : "",
                 "lg:border-b-0",
               ].join(" ")}
             >
@@ -63,7 +64,7 @@ export function SiteNav() {
                 href={item.href}
                 aria-current={isActive ? "true" : undefined}
                 className={[
-                  "flex h-full items-center justify-center px-4 py-4 text-center font-sans text-xs font-medium tracking-wide transition-colors",
+                  "flex h-full items-center justify-center px-2 py-4 text-center font-sans text-xs font-medium tracking-wide transition-colors",
                   isActive
                     ? "bg-primary/8 text-primary shadow-[inset_0_-2px_0_0_var(--primary)]"
                     : "text-muted-foreground hover:bg-secondary hover:text-primary",
