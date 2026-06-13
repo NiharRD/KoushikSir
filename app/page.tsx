@@ -1,9 +1,11 @@
 import Image from "next/image"
-import { ArrowRight, GraduationCap, BookOpen, School, Mail, Phone } from "lucide-react"
+import { ArrowRight, GraduationCap, BookOpen, School, Mail, Phone, MapPin } from "lucide-react"
 import { SiteNav } from "@/components/site-nav"
 import { Section } from "@/components/section"
 import { PublicationsAccordion, type Publication } from "@/components/publications-accordion"
+import { PublicationsSearch } from "@/components/publications-search"
 import { ResearchItems } from "@/components/research-items"
+import { AnimatedCounter } from "@/components/animated-counter"
 
 function LinkedinIcon(props: React.ComponentProps<"svg">) {
   return (
@@ -686,7 +688,7 @@ const GALLERY = [
 export default function Home() {
   return (
     <div className="min-h-screen font-sans text-foreground relative">
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,oklch(0.93_0.04_252)_0%,transparent_50%),radial-gradient(ellipse_at_bottom_right,oklch(0.94_0.05_58)_0%,transparent_45%),linear-gradient(to_bottom,oklch(0.985_0.012_85),oklch(0.97_0.02_252))]" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,var(--primary-glow))_0%,transparent_50%),radial-gradient(ellipse_at_bottom_right,var(--secondary-glow))_0%,transparent_45%),linear-gradient(to_bottom,var(--bg-gradient-start),var(--bg-gradient-end))] transition-all duration-500" />
 
       <div className="mx-auto max-w-6xl border-x border-border bg-card/75 shadow-[0_0_80px_oklch(0.36_0.13_252/0.06)] backdrop-blur-sm">
         <SiteNav />
@@ -794,7 +796,9 @@ export default function Home() {
                       key={l}
                       className={`py-6 ${i < 2 ? "border-r border-border" : ""}`}
                     >
-                      <dt className="font-serif text-3xl font-medium tabular-nums text-primary">{n}</dt>
+                      <dt className="font-serif text-3xl font-medium tabular-nums text-primary">
+                        <AnimatedCounter value={n} />
+                      </dt>
                       <dd className="mt-2 font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
                         {l}
                       </dd>
@@ -825,7 +829,7 @@ export default function Home() {
             {EXPERIENCE.map((exp, i) => (
               <li
                 key={i}
-                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.08)] ${
+                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06),0_0_24px_oklch(0.62_0.14_58/0.08)] before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-orange before:scale-y-0 before:transition-transform before:duration-300 before:origin-center hover:before:scale-y-100 ${
                   i < EXPERIENCE.length - 1 ? "border-b border-border" : ""
                 }`}
               >
@@ -921,7 +925,7 @@ export default function Home() {
             {AWARDS.map((award, i) => (
               <li
                 key={i}
-                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.08)] ${
+                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06),0_0_24px_oklch(0.62_0.14_58/0.08)] before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-orange before:scale-y-0 before:transition-transform before:duration-300 before:origin-center hover:before:scale-y-100 ${
                   i < AWARDS.length - 1 ? "border-b border-border" : ""
                 }`}
               >
@@ -943,7 +947,7 @@ export default function Home() {
             {EDUCATION.map((e, i) => (
               <li
                 key={e.year}
-                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.08)] ${
+                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06),0_0_24px_oklch(0.62_0.14_58/0.08)] before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-orange before:scale-y-0 before:transition-transform before:duration-300 before:origin-center hover:before:scale-y-100 ${
                   i < EDUCATION.length - 1 ? "border-b border-border" : ""
                 }`}
               >
@@ -1029,15 +1033,7 @@ export default function Home() {
 
         {/* Publications */}
         <Section id="publications" index="06" title="Publications">
-          <div className="border-b border-border bg-secondary/30 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10">
-            Journal Publications
-          </div>
-          <PublicationsAccordion items={PUBLICATIONS} />
-
-          <div className="border-b border-t border-border bg-secondary/30 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10">
-            Conference Publications
-          </div>
-          <PublicationsAccordion items={CONFERENCES} trigger="hover" />
+          <PublicationsSearch journals={PUBLICATIONS} conferences={CONFERENCES} />
         </Section>
 
         {/* Students */}
@@ -1195,10 +1191,27 @@ export default function Home() {
                 <p className="mt-1 font-mono text-[0.7rem] uppercase tracking-widest text-orange">
                   Assistant Professor
                 </p>
-                <div className="mt-4 space-y-1 text-sm text-muted-foreground max-w-md">
-                  <p>Department of Civil and Environmental Engineering,</p>
-                  <p>IIT Patna, Bihta, Bihar, India, 801103</p>
-                </div>
+                
+                <a
+                  href="https://maps.app.goo.gl/w373xpCZRzRcm7ds6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-secondary/80 border border-border rounded-full text-[0.65rem] font-mono text-muted-foreground uppercase tracking-wider hover:border-orange hover:text-orange transition-colors"
+                >
+                  <MapPin className="size-3 text-orange animate-pulse" />
+                  25.5356° N, 84.8512° E
+                </a>
+
+                <a
+                  href="https://maps.app.goo.gl/w373xpCZRzRcm7ds6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 block space-y-1 text-sm text-muted-foreground hover:text-primary transition-colors max-w-md group/addr"
+                >
+                  <p className="group-hover/addr:underline">Department of Civil and Environmental Engineering,</p>
+                  <p className="group-hover/addr:underline">Academic Block 6, IIT Patna,</p>
+                  <p className="group-hover/addr:underline">Bihta, Bihar, India, 801103</p>
+                </a>
 
                 <div className="w-full border-t border-border/60 my-8"></div>
 

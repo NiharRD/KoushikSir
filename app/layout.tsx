@@ -2,6 +2,8 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google'
 import { CursorLens } from '@/components/cursor-lens'
+import { ThemeToggle } from '@/components/theme-toggle'
+import { LensHint } from '@/components/lens-hint'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -51,6 +53,8 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased">
         <CursorLens />
+        <ThemeToggle />
+        <LensHint />
         <div id="main-content">
           {children}
         </div>
