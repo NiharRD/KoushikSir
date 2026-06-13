@@ -159,13 +159,8 @@
 
 /* Warping magnifier cursor — inspired by glass lens magnification */
 :root {
-  --lens-x: -1000px;
-  --lens-y: -1000px;
-  --lens-scroll-y: 0px;
   --lens-size: 280px;
   --lens-edge-width: 25px;
-  --lens-zoom-center: 1.8;
-  --lens-zoom-edge: 1.3;
 }
 
 html.cursor-lens-active,
@@ -173,76 +168,76 @@ html.cursor-lens-active * {
   cursor: none !important;
 }
 
-.cursor-lens-root {
-  display: none;
+/* Outer container of the lens, positioned with translate3d */
+.cursor-lens-container {
   position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0;
+  left: 0;
+  width: var(--lens-size);
+  height: var(--lens-size);
   pointer-events: none;
   z-index: 9999;
-  overflow: hidden;
+  border-radius: 50%;
+  will-change: transform;
+  display: none;
+  /* Hardware acceleration layer */
+  transform: translate3d(-1000px, -1000px, 0);
 }
 
-html.cursor-lens-active .cursor-lens-root {
+html.cursor-lens-active .cursor-lens-container {
   display: block;
 }
 
-#lens-edge {
+/* Generic layer structure */
+.lens-layer {
   position: absolute;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
   pointer-events: none;
-  clip-path: circle(calc(var(--lens-size) / 2) at var(--lens-x) var(--lens-y));
+  border-radius: 50%;
+  overflow: hidden;
+  /* Force hardware acceleration for clean circular masking */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Outer blurred edge layer */
+.lens-edge-layer {
+  inset: 0;
+  width: 100%;
+  height: 100%;
   filter: blur(3px) brightness(0.85);
 }
 
-#lens-center {
-  position: absolute;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  -webkit-mask-image: radial-gradient(
-    circle at var(--lens-x) var(--lens-y),
-    black calc((var(--lens-size) / 2) - var(--lens-edge-width) - 10px),
-    transparent calc(var(--lens-size) / 2)
-  );
-  mask-image: radial-gradient(
-    circle at var(--lens-x) var(--lens-y),
-    black calc((var(--lens-size) / 2) - var(--lens-edge-width) - 10px),
-    transparent calc(var(--lens-size) / 2)
-  );
+/* Inner sharp scaled layer */
+.lens-center-layer {
+  top: var(--lens-edge-width);
+  left: var(--lens-edge-width);
+  right: var(--lens-edge-width);
+  bottom: var(--lens-edge-width);
 }
 
+/* Cloned document layout */
 .cursor-lens-clone {
   position: absolute;
-  top: calc(0px - var(--lens-scroll-y));
+  top: 0;
   left: 0;
   width: 100vw;
   min-height: 100vh;
-  transform-origin: var(--lens-x) calc(var(--lens-y) + var(--lens-scroll-y));
+  transform-origin: 0 0;
   background-color: var(--background);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.edge-scale {
-  transform: scale(var(--lens-zoom-edge));
-}
-
-.center-scale {
-  transform: scale(var(--lens-zoom-center));
-}
-
-#lens-glass {
+/* Glass overlay positioned over the outer lens container */
+.lens-glass-overlay {
   position: absolute;
-  top: calc(var(--lens-y) - var(--lens-size) / 2);
-  left: calc(var(--lens-x) - var(--lens-size) / 2);
-  width: var(--lens-size);
-  height: var(--lens-size);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   pointer-events: none;
   box-sizing: border-box;
+  z-index: 10; /* Make sure reflection is on top of cloned layers */
   box-shadow:
     inset 0 0 30px oklch(0.24 0.06 255 / 0.12),
     inset 0 0 15px oklch(0.36 0.13 252 / 0.15),
@@ -255,7 +250,7 @@ html.cursor-lens-active .cursor-lens-root {
   );
 }
 
-.dark #lens-glass {
+.dark .lens-glass-overlay {
   box-shadow:
     inset 0 0 30px oklch(0 0 0 / 0.6),
     inset 0 0 15px oklch(0.985 0 0 / 0.06),

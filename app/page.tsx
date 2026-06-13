@@ -31,23 +31,54 @@ const DEGREES = [
   { degree: "B.E.", place: "BESU Shibpur" },
 ]
 
-const EXPERIENCE = [
+const JOURNEY = [
   {
-    role: "Assistant Professor",
-    organization: "Indian Institute of Technology, Patna",
+    type: "professional",
+    title: "Assistant Professor",
+    institution: "Indian Institute of Technology, Patna",
     period: "Aug 2015 - Present",
-    location: "",
-    description: "",
+    location: "Bihta, Bihar",
     logo: "/images/education/iit_patna.png",
   },
   {
-    role: "Project Engineer",
-    organization: "IIT Kanpur",
+    type: "professional",
+    title: "Project Engineer",
+    institution: "IIT Kanpur",
     period: "Oct 2014 - Apr 2015",
     location: "Greater Lucknow Area",
     description: "Working on analytical as well as simulation part of an industrial project",
     logo: "/images/education/iit_kanpur.svg",
-  }
+  },
+  {
+    type: "academic",
+    title: "Doctor of Philosophy (PhD), Structural Engineering",
+    institution: "Indian Institute of Technology, Kanpur",
+    period: "2010 - 2015",
+    thesis: "Vibration-based Structural Damage Localization and Characterization using Output-only Measurements",
+    logo: "/images/education/iit_kanpur.svg",
+    activities: [
+      "Red one belt holder in Tae-Kwon-Do, a Korean Marshal Art",
+      "DPGC (Departmental Post Graduate Committee) Student Member, Departmental of Civil Engineering (October 2010 – September 2012)",
+      "Academic Senator (Post Graduate), IIT Kanpur (October 2012 – September 2013)",
+    ],
+  },
+  {
+    type: "academic",
+    title: "Master of Technology (MTech), Structural Dynamics",
+    institution: "Indian Institute of Technology, Roorkee",
+    period: "2008 - 2010",
+    logo: "/images/education/iit_roorkee.svg",
+    activities: [
+      "DAAD (Deutscher Akademischer Austausch Dienst) fellow for Master Sandwich Program (MSP–2009) in Germany (September 2009–May 2010)",
+    ],
+  },
+  {
+    type: "academic",
+    title: "B.E. Civil Engineering",
+    institution: "Bengal Engineering & Science University, Shibpur",
+    period: "2007",
+    logo: "/images/education/iiest_shibpur.png",
+  },
 ]
 
 const ADMIN_DEPT = [
@@ -187,35 +218,7 @@ const AWARDS = [
   },
 ]
 
-const EDUCATION = [
-  {
-    year: "2010 - 2015",
-    degree: "Doctor of Philosophy (PhD), Structural Engineering",
-    place: "Indian Institute of Technology, Kanpur",
-    thesis: "Vibration-based Structural Damage Localization and Characterization using Output-only Measurements",
-    logo: "/images/education/iit_kanpur.svg",
-    activities: [
-      "Red one belt holder in Tae-Kwon-Do, a Korean Marshal Art",
-      "DPGC (Departmental Post Graduate Committee) Student Member, Departmental of Civil Engineering (October 2010 – September 2012)",
-      "Academic Senator (Post Graduate), IIT Kanpur (October 2012 – September 2013)",
-    ],
-  },
-  {
-    year: "2008 - 2010",
-    degree: "Master of Technology (MTech), Structural Dynamics",
-    place: "Indian Institute of Technology, Roorkee",
-    logo: "/images/education/iit_roorkee.svg",
-    activities: [
-      "DAAD (Deutscher Akademischer Austausch Dienst) fellow for Master Sandwich Program (MSP–2009) in Germany (September 2009–May 2010)",
-    ],
-  },
-  {
-    year: "2007",
-    degree: "B.E. Civil Engineering",
-    place: "Bengal Engineering & Science University, Shibpur",
-    logo: "/images/education/iiest_shibpur.png",
-  },
-]
+
 
 const INTERESTS = [
   "Structural Health Monitoring",
@@ -239,189 +242,174 @@ const PUBLICATIONS: Publication[] = [
   },
   {
     ref: "[02]",
-    title: "Numerical Investigation on the Influence of Soil-Structure Interaction in Damage Quantification of Shear Buildings",
-    cite: "Das, S., Gautam, P., and Roy, K. (2025), \"Numerical Investigation on the Influence of Soil-Structure Interaction in Damage Quantification of Shear Buildings\"",
-    date: "July 2025",
-    url: "https://www.researchgate.net/publication/394766456_Numerical_Investigation_on_the_Influence_of_Soil-Structure_Interaction_in_Damage_Quantification_of_Shear_Buildings",
-  },
-  {
-    ref: "[03]",
     title: "Baseline-free localization and quantification of structural damage using spectral response",
     cite: "Ganguly, S. and Roy, K. (2025), \"Baseline-free localization and quantification of structural damage using spectral response\", Applied Mathematical Modelling",
     date: "June 2025",
     url: "https://www.researchgate.net/publication/388290357_Baseline-free_localization_and_quantification_of_structural_damage_using_spectral_response",
   },
   {
-    ref: "[04]",
+    ref: "[03]",
     title: "Damage quantification using spectral response of a multi-degree-of-freedom system with spatial and temporal stiffness variations: Application to shear-type frames",
-    cite: "Ganguly, S. and Roy, K. (2025), \\",
+    cite: "Ganguly, S. and Roy, K. (2025), \"Damage quantification using spectral response of a multi-degree-of-freedom system with spatial and temporal stiffness variations: Application to shear-type frames\", Applied Mathematical Modelling",
     date: "November 2024",
     url: "https://www.researchgate.net/publication/385838726_Damage_quantification_using_spectral_response_of_a_multi-degree-of-freedom_system_with_spatial_and_temporal_stiffness_variations_Application_to_shear-type_frames",
   },
   {
-    ref: "[05]",
+    ref: "[04]",
     title: "Frequency response function-based closed-form expression for multi-damage quantification and its application on shear buildings",
-    cite: "Das, S. and Roy, K. (2024), \\",
+    cite: "Das, S. and Roy, K. (2024), \"Frequency response function-based closed-form expression for multi-damage quantification and its application on shear buildings\", Journal of Sound and Vibration",
     date: "April 2024",
     url: "https://www.researchgate.net/publication/380323727_Frequency_response_function-based_closed-form_expression_for_multi-damage_quantification_and_its_application_on_shear_buildings",
   },
   {
-    ref: "[06]",
+    ref: "[05]",
     title: "Forced Vibration Analysis using 'Elmer' FEM Package to Develop Poincaré Map and Correlation Method-based Damage Indicators",
-    cite: "Ganguly, S. and Roy, K. (2024), \\",
+    cite: "Ganguly, S. and Roy, K. (2024), \"Forced Vibration Analysis using 'Elmer' FEM Package to Develop Poincaré Map and Correlation Method-based Damage Indicators\", Journal of Sound and Vibration",
     date: "March 2024",
     url: "https://www.researchgate.net/publication/378948831_Nonlinear_Forced_Vibration_Analysis_using_'Elmer'_FEM_Package_to_Develop_Poincare_Map_and_Correlation_Method-based_Damage_Indicators",
   },
   {
-    ref: "[07]",
+    ref: "[06]",
     title: "Application of Covariance statistical method for damage identification on railway truss bridge using acceleration response: Experimental and numerical validation",
-    cite: "Faridi, M. A., Roy, K. and Singhal, V. (2024), \\",
+    cite: "Faridi, M. A., Roy, K. and Singhal, V. (2024), \"Application of Covariance statistical method for damage identification on railway truss bridge using acceleration response: Experimental and numerical validation\", Structural Control and Health Monitoring",
     date: "February 2024",
     url: "https://www.researchgate.net/publication/378540088_Application_of_covariance_statistical_method_for_damage_identification_on_railway_truss_bridge_using_acceleration_response_experimental_and_numerical_validation",
   },
   {
-    ref: "[08]",
+    ref: "[07]",
     title: "Using limited roving sensors to monitor bridge subjected to random traffic load",
-    cite: "Faridi, M. A., Kuncham, E., Roy, K. and Singhal, V. (2024), \\",
+    cite: "Faridi, M. A., Kuncham, E., Roy, K. and Singhal, V. (2024), \"Using limited roving sensors to monitor bridge subjected to random traffic load\", Structural Health Monitoring",
     date: "January 2024",
     url: "https://www.researchgate.net/publication/377299390_Using_limited_roving_sensors_to_monitor_bridge_subjected_to_random_traffic_load",
   },
   {
-    ref: "[09]",
+    ref: "[08]",
     title: "Damage quantification in beam-type structures using modal curvature ratio",
-    cite: "Faridi, M. A., Roy, K. and Singhal, V. (2024), \\",
+    cite: "Faridi, M. A., Roy, K. and Singhal, V. (2024), \"Damage quantification in beam-type structures using modal curvature ratio\", Journal of Civil Structural Health Monitoring",
     date: "January 2024",
     url: "https://www.researchgate.net/publication/377643774_Damage_quantification_in_beam-type_structures_using_modal_curvature_ratio",
   },
   {
-    ref: "[10]",
-    title: "Reliability of Estimated Damage Quantity in Presence of Material and Measurement Uncertainty",
-    cite: "Ganguly, S. and Roy, K. (2024), \"Reliability of Estimated Damage Quantity in Presence of Material and Measurement Uncertainty\", Procedia Structural Integrity",
-    date: "January 2024",
-    url: "https://www.researchgate.net/publication/385676375_Reliability_of_Estimated_Damage_Quantity_in_Presence_of_Material_and_Measurement_Uncertainty",
-  },
-  {
-    ref: "[11]",
+    ref: "[09]",
     title: "Propagation of material uncertainty in modal parameters and its influence in damage quantification of shear buildings",
-    cite: "Das, S. and Roy, K. (2023), \\",
+    cite: "Das, S. and Roy, K. (2023), \"Propagation of material uncertainty in modal parameters and its influence in damage quantification of shear buildings\", Applied Mathematical Modelling",
     date: "September 2023",
     url: "https://www.researchgate.net/publication/374244205_Propagation_of_material_uncertainty_in_modal_parameters_and_its_influence_in_damage_quantification_of_shear_buildings",
   },
   {
-    ref: "[12]",
-    title: "A Novel Damage Indicator Evolved from the Poincaré Map for Localization of Seismic Damage in a Structure with Nonlinear Breathing Crack",
-    cite: "Ganguly, S. and Roy, K. (2023), \"A Novel Damage Indicator Evolved from the Poincaré Map for Localization of Seismic Damage in a Structure with Nonlinear Breathing Crack\"",
-    date: "July 2023",
-    url: "https://www.researchgate.net/publication/372715395_A_Novel_Damage_Indicator_Evolved_from_the_Poincare_Map_for_Localization_of_Seismic_Damage_in_a_Structure_with_Nonlinear_Breathing_Crack",
-  },
-  {
-    ref: "[13]",
+    ref: "[10]",
     title: "Perturbation Approach for Damage Localization in Beam-type Structures: Analytical, Experimental and Numerical Exposition",
-    cite: "Faridi, M. A., Roy, K. and Singhal, V. (2022), \\",
+    cite: "Faridi, M. A., Roy, K. and Singhal, V. (2022), \"Perturbation Approach for Damage Localization in Beam-type Structures: Analytical, Experimental and Numerical Exposition\", Structural Control and Health Monitoring",
     date: "April 2023",
     url: "https://www.researchgate.net/publication/370572064_Perturbation_approach_for_damage_localization_in_beam-type_structures_analytical_experimental_and_numerical_exposition",
   },
   {
-    ref: "[14]",
+    ref: "[11]",
     title: "Performance assessment of time-domain damage indicators based on output-only measurements and Poincaré map: A comparative review on nonlinear structures",
-    cite: "Ganguly, S. and Roy, K. (2023), \\",
+    cite: "Ganguly, S. and Roy, K. (2023), \"Performance assessment of time-domain damage indicators based on output-only measurements and Poincaré map: A comparative review on nonlinear structures\", Nonlinear Dynamics",
     date: "April 2023",
     url: "https://www.researchgate.net/publication/370079622_Performance_assessment_of_time-domain_damage_indicators_based_on_output-only_measurement_and_Poincare_map_A_comparative_review_on_nonlinear_structures",
   },
   {
-    ref: "[15]",
+    ref: "[12]",
     title: "Application of Bridge Weigh-in-Motion system in Bridge Health Monitoring: A state-of-the-art review",
-    cite: "Paul, D. and Roy, K. (2023), \\",
+    cite: "Paul, D. and Roy, K. (2023), \"Application of Bridge Weigh-in-Motion system in Bridge Health Monitoring: A state-of-the-art review\", Archive of Applied Mechanics",
     date: "March 2023",
     url: "https://www.researchgate.net/publication/368991650_Application_of_bridge_weigh-in-motion_system_in_bridge_health_monitoring_a_state-of-the-art_review",
   },
   {
-    ref: "[16]",
+    ref: "[13]",
     title: "Structural damage quantification in shear buildings using mode shape slope ratio",
-    cite: "Roy, K. (2023), \\",
+    cite: "Roy, K. (2023), \"Structural damage quantification in shear buildings using mode shape slope ratio\", Journal of Sound and Vibration",
     date: "September 2022",
     url: "https://www.researchgate.net/publication/363682218_Structural_damage_quantification_in_shear_buildings_using_mode_shape_slope_ratio",
   },
   {
-    ref: "[17]",
+    ref: "[14]",
     title: "Seismic performance assessment of adjacent building structures connected with superelastic SMA damper and comparison with yield damper",
-    cite: "Gur, S., Roy, K. and Singh, P. (2022), \\",
+    cite: "Gur, S., Roy, K. and Singh, P. (2022), \"Seismic performance assessment of adjacent building structures connected with superelastic SMA damper and comparison with yield damper\", Journal of Building Engineering",
     date: "January 2022",
     url: "https://www.researchgate.net/publication/357931121_Seismic_performance_assessment_of_adjacent_building_structures_connected_with_superelastic_shape_memory_alloy_damper_and_comparison_with_yield_damper",
   },
   {
-    ref: "[18]",
+    ref: "[15]",
     title: "A state-of-the-art review on FRF-based structural damage detection: Development in last two decades and way forward",
-    cite: "Das, S. and Roy, K. (2022), \\",
+    cite: "Das, S. and Roy, K. (2022), \"A state-of-the-art review on FRF-based structural damage detection: Development in last two decades and way forward\", Journal of Civil Structural Health Monitoring",
     date: "December 2021",
     url: "https://www.researchgate.net/publication/356923485_A_State-of-the-Art_Review_on_FRF-Based_Structural_Damage_Detection_Development_in_Last_Two_Decades_and_Way_Forward",
   },
   {
-    ref: "[19]",
+    ref: "[16]",
     title: "Acceleration time history dataset for a 3D miniature model of a shear building with structural damage",
-    cite: "Anjneya, K. and Roy K. (2021), \\",
+    cite: "Anjneya, K. and Roy K. (2021), \"Acceleration time history dataset for a 3D miniature model of a shear building with structural damage\", Mechanical Systems and Signal Processing",
     date: "September 2021",
     url: "https://www.researchgate.net/publication/354651428_Acceleration_time_history_dataset_for_a_3D_miniature_model_of_a_shear_building_with_structural_damage",
   },
   {
-    ref: "[20]",
+    ref: "[17]",
     title: "Fundamental Mode Shape-based Structural Damage Quantification via Spectral Element Method",
-    cite: "Chaudhary, P. K., Anjneya, K and Roy, K. (2021), \\",
+    cite: "Chaudhary, P. K., Anjneya, K and Roy, K. (2021), \"Fundamental Mode Shape-based Structural Damage Quantification via Spectral Element Method\", Journal of Sound and Vibration",
     date: "August 2021",
     url: "https://www.researchgate.net/publication/354142994_Fundamental_Mode_Shape-Based_Structural_Damage_Quantification_Using_Spectral_Element_Method",
   },
   {
-    ref: "[21]",
+    ref: "[18]",
     title: "Response surface-based structural damage identification using dynamic responses",
-    cite: "Anjneya, K and Roy K. (2021), \\",
+    cite: "Anjneya, K and Roy K. (2021), \"Response surface-based structural damage identification using dynamic responses\", Journal of Sound and Vibration",
     date: "February 2021",
     url: "https://www.researchgate.net/publication/347442567_Response_surface-based_structural_damage_identification_using_dynamic_responses",
   },
   {
-    ref: "[22]",
+    ref: "[19]",
     title: "Monitoring the health of the structure",
-    cite: "Anjneya, K. and Roy, K. (2020), \"Monitoring the health of the structure\"",
+    cite: "Anjneya, K. and Roy, K. (2020), \"Monitoring the health of the structure\", Book Chapter",
     date: "June 2020",
     url: "https://www.researchgate.net/publication/344252926_Monitoring_the_health_of_the_structure",
   },
   {
-    ref: "[23]",
+    ref: "[20]",
     title: "Structural Damage Identification using Mode Shape Slope and Curvature",
-    cite: "Roy, K. (2017), \\",
+    cite: "Roy, K. (2017), \"Structural Damage Identification using Mode Shape Slope and Curvature\", Journal of Sound and Vibration",
     date: "September 2017",
     url: "https://www.researchgate.net/publication/318777679_Structural_Damage_Identification_Using_Mode_Shape_Slope_and_Curvature",
   },
   {
-    ref: "[24]",
+    ref: "[21]",
     title: "Design of re-centering spring for flat sliding base isolation system: Theory and a numerical study",
-    cite: "Chakraborty, S., Roy, K. and Ray-Chaudhuri, S. (2016), \\",
+    cite: "Chakraborty, S., Roy, K. and Ray-Chaudhuri, S. (2016), \"Design of re-centering spring for flat sliding base isolation system: Theory and a numerical study\", Journal of Sound and Vibration",
     date: "November 2016",
     url: "https://www.researchgate.net/publication/306416896_Design_of_re-centering_spring_for_flat_sliding_base_isolation_system_Theory_and_a_numerical_study",
   },
   {
-    ref: "[25]",
+    ref: "[22]",
     title: "Stochastic Seismic Response of Buildings with Shape-Memory-Alloy Dampers",
-    cite: "Gur, S., Roy, K. and Mishra, S. K. (2016), \\",
+    cite: "Gur, S., Roy, K. and Mishra, S. K. (2016), \"Stochastic Seismic Response of Buildings with Shape-Memory-Alloy Dampers\", Structural Control and Health Monitoring",
+    date: "November 2016",
+    url: "https://www.researchgate.net/publication/306416896_Design_of_re-centering_spring_for_flat_sliding_base_isolation_system_Theory_and_a_numerical_study",
+  },
+  {
+    ref: "[23]",
+    title: "ARX Model-based Damage Sensitive Features for Structural Damage Localization using Output-only Measurements",
+    cite: "Roy, K., Bhattacharya, B. and Ray-Chaudhuri, S. (2015), \"ARX Model-based Damage Sensitive Features for Structural Damage Localization using Output-only Measurements\", Journal of Sound and Vibration",
+    date: "August 2015",
+  },
+  {
+    ref: "[24]",
+    title: "Tuned-liquid-column ball-damper for seismic vibration control",
+    cite: "Gur, S., Roy, K. and Mishra, S. K. (2015), \"Tuned-liquid-column ball-damper for seismic vibration control\", Structural Control and Health Monitoring",
+    date: "July 2015",
+  },
+  {
+    ref: "[25]",
+    title: "Response of Bridges Isolated by Shape Memory-Alloy Rubber Bearing",
+    cite: "Mishra, S. K., Gur, S., Roy, K. and Chakraborty, S. (2015), \"Response of Bridges Isolated by Shape Memory-Alloy Rubber Bearing\", Journal of Bridge Engineering",
+    date: "June 2015",
   },
   {
     ref: "[26]",
-    title: "ARX Model-based Damage Sensitive Features for Structural Damage Localization using Output-only Measurements",
-    cite: "Roy, K., Bhattacharya, B. and Ray-Chaudhuri, S. (2015), \\",
-  },
-  {
-    ref: "[27]",
-    title: "Tuned-liquid-column ball-damper for seismic vibration control",
-    cite: "Gur, S., Roy, K. and Mishra, S. K. (2015), \\",
-  },
-  {
-    ref: "[28]",
-    title: "Response of Bridges Isolated by Shape Memory-Alloy Rubber Bearing",
-    cite: "Mishra, S. K., Gur, S., Roy, K. and Chakraborty, S. (2015), \\",
-  },
-  {
-    ref: "[29]",
     title: "Fundamental Mode Shape and its Derivative in Structural Damage Localization",
-    cite: "Roy, K. and Ray-Chaudhuri, S. (2013), \\",
+    cite: "Roy, K. and Ray-Chaudhuri, S. (2013), \"Fundamental Mode Shape and its Derivative in Structural Damage Localization\", Journal of Sound and Vibration",
+    date: "September 2013",
   },
 ]
 
@@ -435,176 +423,209 @@ const CONFERENCES = [
   },
   {
     ref: "[02]",
+    title: "Numerical investigation on the influence of soil-structure interaction in damage quantification of shear buildings",
+    cite: "Das, S., Gautam, P. and Roy, K. \"Numerical investigation on the influence of soil-structure interaction in damage quantification of shear buildings\", 8th International Conference on Recent Advances in Geotechnical Earthquake Engineering and Soil Dynamics (8ICRAGEE), IIT Guwahati, India-781039, December 11-14, 2024",
+    date: "December 11-14, 2024",
+    url: "https://www.researchgate.net/publication/394766456_Numerical_Investigation_on_the_Influence_of_Soil-Structure_Interaction_in_Damage_Quantification_of_Shear_Buildings",
+  },
+  {
+    ref: "[03]",
+    title: "Reliability of Estimated Damage Quantity in Presence of Material and Measurement Uncertainty",
+    cite: "Ganguly, S. and Roy, K. (2024), \"Reliability of Estimated Damage Quantity in Presence of Material and Measurement Uncertainty\", Procedia Structural Integrity",
+    date: "January 2024",
+    url: "https://www.researchgate.net/publication/385676375_Reliability_of_Estimated_Damage_Quantity_in_Presence_of_Material_and_Measurement_Uncertainty",
+  },
+  {
+    ref: "[04]",
+    title: "Uncertainty propagation in modal parameters and its influence on damage quantification in shear buildings using fundamental mode",
+    cite: "Das, S. and Roy, K. \"Uncertainty propagation in modal parameters and its influence on damage quantification in shear buildings using fundamental mode\", 13th Structural Engineering Convention (SEC 2023), VNIT Nagpur, India-440010, December 7-9, 2023",
+    date: "December 7-9, 2023",
+  },
+  {
+    ref: "[05]",
     title: "Propagation of Epistemic Uncertainty in Modal Parameters and Its Influence on Damage",
     cite: "Das, S. and Roy, K. Propagation of Epistemic Uncertainty in Modal Parameters and Its Influence on Damage. 9th ECCOMAS Thematic Conference on Computational Methods in Structural Dynamics and Earthquake Engineering (COMPDYN 2023), Athens, Greece, June 12-14, 2023",
     date: "June 12–14, 2023",
     url: "https://www.researchgate.net/publication/375037343_PROPAGATION_OF_EPISTEMIC_UNCERTAINTY_IN_MODAL_PARAMETERS_AND_ITS_INFLUENCE_ON_DAMAGE",
   },
   {
-    ref: "[03]",
+    ref: "[06]",
+    title: "Experimental investigation for quantifying damage considering soil-structure interaction effect on a smallscale model",
+    cite: "Das, S., Baghel, A., Grover, D. and Roy, K. \"Experimental investigation for quantifying damage considering soil-structure interaction effect on a smallscale model\", 17th Symposium on Earthquake Engineering (17SEE), IIT Roorkee, India-247667, November 14-17, 2022",
+    date: "November 14-17, 2022",
+  },
+  {
+    ref: "[07]",
+    title: "A novel damage indicator evolved from the Poincaré map for localization of seismic damage in a structure with nonlinear breathing crack",
+    cite: "Ganguly, S. and Roy, K. \"A novel damage indicator evolved from the Poincaré map for localization of seismic damage in a structure with nonlinear breathing crack\", 17th Symposium on Earthquake Engineering (17SEE), IIT Roorkee, India-247667, November 14-17, 2022",
+    date: "November 14-17, 2022",
+    url: "https://www.researchgate.net/publication/372715395_A_Novel_Damage_Indicator_Evolved_from_the_Poincare_Map_for_Localization_of_Seismic_Damage_in_a_Structure_with_Nonlinear_Breathing_Crack",
+  },
+  {
+    ref: "[08]",
     title: "Performance of a damage sensitive parameter obtained from different response-based bridge weigh-in-motion",
-    cite: "Paul, D. and Roy, K. \\",
+    cite: "Paul, D. and Roy, K. \"Performance of a damage sensitive parameter obtained from different response-based bridge weigh-in-motion\", The fourteenth international conference on Computational Structures Technology (CST-2022), Montpellier, France, August 23-25, 2022",
     date: "August 23–25, 2022",
     url: "https://www.researchgate.net/publication/378240348_Performance_of_a_damage_sensitive_parameter_obtained_from_different_response-based_bridge_weigh-in-motion",
   },
   {
-    ref: "[04]",
+    ref: "[09]",
     title: "FRF-based experimental investigation of multiple damage quantification in a shear building",
-    cite: "Das, S. and Roy, K. \\",
+    cite: "Das, S. and Roy, K. \"FRF-based experimental investigation of multiple damage quantification in a shear building\", Socio-Technological Aspects of Seismic Disaster and its Mitigation (STASDM), IIT Guwahati, India-781039, June 23-24, 2022",
     date: "June 23–24, 2022",
   },
   {
-    ref: "[05]",
+    ref: "[10]",
     title: "Performance evaluation of a damage indicator using strain, acceleration and displacement-based bridge weigh-in-motion",
-    cite: "Paul, D. and Roy, K. \\",
+    cite: "Paul, D. and Roy, K. \"Performance evaluation of a damage indicator using strain, acceleration and displacement-based bridge weigh-in-motion\", International Conference on Advances in Mechanics, Modelling, Computing and Statistics (ICAMMCS-2022), BITS Pilani, Pilani, India - 333031, March 19-21, 2022",
     date: "March 19–21, 2022",
     url: "https://www.researchgate.net/publication/385896193_Performance_evaluation_of_a_damage_indicator_using_strain_acceleration_and_displacement-based_bridge_weigh-in-motion",
   },
   {
-    ref: "[06]",
+    ref: "[11]",
     title: "Seismic Performance of Coupled Buildings Connected by Yield and SMA Dampers",
-    cite: "Singh, P., Gur, S. and Roy, K. \\",
+    cite: "Singh, P., Gur, S. and Roy, K. \"Seismic Performance of Coupled Buildings Connected by Yield and SMA Dampers\", 12th Structural engineering convention 2021 (SEC2021), MNIT Jaipur, India - 302017, December 19-22, 2021",
     date: "December 19–22, 2021",
   },
   {
-    ref: "[07]",
+    ref: "[12]",
     title: "Experimental Investigation for Quantifying Damage Considering Soil-Structure Interaction Effect on a Small-scale Model",
-    cite: "Das, S., Baghel, A., Grover, D. and Roy, K. Experimental Investigation for Quantifying Damage Considering Soil-Structure Interaction Effect on a Small-scale Model. Symposium in Earthquake Engineering, December, 2020",
+    cite: "Das, S., Baghel, A., Grover, D. and Roy, K. \"Experimental Investigation for Quantifying Damage Considering Soil-Structure Interaction Effect on a Small-scale Model\", Symposium in Earthquake Engineering, December 2020",
     date: "December 2020",
     url: "https://www.researchgate.net/publication/372700120_Experimental_Investigation_for_Quantifying_Damage_Considering_Soil-Structure_Interaction_Effect_on_a_Small-scale_Model",
   },
   {
-    ref: "[08]",
+    ref: "[13]",
     title: "Seismic Response of Adjacent Building Structure connected with Superelastic Damper: Comparison with Yield Damper",
-    cite: "Gur, S., Singh, P. and Roy, K. \\",
+    cite: "Gur, S., Singh, P. and Roy, K. \"Seismic Response of Adjacent Building Structure connected with Superelastic Damper: Comparison with Yield Damper\", 11th International Conference on Structural Dynamics (EASD Procedia EURODYN 2020), Athens, Greece (Virtual Conference), 4696-4709, November 23–26, 2020",
     date: "November 23–26, 2020",
     url: "https://www.researchgate.net/publication/347297694_SEISMIC_RESPONSE_OF_ADJACENT_BUILDING_STRUCTURE_CONNECTED_WITH_SUPERELASTIC_DAMPER_COMPARISON_WITH_YIELD_DAMPER",
   },
   {
-    ref: "[09]",
+    ref: "[14]",
     title: "Spectral Element Method for Damage Localization in Non-Uniform Structures with Parametric Uncertainty",
-    cite: "Chaudhary, P. K., Anjneya, K. and Roy, K. \\",
+    cite: "Chaudhary, P. K., Anjneya, K. and Roy, K. \"Spectral Element Method for Damage Localization in Non-Uniform Structures with Parametric Uncertainty\", 5th International Conference on Civil Structural and Transportation Engineering (ICCSTE 2020), Ottawa, Canada (Virtual Conference), 301, November 12-14, 2020",
     date: "November 12–14, 2020",
     url: "https://www.researchgate.net/publication/346344672_Spectral_Element_Method_for_Damage_Localization_in_Non-Uniform_Structures_with_Parametric_Uncertainty",
   },
   {
-    ref: "[10]",
+    ref: "[15]",
     title: "Structural Damage Quantification Using Flexibility Matrix Based Approach",
-    cite: "Das, S. and Roy, K. \\",
+    cite: "Das, S. and Roy, K. \"Structural Damage Quantification Using Flexibility Matrix Based Approach\", 1st Online International Conference on Recent Advances in Computational and Experimental Mechanics (ICRACEM 2020), IIT Kharagpur, India - 721302, VC-20-036, September 4-6, 2020",
     date: "September 4–6, 2020",
     url: "https://www.researchgate.net/publication/357503702_Structural_Damage_Quantification_Using_Flexibility_Matrix-Based_Approach",
   },
   {
-    ref: "[11]",
+    ref: "[16]",
     title: "Uncertainty Propagation in Estimated Structural Parameters owing to Univariate Uncertain Parameter using RSM and PDEM",
-    cite: "Anjneya, K., Grover, D. and Roy, K. \\",
+    cite: "Anjneya, K., Grover, D. and Roy, K. \"Uncertainty Propagation in Estimated Structural Parameters owing to Univariate Uncertain Parameter using RSM and PDEM\", 7th International Congress on Computational Mechanics and Simulation (ICCMS2019), IIT Mandi, India - 175001, December 11–13, 2019",
     date: "December 11–13, 2019",
     url: "https://www.researchgate.net/publication/346383369_Uncertainty_Propagation_in_Estimated_Structural_Parameters_Owing_to_Univariate_Uncertain_Parameter_Using_RSM_and_PDEM",
   },
   {
-    ref: "[12]",
+    ref: "[17]",
     title: "Extraction of Damage Information in Presence of Parametric Uncertainty using Dimensionality Reduction",
-    cite: "Chowdhury, P. K., Anjneya, K. and Roy, K. \\",
+    cite: "Chowdhury, P. K., Anjneya, K. and Roy, K. \"Extraction of Damage Information in Presence of Parametric Uncertainty using Dimensionality Reduction\", 29th European Safety and Reliability Conference (ESREL), Hannover, Germany, September 2019",
     date: "September 2019",
     url: "https://www.researchgate.net/publication/338767518_Extraction_of_Damage_Information_in_Presence_of_Parametric_Uncertainty_using_Dimensionality_Reduction",
   },
   {
-    ref: "[13]",
+    ref: "[18]",
     title: "Reliability of RSM Towards Damage Identification in a Six-Storey Shear Building using Vibrational Parameters",
-    cite: "Anjneya, K. and Roy, K. \\",
+    cite: "Anjneya, K. and Roy, K. \"Reliability of RSM Towards Damage Identification in a Six-Storey Shear Building using Vibrational Parameters\", 2nd National Conference on Recent Advances in Civil Engineering (RACE2019), NIT Patna, India - 800005, June 6–7, 2019",
     date: "June 6–7, 2019",
     url: "https://www.researchgate.net/publication/346382912_RELIABILITY_OF_RSM_TOWARDS_DAMAGE_IDENTIFICATION_IN_A_SIX-_STOREY_SHEAR_BUILDING_USING_VIBRATIONAL_PARAMETERS",
   },
   {
-    ref: "[14]",
+    ref: "[19]",
     title: "Damage Identification in Beam-Type Structures using Effect of First-Order Perturbation on Eigen Properties",
-    cite: "Faridi, M. A., Roy, K. and Singhal, V. \\",
+    cite: "Faridi, M. A., Roy, K. and Singhal, V. \"Damage Identification in Beam-Type Structures using Effect of First-Order Perturbation on Eigen Properties\", 16th symposium on earthquake engineering (SEE 2018), IIT Roorkee, India - 247667, December 20–22, 2018",
     date: "December 20–22, 2018",
   },
   {
-    ref: "[15]",
+    ref: "[20]",
     title: "Application of response surface-based model updating in damage identification using dynamic responses",
-    cite: "Anjneya, K. and Roy, K. \\",
+    cite: "Anjneya, K. and Roy, K. \"Application of response surface-based model updating in damage identification using dynamic responses\", 11th Structural engineering convention 2018 (SEC2018), Jadavpur University, India - 700032, December 19–21, 2018",
     date: "December 19–21, 2018",
     url: "https://www.researchgate.net/publication/346651039_RESPONSE_SURFACE-BASED_MODEL_UPDATING_IN_STRUCTURAL_DAMAGE_IDENTIFICATION_USING_DYNAMIC_RESPONSES",
   },
   {
-    ref: "[16]",
+    ref: "[21]",
     title: "A Closed-Form Solution and Comparison for the One-Dimensional Orthorhombic Quasicrystal and Crystal Plate",
-    cite: "Bhardwaj, A. and Roy, K. \\",
+    cite: "Bhardwaj, A. and Roy, K. \"A Closed-Form Solution and Comparison for the One-Dimensional Orthorhombic Quasicrystal and Crystal Plate\", 13th World Congress in Computational Mechanics, Newyork City (USA), July 22-27, 2018",
     date: "July 22–27, 2018",
   },
   {
-    ref: "[17]",
+    ref: "[22]",
+    title: "Behavior of Elevated Liquid Storage Tank under Near Fault Earthquakes",
+    cite: "Roy, K., Gur, S. and Mishra, S. K. \"Behavior of Elevated Liquid Storage Tank under Near Fault Earthquakes\", 19th International Conference on Earthquake, Geological and Structural Engineering, Boston (USA), April 24-25, 2017",
+    date: "April 24–25, 2017",
+  },
+  {
+    ref: "[23]",
     title: "Modal parameter-based Damage Identification in Cylindrical Pipe using Dynamic Response",
-    cite: "Gaurav, K., Sonam, K., Singhal, V. and Roy, K. \\",
+    cite: "Gaurav, K., Sonam, K., Singhal, V. and Roy, K. \"Modal parameter-based Damage Identification in Cylindrical Pipe using Dynamic Response\", 10th International Conference on Structural Dynamics, (Procedia Engineering EURODYN 2017), Rome, Italy, 199 (1988-1993), September 10–13, 2017",
     date: "September 10–13, 2017",
     url: "https://www.researchgate.net/publication/319654625_Modal_parameter-based_Damage_Identification_in_Cylindrical_Pipe_using_Dynamic_Response",
   },
   {
-    ref: "[18]",
-    title: "Behavior of Elevated Liquid Storage Tank under Near Fault Earthquakes",
-    cite: "Roy, K., Gur, S. and Mishra, S. K. \\",
-    date: "April 24–25, 2017",
-  },
-  {
-    ref: "[19]",
+    ref: "[24]",
     title: "Performance of Various Vibration-Based Output-only Techniques In Structural Modal Identification",
-    cite: "Roy, K. and Ray-Chaudhuri, S. \\",
+    cite: "Roy, K. and Ray-Chaudhuri, S. \"Performance of Various Vibration-Based Output-only Techniques In Structural Modal Identification\", ISSS National Conference on MEMS, Smart Materials, Structures and Systems, IIT Kanpur, India - 208016, September 28–30, 2016",
     date: "September 28–30, 2016",
   },
   {
-    ref: "[20]",
+    ref: "[25]",
     title: "Fundamental Mode Shape to Localize Delamination in Cantilever Composite Plates using Laser Doppler Vibrometer",
-    cite: "Roy, K., Agrawal, S., Bhattacharya, B. and Ray-Chaudhuri, S. \\",
+    cite: "Roy, K., Agrawal, S., Bhattacharya, B. and Ray-Chaudhuri, S. \"Fundamental Mode Shape to Localize Delamination in Cantilever Composite Plates using Laser Doppler Vibrometer\", 9th Structural Engineering Convention 2014 (SEC2014), IIT Delhi, India - 110016, 2621-2633, December 22–24, 2014",
     date: "December 22–24, 2014",
   },
   {
-    ref: "[21]",
+    ref: "[26]",
     title: "Fundamental Mode Shape in Structural Damage Quantification",
-    cite: "Roy, K. and Ray-Chaudhuri, S. \\",
+    cite: "Roy, K. and Ray-Chaudhuri, S. \"Fundamental Mode Shape in Structural Damage Quantification\", 15th symposium on earthquake engineering (SEE 2014), IIT Roorkee, India - 247667, December 11–13, 2014",
     date: "December 11–13, 2014",
   },
   {
-    ref: "[22]",
+    ref: "[27]",
     title: "A novel bridge structure damage diagnosis algorithm based on statistical pattern recognition",
-    cite: "Xiao, H., Lu, C., Ogai, H. and Roy, K. \\",
+    cite: "Xiao, H., Lu, C., Ogai, H. and Roy, K. \"A novel bridge structure damage diagnosis algorithm based on statistical pattern recognition\", SICE annual conference (IEEE), Hokkaido University, Sapporo, Japan, 775-780, September 9–12, 2014",
     date: "September 9–12, 2014",
   },
   {
-    ref: "[23]",
+    ref: "[28]",
     title: "Damage Characterization in Frame Structures Using Output-Only Modal and Feature-Based Techniques",
-    cite: "Panikkaveettil, H., Roy, K. and Ray-Chaudhuri, S., \\",
+    cite: "Panikkaveettil, H., Roy, K. and Ray-Chaudhuri, S. \"Damage Characterization in Frame Structures Using Output-Only Modal and Feature-Based Techniques\", International federation of automation and control (IFAC), Advances in control and optimization of dynamical systems (ACODS 2014), IIT Kanpur, India - 208016, 3 (1), 973-980, March 13–15, 2014",
     date: "March 13–15, 2014",
   },
   {
-    ref: "[24]",
+    ref: "[29]",
     title: "Effect of Soil-Structure Interaction on Identified Modal Parameters and Damage Localization",
-    cite: "Roy K., Panikkaveettil, H., Ray-Chaudhuri, S and Raychowdhury, P., \\",
+    cite: "Roy K., Panikkaveettil, H., Ray-Chaudhuri, S and Raychowdhury, P., \"Effect of Soil-Structure Interaction on Identified Modal Parameters and Damage Localization\", 15th world conference in earthquake engineering (WCEE 2012), Lisbon, Portugal, September 24–28, 2012",
     date: "September 24–28, 2012",
   },
   {
-    ref: "[25]",
+    ref: "[30]",
     title: "On development of a new seismic base isolation system",
-    cite: "Chakraborty, S., Roy, K., Chinta, C., and Ray-Chaudhuri, S., \\",
+    cite: "Chakraborty, S., Roy, K., Chinta, C., and Ray-Chaudhuri, S., \"On development of a new seismic base isolation system\", 6th international conference on scalable uncertainty management (SUM 2012), Marburg, Germany, 574-581, September 17–19, 2012",
     date: "September 17–19, 2012",
   },
   {
-    ref: "[26]",
+    ref: "[31]",
     title: "Damage Detection of Bridge Using Wireless Sensors",
-    cite: "Roy, K., Ogai, H., Bhattacharya, B., Ray-Chaudhuri, S. and Qin, J., \\",
+    cite: "Roy, K., Ogai, H., Bhattacharya, B., Ray-Chaudhuri, S. and Qin, J., \"Damage Detection of Bridge Using Wireless Sensors\", International federation of automation and control (IFAC), Mining, Mineral and Metal Industries (MMM 2012), Nagaragawa, Gifu, Japan, 107-111, September 10–12, 2012",
     date: "September 10–12, 2012",
   },
   {
-    ref: "[27]",
+    ref: "[32]",
     title: "Comparative Study of Various Vibration-based Structural Damage Detection Techniques",
-    cite: "Roy, K. and Ray-Chaudhuri, S., \\",
+    cite: "Roy, K. and Ray-Chaudhuri, S., \"Comparative Study of Various Vibration-based Structural Damage Detection Techniques\", Asian pacific symposium on structural Reliability and its applications (APSSRA 2012), NUS, Singapore, March 23–25, 2012",
     date: "March 23–25, 2012",
   },
   {
-    ref: "[28]",
+    ref: "[33]",
     title: "Autoregressive Model for Structural Condition Assessment in Presence of Parametric Uncertainty",
-    cite: "Roy, K. and Ray-Chaudhuri, S., \\",
+    cite: "Roy, K. and Ray-Chaudhuri, S., \"Autoregressive Model for Structural Condition Assessment in Presence of Parametric Uncertainty\", International symposium on engineering under uncertainty: safety assessment and management (ISEUSAM 2012), BESU, Shibpur, India - 711103, 1061-1072, January 3–5, 2012",
     date: "January 3–5, 2012",
   },
 ]
@@ -823,53 +844,138 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Experience */}
-        <Section id="experience" index="01" title="Experience">
-          <ul>
-            {EXPERIENCE.map((exp, i) => (
-              <li
-                key={i}
-                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06),0_0_24px_oklch(0.62_0.14_58/0.08)] before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-orange before:scale-y-0 before:transition-transform before:duration-300 before:origin-center hover:before:scale-y-100 ${
-                  i < EXPERIENCE.length - 1 ? "border-b border-border" : ""
-                }`}
-              >
-                <div className="border-border px-6 py-6 sm:border-r sm:px-10 transition-colors duration-500 group-hover:border-transparent">
-                  <span className="font-mono text-sm uppercase tracking-widest text-orange">
-                    {exp.period}
-                  </span>
-                </div>
-                <div className="px-6 py-6 sm:px-10 flex gap-5 sm:gap-6 items-start">
-                  {exp.logo && (
-                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded border border-border bg-white shrink-0 p-1 flex items-center justify-center shadow-sm transition-transform duration-500 group-hover:scale-105">
-                      <Image
-                        src={exp.logo || "/placeholder.svg"}
-                        alt={`${exp.organization} Logo`}
-                        fill
-                        className="object-contain p-1 bg-white"
-                        sizes="(min-width: 640px) 56px, 48px"
-                      />
+        {/* Academic & Professional Journey */}
+        <Section id="journey" index="01" title="Academic & Professional Journey">
+          <div className="relative py-12 md:py-20 overflow-hidden">
+            {/* The vertical timeline thread line */}
+            <div className="absolute left-6 lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-orange/10 via-orange/30 to-orange/10 pointer-events-none" />
+
+            <div className="space-y-12 lg:space-y-16">
+              {JOURNEY.map((item, idx) => {
+                const isEven = idx % 2 === 0
+                return (
+                  <div key={idx} className="relative flex flex-col lg:flex-row items-start">
+                    
+                    {/* Vertical line segment to avoid overflow past nodes */}
+                    <div className="absolute left-6 lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none">
+                      <div className={`w-full bg-gradient-to-b from-orange/20 via-orange/40 to-orange/20 ${
+                        idx === 0 ? "top-[2.25rem] bottom-0" :
+                        idx === JOURNEY.length - 1 ? "top-0 h-[2.25rem]" :
+                        "top-0 bottom-0"
+                      } absolute`} />
                     </div>
-                  )}
-                  <div className="space-y-1 min-w-0 flex-1">
-                    <p className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary leading-tight">
-                      {exp.role}
-                    </p>
-                    <p className="mt-1 text-sm sm:text-base text-foreground font-medium">
-                      {exp.organization}
-                    </p>
-                    {exp.location && (
-                      <p className="text-xs sm:text-sm text-muted-foreground">{exp.location}</p>
-                    )}
-                    {exp.description && (
-                      <p className="mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground pt-1 border-t border-border/40">
-                        {exp.description}
-                      </p>
-                    )}
+
+                    {/* Card Container */}
+                    <div 
+                      className={`group w-full lg:w-1/2 pl-16 pr-6 relative ${
+                        isEven 
+                          ? "lg:ml-0 lg:mr-auto lg:pl-8 lg:pr-12" 
+                          : "lg:ml-auto lg:mr-0 lg:pl-12 lg:pr-8"
+                      }`}
+                    >
+                      {/* Node (Desktop) */}
+                      <div 
+                        className={`hidden lg:flex absolute top-[2.25rem] -translate-y-1/2 z-10 items-center justify-center ${
+                          isEven ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"
+                        }`}
+                      >
+                        <div className="relative w-12 h-12 rounded-full border border-orange/30 bg-white p-1 shadow-md transition-all duration-500 scale-100 group-hover:scale-110 group-hover:border-orange group-hover:ring-8 group-hover:ring-orange/15 ring-8 ring-background dark:bg-zinc-900">
+                          <Image
+                            src={item.logo}
+                            alt={`${item.institution} logo`}
+                            fill
+                            className="object-contain p-1 rounded-full bg-white"
+                            sizes="40px"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Node (Mobile) */}
+                      <div className="lg:hidden absolute left-6 top-[2.25rem] -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+                        <div className="relative w-12 h-12 rounded-full border border-orange/30 bg-white p-1 shadow-md transition-all duration-500 scale-100 group-hover:scale-110 group-hover:border-orange group-hover:ring-8 group-hover:ring-orange/15 ring-8 ring-background dark:bg-zinc-900">
+                          <Image
+                            src={item.logo}
+                            alt={`${item.institution} logo`}
+                            fill
+                            className="object-contain p-1 rounded-full bg-white"
+                            sizes="40px"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Connector line (Desktop) */}
+                      <div 
+                        className={`hidden lg:block absolute top-[2.25rem] h-[1.5px] bg-orange/45 transition-transform duration-500 scale-x-0 group-hover:scale-x-100 ${
+                          isEven 
+                            ? "right-0 w-12 origin-right" 
+                            : "left-0 w-12 origin-left"
+                        }`} 
+                      />
+
+                      {/* Connector line (Mobile) */}
+                      <div className="lg:hidden absolute top-[2.25rem] left-6 w-10 h-[1.5px] bg-orange/45 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+
+                      {/* Card Content */}
+                      <div className="relative rounded border border-border bg-card/45 backdrop-blur-sm p-6 shadow-sm hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.05),0_0_24px_oklch(0.62_0.14_58/0.06)] transition-all duration-500 hover:-translate-y-1 hover:border-orange/25">
+                        
+                        {/* Soft Golden Backglow */}
+                        <div className="absolute -inset-px rounded opacity-0 group-hover:opacity-100 bg-gradient-to-r from-orange/5 via-primary/5 to-orange/5 blur-xl transition-all duration-500 -z-10 pointer-events-none" />
+
+                        {/* Golden side bar indicator for hover effect */}
+                        <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-orange scale-y-0 transition-transform duration-300 origin-center group-hover:scale-y-100" />
+                        
+                        {/* Academic/Professional Badge */}
+                        <div className="flex items-center justify-between gap-4 mb-3">
+                          <span className="font-mono text-xs uppercase tracking-widest text-orange font-semibold">
+                            {item.period}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-full text-[0.65rem] font-mono uppercase tracking-wider bg-secondary border border-border text-muted-foreground">
+                            {item.type}
+                          </span>
+                        </div>
+
+                        {/* Title & Institution */}
+                        <h4 className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary leading-snug">
+                          {item.title}
+                        </h4>
+                        <p className="mt-1 text-sm font-medium text-foreground">
+                          {item.institution}
+                        </p>
+                        {item.location && (
+                          <p className="text-xs text-muted-foreground mt-0.5">{item.location}</p>
+                        )}
+
+                        {/* Thesis / Description */}
+                        {item.thesis && (
+                          <p className="mt-4 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/40 leading-relaxed">
+                            <strong className="font-medium text-foreground">Thesis:</strong> {item.thesis}
+                          </p>
+                        )}
+                        {item.description && (
+                          <p className="mt-4 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/40 leading-relaxed">
+                            {item.description}
+                          </p>
+                        )}
+
+                        {/* Activities */}
+                        {item.activities && item.activities.length > 0 && (
+                          <div className="mt-4 text-xs sm:text-sm text-muted-foreground pt-3 border-t border-border/40">
+                            <strong className="font-medium text-foreground block mb-1.5">Activities &amp; Societies:</strong>
+                            <ul className="list-outside list-disc pl-4 space-y-1 text-muted-foreground/80">
+                              {item.activities.map((act, j) => (
+                                <li key={j}>{act}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                )
+              })}
+            </div>
+          </div>
         </Section>
 
         {/* Administrative Experience */}
@@ -941,62 +1047,10 @@ export default function Home() {
           </ul>
         </Section>
 
-        {/* Education */}
-        <Section id="education" index="04" title="Education">
-          <ul>
-            {EDUCATION.map((e, i) => (
-              <li
-                key={e.year}
-                className={`group relative grid grid-cols-1 sm:grid-cols-[10rem_1fr] transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:scale-[1.01] hover:bg-secondary/50 hover:backdrop-blur-xl hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.06),0_0_24px_oklch(0.62_0.14_58/0.08)] before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-orange before:scale-y-0 before:transition-transform before:duration-300 before:origin-center hover:before:scale-y-100 ${
-                  i < EDUCATION.length - 1 ? "border-b border-border" : ""
-                }`}
-              >
-                <span className="border-border px-6 py-6 font-mono text-sm uppercase tracking-widest text-orange sm:border-r sm:px-10 transition-colors duration-500 group-hover:border-transparent">
-                  {e.year}
-                </span>
-                <div className="px-6 py-6 sm:px-10 flex gap-5 sm:gap-6 items-start">
-                  {e.logo && (
-                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded border border-border bg-white shrink-0 p-1 flex items-center justify-center shadow-sm transition-transform duration-500 group-hover:scale-105">
-                      <Image
-                        src={e.logo || "/placeholder.svg"}
-                        alt={`${e.place} Logo`}
-                        fill
-                        className="object-contain p-1 bg-white"
-                        sizes="(min-width: 640px) 56px, 48px"
-                      />
-                    </div>
-                  )}
-                  <div className="space-y-1 min-w-0 flex-1">
-                    <p className="font-serif text-lg sm:text-xl font-medium tracking-tight text-primary leading-tight">
-                      {e.degree}
-                    </p>
-                    <p className="mt-1 text-sm sm:text-base text-foreground font-medium">
-                      {e.place}
-                    </p>
-                    {e.thesis && (
-                      <p className="mt-4 text-sm text-muted-foreground">
-                        <strong className="font-medium text-foreground">Thesis:</strong> {e.thesis}
-                      </p>
-                    )}
-                    {e.activities && e.activities.length > 0 && (
-                      <div className="mt-3 text-sm text-muted-foreground">
-                        <strong className="font-medium text-foreground">Activities & Societies:</strong>
-                        <ul className="mt-2 ml-4 list-outside list-disc space-y-1">
-                          {e.activities.map((act, j) => (
-                            <li key={j}>{act}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Section>
+
 
         {/* Research */}
-        <Section id="research" index="05" title="Research">
+        <Section id="research" index="04" title="Research">
           {/* Research Interests — minimalist wireframe grid */}
           <div className="border-b border-border">
             <p className="border-b border-border bg-secondary/30 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10">
@@ -1032,12 +1086,12 @@ export default function Home() {
         </Section>
 
         {/* Publications */}
-        <Section id="publications" index="06" title="Publications">
+        <Section id="publications" index="05" title="Publications & Conferences">
           <PublicationsSearch journals={PUBLICATIONS} conferences={CONFERENCES} />
         </Section>
 
         {/* Students */}
-        <Section id="students" index="07" title="Students">
+        <Section id="students" index="06" title="Students">
           {/* Current Scholars */}
           <div className="px-6 py-4 sm:px-10 border-b border-border bg-secondary/10">
             <h3 className="font-mono text-[0.75rem] uppercase tracking-widest text-primary font-bold">Current Scholars</h3>
@@ -1146,7 +1200,7 @@ export default function Home() {
         </Section>
 
         {/* Gallery */}
-        <Section id="gallery" index="08" title="Gallery">
+        <Section id="gallery" index="07" title="Gallery">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {GALLERY.map((g, i) => (
               <figure
@@ -1176,7 +1230,7 @@ export default function Home() {
         </Section>
 
         {/* Contact */}
-        <Section id="contact" index="09" title="Contact">
+        <Section id="contact" index="08" title="Contact">
           <div className="flex justify-center px-6 py-12 sm:px-10">
             <div className="w-full max-w-2xl border border-border bg-secondary/15 backdrop-blur-md p-8 sm:p-12 transition-all duration-500 hover:shadow-[0_8px_32px_oklch(0.36_0.13_252/0.04)]">
               <div className="flex flex-col items-center text-center">

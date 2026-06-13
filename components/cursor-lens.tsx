@@ -18,22 +18,25 @@ function buildLensLayers(mainContent: HTMLElement) {
   const clone = mainContent.cloneNode(true) as HTMLElement
   stripIds(clone)
 
+  // 1. Edge Layer
   const lensEdge = document.createElement("div")
-  lensEdge.id = "lens-edge"
-  const edgeWrapper = document.createElement("div")
-  edgeWrapper.className = "cursor-lens-clone edge-scale"
-  edgeWrapper.appendChild(clone)
-  lensEdge.appendChild(edgeWrapper)
+  lensEdge.className = "lens-layer lens-edge-layer"
+  const edgeClone = document.createElement("div")
+  edgeClone.className = "cursor-lens-clone"
+  edgeClone.appendChild(clone)
+  lensEdge.appendChild(edgeClone)
 
+  // 2. Center Layer
   const lensCenter = document.createElement("div")
-  lensCenter.id = "lens-center"
-  const centerWrapper = document.createElement("div")
-  centerWrapper.className = "cursor-lens-clone center-scale"
-  centerWrapper.appendChild(clone.cloneNode(true))
-  lensCenter.appendChild(centerWrapper)
+  lensCenter.className = "lens-layer lens-center-layer"
+  const centerClone = document.createElement("div")
+  centerClone.className = "cursor-lens-clone"
+  centerClone.appendChild(clone.cloneNode(true))
+  lensCenter.appendChild(centerClone)
 
+  // 3. Glass Overlay
   const lensGlass = document.createElement("div")
-  lensGlass.id = "lens-glass"
+  lensGlass.className = "lens-glass-overlay"
   lensGlass.setAttribute("aria-hidden", "true")
 
   return { lensEdge, lensCenter, lensGlass }
@@ -48,13 +51,118 @@ export function CursorLens() {
 
     setActive(true)
 
-    const updateMousePosition = (e: MouseEvent) => {
-      document.documentElement.style.setProperty("--lens-x", `${e.clientX}px`)
-      document.documentElement.style.setProperty("--lens-y", `${e.clientY}px`)
+    let targetX = -1000
+    let targetY = -1000
+    let currentX = -1000
+    let currentY = -1000
+    let rafId: number | null = null
+    let isLensing = false
+
+    const updateClones = () => {
+      if (!isLensing) return
+
+      const scrollY = window.scrollY
+      
+      // Smooth interpolation (lerp)
+      if (currentX === -1000) {
+        currentX = targetX
+        currentY = targetY
+      } else {
+        // Butter-smooth inertia glide
+        currentX += (targetX - currentX) * 0.16
+        currentY += (targetY - currentY) * 0.16
+      }
+
+      const container = containerRef.current
+      if (container) {
+        const W = 280
+        const H = 280
+        const D = 25 // Edge width
+        const W_inner = W - 2 * D
+        const H_inner = H - 2 * D
+
+        const cx = currentX
+        const cy = currentY
+
+        const lensX = cx - W / 2
+        const lensY = cy - H / 2
+        container.style.transform = `translate3d(${lensX}px, ${lensY}px, 0)`
+
+        // Move the clones inside
+        const edgeClone = container.querySelector(".lens-edge-layer .cursor-lens-clone") as HTMLElement | null
+        const centerClone = container.querySelector(".lens-center-layer .cursor-lens-clone") as HTMLElement | null
+
+        if (edgeClone) {
+          const S_edge = 1.3
+          const tx_edge = W / 2 - cx * S_edge
+          const ty_edge = H / 2 - (cy + scrollY) * S_edge
+          edgeClone.style.transform = `translate3d(${tx_edge}px, ${ty_edge}px, 0) scale(${S_edge})`
+        }
+
+        if (centerClone) {
+          const S_center = 1.8
+          const tx_center = W_inner / 2 - cx * S_center
+          const ty_center = H_inner / 2 - (cy + scrollY) * S_center
+          centerClone.style.transform = `translate3d(${tx_center}px, ${ty_center}px, 0) scale(${S_center})`
+        }
+      }
+
+      rafId = requestAnimationFrame(updateClones)
     }
 
-    const updateScrollPosition = () => {
-      document.documentElement.style.setProperty("--lens-scroll-y", `${window.scrollY}px`)
+    const startLensing = () => {
+      if (isLensing) return
+      isLensing = true
+      document.documentElement.classList.add("cursor-lens-active")
+      if (rafId) cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(updateClones)
+    }
+
+    const stopLensing = () => {
+      if (!isLensing) return
+      isLensing = false
+      document.documentElement.classList.remove("cursor-lens-active")
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+      // Reset position variables
+      currentX = -1000
+      currentY = -1000
+      const container = containerRef.current
+      if (container) {
+        container.style.transform = `translate3d(-1000px, -1000px, 0)`
+      }
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      targetX = e.clientX
+      targetY = e.clientY
+    }
+
+    const handleMouseDown = (e: MouseEvent) => {
+      if (e.button === 2) {
+        targetX = e.clientX
+        targetY = e.clientY
+        currentX = e.clientX
+        currentY = e.clientY
+        mountClones()
+        startLensing()
+      }
+    }
+
+    const handleMouseUp = (e: MouseEvent) => {
+      if (e.button === 2) {
+        stopLensing()
+      }
+    }
+
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault()
+    }
+
+    const handleBlur = () => {
+      stopLensing()
     }
 
     const mountClones = () => {
@@ -67,34 +175,10 @@ export function CursorLens() {
       container.append(lensEdge, lensCenter, lensGlass)
     }
 
-    const handleMouseDown = (e: MouseEvent) => {
-      if (e.button === 2) {
-        updateMousePosition(e)
-        updateScrollPosition()
-        mountClones()
-        document.documentElement.classList.add("cursor-lens-active")
-      }
-    }
-
-    const handleMouseUp = (e: MouseEvent) => {
-      if (e.button === 2) {
-        document.documentElement.classList.remove("cursor-lens-active")
-      }
-    }
-
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault()
-    }
-
-    const handleBlur = () => {
-      document.documentElement.classList.remove("cursor-lens-active")
-    }
-
     const initTimer = window.setTimeout(mountClones, 100)
     const loadTimer = window.setTimeout(mountClones, 800)
 
-    window.addEventListener("mousemove", updateMousePosition)
-    window.addEventListener("scroll", updateScrollPosition, { passive: true })
+    window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mousedown", handleMouseDown, true)
     window.addEventListener("mouseup", handleMouseUp, true)
     window.addEventListener("contextmenu", handleContextMenu, true)
@@ -102,25 +186,17 @@ export function CursorLens() {
     window.addEventListener("resize", mountClones)
     window.addEventListener("load", mountClones)
 
-    document.documentElement.style.setProperty("--lens-x", "-1000px")
-    document.documentElement.style.setProperty("--lens-y", "-1000px")
-    updateScrollPosition()
-
     return () => {
       window.clearTimeout(initTimer)
       window.clearTimeout(loadTimer)
-      window.removeEventListener("mousemove", updateMousePosition)
-      window.removeEventListener("scroll", updateScrollPosition)
+      window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mousedown", handleMouseDown, true)
       window.removeEventListener("mouseup", handleMouseUp, true)
       window.removeEventListener("contextmenu", handleContextMenu, true)
       window.removeEventListener("blur", handleBlur)
       window.removeEventListener("resize", mountClones)
       window.removeEventListener("load", mountClones)
-      document.documentElement.classList.remove("cursor-lens-active")
-      document.documentElement.style.removeProperty("--lens-x")
-      document.documentElement.style.removeProperty("--lens-y")
-      document.documentElement.style.removeProperty("--lens-scroll-y")
+      stopLensing()
       containerRef.current?.replaceChildren()
     }
   }, [])
@@ -130,7 +206,7 @@ export function CursorLens() {
   return (
     <div
       ref={containerRef}
-      className="cursor-lens-root"
+      className="cursor-lens-container"
       aria-hidden="true"
     />
   )

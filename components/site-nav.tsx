@@ -4,11 +4,11 @@ import { useEffect, useState } from "react"
 
 const NAV_ITEMS = [
   { label: "Home", href: "#home", id: "home" },
-  { label: "Professional Experience", href: "#experience", id: "experience" },
+  { label: "Journey", href: "#journey", id: "journey" },
+  { label: "Administrative Experience", href: "#administrative-experience", id: "administrative-experience" },
   { label: "Awards & Honours", href: "#awards-honours", id: "awards-honours" },
-  { label: "Education", href: "#education", id: "education" },
   { label: "Research", href: "#research", id: "research" },
-  { label: "Publications", href: "#publications", id: "publications" },
+  { label: "Publications & Conferences", href: "#publications", id: "publications" },
   { label: "Students", href: "#students", id: "students" },
   { label: "Gallery", href: "#gallery", id: "gallery" },
   { label: "Contact", href: "#contact", id: "contact" },
