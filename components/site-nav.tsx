@@ -45,7 +45,7 @@ export function SiteNav() {
   }, [])
 
   return (
-    <nav aria-label="Primary" className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
+    <nav aria-label="Primary" className="sticky top-0 z-50 border-b border-border bg-background/88 shadow-[0_12px_40px_oklch(0.24_0.06_255/0.06)] backdrop-blur-xl">
       <ul className="grid grid-cols-3 lg:grid-cols-9">
         {NAV_ITEMS.map((item, i) => {
           const isActive = activeId === item.id
@@ -64,12 +64,15 @@ export function SiteNav() {
                 href={item.href}
                 aria-current={isActive ? "true" : undefined}
                 className={[
-                  "flex h-full items-center justify-center px-2 py-4 text-center font-sans text-xs font-medium tracking-wide transition-colors",
+                  "relative flex h-full items-center justify-center px-2 py-4 text-center font-sans text-xs font-medium tracking-wide transition-all duration-300",
                   isActive
-                    ? "bg-primary/8 text-primary shadow-[inset_0_-2px_0_0_var(--primary)]"
-                    : "text-muted-foreground hover:bg-secondary hover:text-primary",
+                    ? "bg-gradient-to-b from-primary/10 to-orange/5 text-primary shadow-[inset_0_-2px_0_0_var(--orange)]"
+                    : "text-muted-foreground hover:bg-secondary/70 hover:text-primary",
                 ].join(" ")}
               >
+                {isActive && (
+                  <span className="absolute inset-x-4 bottom-0 h-px bg-orange shadow-[0_0_14px_oklch(0.62_0.14_58/0.55)]" />
+                )}
                 {item.label}
               </a>
             </li>

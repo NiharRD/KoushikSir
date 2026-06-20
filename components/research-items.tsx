@@ -492,14 +492,14 @@ export function ResearchItems() {
   const IconComponent = activeCategory.icon
 
   return (
-    <div className="border-t border-border bg-secondary/10 px-6 py-10 sm:px-10">
+    <div className="border-t border-border bg-gradient-to-br from-secondary/20 via-card/60 to-orange/5 px-6 py-12 sm:px-10">
       <div className="mx-auto max-w-4xl">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <h4 className="font-serif text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               Research Items
             </h4>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               Select a category below to explore Dr. Roy's research items including articles, book chapters, datasets, and methods.
             </p>
           </div>
@@ -509,7 +509,7 @@ export function ResearchItems() {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="flex w-full items-center justify-between rounded border border-border bg-secondary/80 px-4 py-3 text-left font-mono text-xs font-medium uppercase tracking-wider text-foreground backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-secondary/90 focus:outline-none focus:ring-1 focus:ring-primary/40"
+              className="flex w-full items-center justify-between border border-border bg-card/80 px-4 py-3 text-left font-mono text-xs font-medium uppercase tracking-wider text-foreground shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-orange/50 hover:bg-orange/10 focus:outline-none focus:ring-1 focus:ring-orange/40"
             >
               <span className="flex items-center gap-2">
                 <IconComponent className="size-4 text-primary" />
@@ -527,7 +527,7 @@ export function ResearchItems() {
                 {/* Backdrop overlay to click outside */}
                 <div className="fixed inset-0 z-30" onClick={() => setIsOpen(false)} />
 
-                <div className="absolute right-0 top-full z-40 mt-2 w-full origin-top-right rounded border border-border bg-background/95 shadow-xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-top-2">
+                <div className="absolute right-0 top-full z-40 mt-2 w-full origin-top-right border border-border bg-background/95 shadow-xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-top-2">
                   <ul className="py-1">
                     {(Object.keys(CATEGORIES) as CategoryKey[]).map((key) => {
                       const cat = CATEGORIES[key]
@@ -565,7 +565,7 @@ export function ResearchItems() {
         </div>
 
         {/* Display List of Selected Category */}
-        <div className="relative mt-8 rounded border border-border bg-secondary/20">
+        <div className="relative mt-8 overflow-hidden border border-border bg-card/70 shadow-[0_16px_50px_oklch(0.36_0.13_252/0.07)] backdrop-blur">
           {/* Scroll fade mask at the bottom */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-background/30 to-transparent" />
 
@@ -574,7 +574,7 @@ export function ResearchItems() {
               {activeCategory.items.map((item, idx) => (
                 <li
                   key={idx}
-                  className="group flex items-start gap-4 border-b border-border/20 px-4 py-3 rounded transition-all duration-300 hover:bg-secondary/50 border-l-2 border-l-transparent hover:border-l-primary"
+                  className="group flex items-start gap-4 border-b border-border/30 border-l-2 border-l-transparent px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-l-orange hover:bg-secondary/55 hover:shadow-sm"
                 >
                   <span className="mt-0.5 font-mono text-xs tabular-nums text-primary">
                     {item.ref}
@@ -594,7 +594,7 @@ export function ResearchItems() {
                       href={item.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex size-7 shrink-0 items-center justify-between rounded-full border border-border bg-secondary/40 p-1.5 text-primary opacity-0 transition-all duration-300 hover:border-primary/50 hover:bg-secondary/70 group-hover:-translate-x-1 group-hover:opacity-100"
+                      className="group/link flex size-8 shrink-0 items-center justify-between border border-border bg-card/80 p-2 text-primary opacity-0 transition-all duration-300 hover:border-orange/50 hover:bg-orange/10 hover:text-orange group-hover:-translate-x-1 group-hover:opacity-100"
                     >
                       <ArrowRight className="size-4" />
                     </a>

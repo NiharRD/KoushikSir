@@ -69,41 +69,41 @@ export function PublicationsSearch({
   }, [conferences, searchQuery, selectedYear])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 bg-gradient-to-b from-card/30 to-secondary/10 pb-8">
       {/* Search and Filter Controls */}
-      <div className="border-y border-border bg-secondary/15 p-6 sm:px-10 flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
+      <div className="border-y border-border bg-card/70 p-6 shadow-[0_12px_40px_oklch(0.36_0.13_252/0.05)] backdrop-blur sm:px-10 flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
         {/* Search Bar */}
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-orange" />
           <input
             type="text"
             placeholder="Search by title, citation, or authors..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 text-sm border border-border bg-card rounded-md focus:outline-none focus:border-orange focus:ring-1 focus:ring-orange/30 text-foreground transition-all"
+            className="w-full border border-border bg-background/70 py-3 pl-10 pr-4 text-sm text-foreground shadow-inner transition-all placeholder:text-muted-foreground/70 focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange/30"
           />
         </div>
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-3">
           {/* Tab switches */}
-          <div className="flex bg-secondary border border-border p-0.5 rounded-md text-xs font-mono">
+          <div className="flex border border-border bg-secondary/70 p-0.5 text-xs font-mono shadow-sm">
             <button
               onClick={() => setActiveTab("all")}
-              className={`px-3 py-1.5 rounded transition-all cursor-pointer ${activeTab === "all" ? "bg-primary text-primary-foreground font-semibold shadow-sm" : "text-muted-foreground hover:text-primary"}`}
+              className={`px-3 py-2 transition-all cursor-pointer ${activeTab === "all" ? "bg-primary text-primary-foreground font-semibold shadow-sm" : "text-muted-foreground hover:bg-card/70 hover:text-primary"}`}
             >
               All
             </button>
             <button
               onClick={() => setActiveTab("journals")}
-              className={`px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${activeTab === "journals" ? "bg-primary text-primary-foreground font-semibold shadow-sm" : "text-muted-foreground hover:text-primary"}`}
+              className={`px-3 py-2 transition-all cursor-pointer flex items-center gap-1.5 ${activeTab === "journals" ? "bg-primary text-primary-foreground font-semibold shadow-sm" : "text-muted-foreground hover:bg-card/70 hover:text-primary"}`}
             >
               <BookOpen className="size-3" />
               Journals
             </button>
             <button
               onClick={() => setActiveTab("conferences")}
-              className={`px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${activeTab === "conferences" ? "bg-primary text-primary-foreground font-semibold shadow-sm" : "text-muted-foreground hover:text-primary"}`}
+              className={`px-3 py-2 transition-all cursor-pointer flex items-center gap-1.5 ${activeTab === "conferences" ? "bg-primary text-primary-foreground font-semibold shadow-sm" : "text-muted-foreground hover:bg-card/70 hover:text-primary"}`}
             >
               <Presentation className="size-3" />
               Conferences
@@ -111,7 +111,7 @@ export function PublicationsSearch({
           </div>
 
           {/* Year selector */}
-          <div className="flex items-center gap-1.5 border border-border bg-card rounded-md px-3 py-1.5 text-xs text-foreground">
+          <div className="flex items-center gap-1.5 border border-border bg-background/70 px-3 py-2 text-xs text-foreground shadow-sm">
             <SlidersHorizontal className="size-3.5 text-orange" />
             <select
               value={selectedYear}
@@ -133,9 +133,9 @@ export function PublicationsSearch({
       <div>
         {(activeTab === "all" || activeTab === "journals") && (
           <div>
-            <div className="border-b border-border bg-secondary/30 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10 flex justify-between items-center">
+            <div className="border-b border-border bg-gradient-to-r from-secondary/45 via-card/60 to-orange/10 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10 flex justify-between items-center">
               <span>Journal Publications</span>
-              <span className="text-muted-foreground text-[0.65rem] lowercase font-normal">
+              <span className="border border-border bg-background/60 px-2 py-1 text-[0.65rem] lowercase font-normal text-muted-foreground">
                 {filteredJournals.length} found
               </span>
             </div>
@@ -151,9 +151,9 @@ export function PublicationsSearch({
 
         {(activeTab === "all" || activeTab === "conferences") && (
           <div className={`${activeTab === "all" ? "mt-8 border-t border-border" : ""}`}>
-            <div className="border-b border-border bg-secondary/30 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10 flex justify-between items-center">
+            <div className="border-b border-border bg-gradient-to-r from-secondary/45 via-card/60 to-orange/10 px-6 py-4 font-mono text-[0.7rem] uppercase tracking-widest text-primary sm:px-10 flex justify-between items-center">
               <span>Conference Publications</span>
-              <span className="text-muted-foreground text-[0.65rem] lowercase font-normal">
+              <span className="border border-border bg-background/60 px-2 py-1 text-[0.65rem] lowercase font-normal text-muted-foreground">
                 {filteredConferences.length} found
               </span>
             </div>
