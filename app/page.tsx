@@ -86,7 +86,7 @@ export default async function Home() {
         <SiteNav />
 
         {/* Masthead / Hero */}
-        <header id="home" className="scroll-mt-14 border-b border-border">
+        <header id="hero" className="scroll-mt-14 border-b border-border">
           <div className="flex flex-col justify-between gap-2 border-b border-primary/15 bg-primary px-6 py-3 font-mono text-[0.7rem] uppercase tracking-widest text-primary-foreground sm:flex-row sm:px-10">
             <span>Dept. of Civil &amp; Environmental Engineering</span>
             <span>IIT Patna / Bihta, Bihar — 801106</span>
@@ -261,7 +261,7 @@ export default async function Home() {
         {/* ========================================================================= */}
         {/* SECTION 1: PUBLICATIONS PREVIEW */}
         {/* ========================================================================= */}
-        <section className="border-b border-border py-14 px-6 sm:px-10">
+        <section id="publications-preview" className="border-b border-border py-14 px-6 sm:px-10 scroll-mt-14">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-border/60">
               <div className="flex items-center gap-3">
@@ -353,7 +353,7 @@ export default async function Home() {
         {/* ========================================================================= */}
         {/* SECTION 2: RESEARCH & GRANTS PREVIEW */}
         {/* ========================================================================= */}
-        <section className="border-b border-border py-14 px-6 sm:px-10 bg-card/50">
+        <section id="research-preview" className="border-b border-border py-14 px-6 sm:px-10 bg-card/50 scroll-mt-14">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-border/60">
               <div className="flex items-center gap-3">
@@ -419,7 +419,7 @@ export default async function Home() {
         {/* ========================================================================= */}
         {/* SECTION 3: STUDENTS & RESEARCH SCHOLARS PREVIEW */}
         {/* ========================================================================= */}
-        <section className="border-b border-border py-14 px-6 sm:px-10">
+        <section id="students-preview" className="border-b border-border py-14 px-6 sm:px-10 scroll-mt-14">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-border/60">
               <div className="flex items-center gap-3">
@@ -488,7 +488,7 @@ export default async function Home() {
         {/* ========================================================================= */}
         {/* SECTION 4: AWARDS & HONOURS PREVIEW */}
         {/* ========================================================================= */}
-        <section className="border-b border-border py-14 px-6 sm:px-10 bg-card/50">
+        <section id="awards-preview" className="border-b border-border py-14 px-6 sm:px-10 bg-card/50 scroll-mt-14">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-border/60">
               <div className="flex items-center gap-3">
@@ -550,7 +550,7 @@ export default async function Home() {
         {/* ========================================================================= */}
         {/* SECTION 5: CONSULTANCY & INDUSTRIAL PROJECTS PREVIEW */}
         {/* ========================================================================= */}
-        <section className="border-b border-border py-14 px-6 sm:px-10">
+        <section id="consultancy-preview" className="border-b border-border py-14 px-6 sm:px-10 scroll-mt-14">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-border/60">
               <div className="flex items-center gap-3">
