@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String?         @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@unique([provider, providerAccountId])
+}
+ 
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@unique([identifier, token])
+}
+ 
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([userId, credentialID])
+}
+
+model Publication {
+  id          Int      @id @default(autoincrement())
+  ref         String
+  title       String
+  cite        String
+  date        String
+  url         String?
+  type        String   @default("journal") // "journal" | "conference"
+  googleScholarUrl String?
+  researchGateUrl  String?
+  doiUrl           String?
+  links            String?  // JSON array of {label, url}
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ResearchGrant {
+  id          Int      @id @default(autoincrement())
+  title       String
+  agency      String
+  period      String
+  grant       String
+  role        String
+  googleScholarUrl String?
+  researchGateUrl  String?
+  links            String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Student {
+  id          Int      @id @default(autoincrement())
+  name        String
+  year        String?
+  thesis      String
+  degree      String   @default("PhD")
+  status      String   @default("graduated") // "current" | "graduated"
+  googleScholarUrl String?
+  researchGateUrl  String?
+  links            String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Award {
+  id          Int      @id @default(autoincrement())
+  title       String
+  detail      String
+  date        String
+  links        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ConsultancyProject {
+  id          Int      @id @default(autoincrement())
+  title       String
+  client      String
+  period      String
+  value       String?
+  role        String?
+  links        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProfileLink {
+  id    Int    @id @default(autoincrement())
+  key   String @unique  // "googleScholar", "researchGate", "linkedin", etc.
+  label String
+  url   String
+  icon  String?
+}
+
+model JourneyItem {
+  id          Int      @id @default(autoincrement())
+  type        String   // "academic" | "professional" | "administrative"
+  title       String
+  institution String
+  period      String
+  location    String?
+  description String?
+  thesis      String?
+  logo        String?
+  activities  String?  // JSON array
+  sortOrder   Int      @default(0)
+}

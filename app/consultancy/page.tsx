@@ -1,0 +1,82 @@
+import { prisma } from "@/lib/prisma"
+import { SiteNav } from "@/components/site-nav"
+import { SiteFooter } from "@/components/site-footer"
+import { AmbientBackground } from "@/components/ambient-background"
+import { ArrowLeft, Briefcase, Building } from "lucide-react"
+import Link from "next/link"
+
+export default async function ConsultancyPage() {
+  const items = await prisma.consultancyProject.findMany({
+    orderBy: { id: "asc" },
+  })
+
+  return (
+    <div className="relative isolate min-h-screen font-sans text-foreground">
+      <AmbientBackground />
+      <div className="relative z-10 w-full bg-card/85 shadow-xl backdrop-blur-md min-h-screen flex flex-col justify-between">
+        <div>
+          <SiteNav />
+          <main className="px-6 py-12 sm:px-10 max-w-6xl mx-auto w-full">
+            <Link
+              href="/"
+              className="inline-flex items-center text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-orange transition-colors mb-8"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Overview
+            </Link>
+
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-10 pb-4 border-b border-border">
+              <div>
+                <h1 className="font-serif text-3xl sm:text-5xl text-primary font-medium">
+                  Industrial Consultancy &amp; Design Vetting
+                </h1>
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-2">
+                  Structural safety vetting, proof checking, quality assurance &amp; testing projects
+                </p>
+              </div>
+              <span className="font-mono text-xs px-3 py-1 bg-primary/10 text-primary border border-primary/20 self-start sm:self-auto">
+                {items.length} Projects Recorded
+              </span>
+            </div>
+
+            <div className="space-y-5">
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+                    <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20 self-start">
+                      {item.period}
+                    </span>
+                    {item.value && (
+                      <span className="font-mono text-sm font-semibold text-primary px-2.5 py-0.5 bg-primary/10 self-start sm:self-auto">
+                        Value: {item.value}
+                      </span>
+                    )}
+                  </div>
+
+                  <h2 className="font-serif text-xl font-medium text-foreground mb-3 leading-snug">
+                    {item.title}
+                  </h2>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-border/50 text-xs font-mono text-muted-foreground">
+                    <p>
+                      <strong className="text-foreground">Client Organization:</strong> {item.client}
+                    </p>
+                    {item.role && (
+                      <p>
+                        <strong className="text-foreground">Expert Role:</strong> {item.role}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </main>
+        </div>
+
+        <SiteFooter />
+      </div>
+    </div>
+  )
+}

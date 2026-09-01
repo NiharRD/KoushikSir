@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} bg-background`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} bg-background dark`}
     >
       <body className="font-sans antialiased">
         <CursorLens />
@@ -65,3 +65,4 @@ export default function RootLayout({
     </html>
   )
 }
+

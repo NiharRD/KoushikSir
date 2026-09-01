@@ -1,84 +1,98 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Menu, X } from "lucide-react"
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#home", id: "home" },
-  { label: "Journey", href: "#journey", id: "journey" },
-  { label: "Administrative Experience", href: "#administrative-experience", id: "administrative-experience" },
-  { label: "Awards & Honours", href: "#awards-honours", id: "awards-honours" },
-  { label: "Research", href: "#research", id: "research" },
-  { label: "Publications & Conferences", href: "#publications", id: "publications" },
-  { label: "Students", href: "#students", id: "students" },
-  { label: "Gallery", href: "#gallery", id: "gallery" },
-  { label: "Contact", href: "#contact", id: "contact" },
+  { label: "Home", href: "/" },
+  { label: "Publications", href: "/publications" },
+  { label: "Research", href: "/research" },
+  { label: "Students", href: "/students" },
+  { label: "Awards", href: "/awards" },
+  { label: "Teaching", href: "/teaching" },
+  { label: "Consultancy", href: "/consultancy" },
 ]
 
 export function SiteNav() {
-  const [activeId, setActiveId] = useState("home")
-
-  useEffect(() => {
-    const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
-      (el): el is HTMLElement => el !== null,
-    )
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the entry closest to the top of the viewport that is intersecting.
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id)
-        }
-      },
-      {
-        // Account for the sticky nav height; trigger when a section reaches the upper band.
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: 0,
-      },
-    )
-
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
-  }, [])
+  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav aria-label="Primary" className="sticky top-0 z-50 border-b border-border bg-background/88 shadow-[0_12px_40px_oklch(0.24_0.06_255/0.06)] backdrop-blur-xl">
-      <ul className="grid grid-cols-3 lg:grid-cols-9">
+    <nav aria-label="Primary" className="sticky top-0 z-50 border-b border-border bg-background/90 shadow-[0_12px_40px_oklch(0.24_0.06_255/0.06)] backdrop-blur-xl">
+      {/* Desktop Nav */}
+      <ul className="hidden lg:grid grid-cols-7 w-full">
         {NAV_ITEMS.map((item, i) => {
-          const isActive = activeId === item.id
+          const isActive = pathname === item.href
           return (
             <li
               key={item.href}
               className={[
-                "border-border border-b border-r",
-                i % 3 === 2 ? "max-lg:border-r-0" : "",
-                i === NAV_ITEMS.length - 1 ? "lg:border-r-0" : "",
-                i >= 6 ? "max-lg:border-b-0" : "",
-                "lg:border-b-0",
+                "border-border border-r",
+                i === NAV_ITEMS.length - 1 ? "border-r-0" : "",
               ].join(" ")}
             >
-              <a
+              <Link
                 href={item.href}
-                aria-current={isActive ? "true" : undefined}
+                aria-current={isActive ? "page" : undefined}
                 className={[
                   "relative flex h-full items-center justify-center px-2 py-4 text-center font-sans text-xs font-medium tracking-wide transition-all duration-300",
                   isActive
-                    ? "bg-gradient-to-b from-primary/10 to-orange/5 text-primary shadow-[inset_0_-2px_0_0_var(--orange)]"
+                    ? "bg-gradient-to-b from-primary/15 to-orange/10 text-primary shadow-[inset_0_-2px_0_0_var(--orange)] font-semibold"
                     : "text-muted-foreground hover:bg-secondary/70 hover:text-primary",
                 ].join(" ")}
               >
                 {isActive && (
-                  <span className="absolute inset-x-4 bottom-0 h-px bg-orange shadow-[0_0_14px_oklch(0.62_0.14_58/0.55)]" />
+                  <span className="absolute inset-x-4 bottom-0 h-[2px] bg-orange shadow-[0_0_14px_oklch(0.62_0.14_58/0.55)]" />
                 )}
                 {item.label}
-              </a>
+              </Link>
             </li>
           )
         })}
       </ul>
+
+      {/* Mobile Nav Header */}
+      <div className="lg:hidden flex items-center justify-between px-6 py-4">
+        <Link href="/" className="font-serif font-medium text-primary text-base">
+          Dr. Koushik Roy
+        </Link>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-foreground p-2 rounded-md hover:bg-secondary/60 transition-colors"
+          aria-label="Toggle navigation"
+        >
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile Nav Drawer */}
+      {isOpen && (
+        <div className="lg:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border shadow-2xl animate-in slide-in-from-top-2 duration-200">
+          <ul className="flex flex-col divide-y divide-border">
+            {NAV_ITEMS.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={[
+                      "block px-6 py-3.5 text-sm font-medium tracking-wide transition-all",
+                      isActive
+                        ? "bg-primary/10 text-primary border-l-4 border-orange pl-5 font-semibold"
+                        : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground",
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      )}
     </nav>
   )
 }

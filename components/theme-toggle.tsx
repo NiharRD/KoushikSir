@@ -16,14 +16,10 @@ export function ThemeToggle() {
         document.documentElement.classList.remove("dark")
       }
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-      const initial = prefersDark ? "dark" : "light"
+      // Force dark mode as initial default
+      const initial = "dark"
       setTheme(initial)
-      if (prefersDark) {
-        document.documentElement.classList.add("dark")
-      } else {
-        document.documentElement.classList.remove("dark")
-      }
+      document.documentElement.classList.add("dark")
     }
   }, [])
 
