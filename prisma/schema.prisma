@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -116,6 +116,7 @@ model Student {
   thesis      String
   degree      String   @default("PhD")
   status      String   @default("graduated") // "current" | "graduated"
+  areaOfResearch String?
   googleScholarUrl String?
   researchGateUrl  String?
   links            String?
@@ -140,6 +141,11 @@ model ConsultancyProject {
   period      String
   value       String?
   role        String?
+  description String?
+  startDate   String?
+  endDate     String?
+  status      String?  @default("Ongoing")
+  progress    String?
   links        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -165,4 +171,15 @@ model JourneyItem {
   logo        String?
   activities  String?  // JSON array
   sortOrder   Int      @default(0)
+}
+
+model SiteSettings {
+  id               Int    @id @default(autoincrement())
+  yearsExperience  String @default("12+")
+  publicationsLabel String @default("27+")
+  grantsLabel      String @default("₹ 2.0+ Cr")
+  phdScholarsLabel String @default("5+")
+  profileImageUrl  String @default("/professor-portrait.png")
+  profileImageDims String @default("600x800")
+  socialLinks      String @default("[]") // JSON: [{key, label, url, icon?}]
 }

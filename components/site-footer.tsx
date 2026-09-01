@@ -18,7 +18,7 @@ function LinkedinIcon(props: React.ComponentProps<"svg">) {
   )
 }
 
-export function SiteFooter() {
+export function SiteFooter({ socialLinks = [] }: { socialLinks?: any[] }) {
   return (
     <footer id="contact" className="border-t border-border bg-card/70 backdrop-blur-md">
       {/* Top Banner */}
@@ -92,49 +92,31 @@ export function SiteFooter() {
             Academic Profiles
           </h3>
           <ul className="space-y-2.5">
-            {[
-              {
-                label: "Google Scholar",
-                href: "https://scholar.google.com/citations?user=j3-TJncAAAAJ&hl=en",
-                icon: GraduationCap,
-              },
-              {
-                label: "ResearchGate",
-                href: "https://www.researchgate.net/profile/Koushik-Roy-10",
-                icon: BookOpen,
-              },
-              {
-                label: "LinkedIn Profile",
-                href: "https://www.linkedin.com/in/dr-koushik-roy-2b87768a/?originalSubdomain=in",
-                icon: LinkedinIcon,
-              },
-              {
-                label: "Academia.edu",
-                href: "https://iitp.academia.edu/KoushikRoy",
-                icon: School,
-              },
-              {
-                label: "IIT Patna Faculty Page",
-                href: "https://www.iitp.ac.in/",
-                icon: ExternalLink,
-              },
-            ].map((link) => {
-              const Icon = link.icon
+            {socialLinks.length > 0 ? socialLinks.map((link: any, i: number) => {
+              const lowerKey = link.key.toLowerCase()
+              let Icon = ExternalLink
+              if (lowerKey.includes("scholar")) Icon = GraduationCap
+              else if (lowerKey.includes("researchgate")) Icon = BookOpen
+              else if (lowerKey.includes("linkedin")) Icon = LinkedinIcon
+              else if (lowerKey.includes("academia")) Icon = School
+
               return (
-                <li key={link.label}>
+                <li key={i}>
                   <a
-                    href={link.href}
+                    href={link.value}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2.5 text-xs font-mono uppercase tracking-wide text-muted-foreground hover:text-orange transition-all"
                   >
                     <Icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-orange transition-colors" />
-                    <span>{link.label}</span>
+                    <span>{link.key}</span>
                     <ExternalLink className="h-2.5 w-2.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </a>
                 </li>
               )
-            })}
+            }) : (
+              <p className="text-xs text-muted-foreground">No links added.</p>
+            )}
           </ul>
         </div>
       </div>

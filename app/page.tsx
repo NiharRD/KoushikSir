@@ -55,6 +55,7 @@ const INTERESTS = [
 export default async function Home() {
   // Parallel fetch for counts and preview items
   const [
+    settings,
     pubCount,
     grantCount,
     studentCount,
@@ -66,6 +67,20 @@ export default async function Home() {
     recentAwards,
     recentConsultancy,
   ] = await Promise.all([
+    prisma.siteSettings.upsert({
+      where: { id: 1 },
+      create: { 
+        id: 1,
+        socialLinks: JSON.stringify([
+          { key: "Google Scholar", value: "https://scholar.google.com/citations?user=j3-TJncAAAAJ&hl=en" },
+          { key: "ResearchGate", value: "https://www.researchgate.net/profile/Koushik-Roy-10" },
+          { key: "LinkedIn Profile", value: "https://www.linkedin.com/in/dr-koushik-roy-2b87768a/?originalSubdomain=in" },
+          { key: "Academia.edu", value: "https://iitp.academia.edu/KoushikRoy" },
+          { key: "IIT Patna Faculty Page", value: "https://www.iitp.ac.in/" }
+        ])
+      },
+      update: {},
+    }),
     prisma.publication.count(),
     prisma.researchGrant.count(),
     prisma.student.count(),
@@ -77,6 +92,8 @@ export default async function Home() {
     prisma.award.findMany({ take: 4, orderBy: { id: "asc" } }),
     prisma.consultancyProject.findMany({ take: 4, orderBy: { id: "asc" } }),
   ])
+  
+  const socialLinks = JSON.parse(settings.socialLinks || "[]")
 
   return (
     <div className="relative isolate min-h-screen font-sans text-foreground">
@@ -161,43 +178,37 @@ export default async function Home() {
 
                   {/* Profile Links */}
                   <div className="mt-6 flex flex-wrap gap-2.5">
-                    <a
-                      href="https://scholar.google.com/citations?user=j3-TJncAAAAJ&hl=en"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 border border-border bg-secondary/30 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/60 hover:text-orange"
-                    >
-                      <GraduationCap className="h-3.5 w-3.5" />
-                      Google Scholar
-                    </a>
-                    <a
-                      href="https://www.researchgate.net/profile/Koushik-Roy-10"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 border border-border bg-secondary/30 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/60 hover:text-orange"
-                    >
-                      <BookOpen className="h-3.5 w-3.5" />
-                      ResearchGate
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/dr-koushik-roy-2b87768a/?originalSubdomain=in"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 border border-border bg-secondary/30 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/60 hover:text-orange"
-                    >
-                      <LinkedinIcon className="h-3.5 w-3.5" />
-                      LinkedIn
-                    </a>
+                    {socialLinks.map((link: any, i: number) => {
+                      const lowerKey = link.key.toLowerCase()
+                      let Icon: any = ExternalLink
+                      if (lowerKey.includes("scholar")) Icon = GraduationCap
+                      else if (lowerKey.includes("researchgate")) Icon = BookOpen
+                      else if (lowerKey.includes("linkedin")) Icon = LinkedinIcon
+                      else if (lowerKey.includes("github")) Icon = Users // Placeholder if needed
+
+                      return (
+                        <a
+                          key={i}
+                          href={link.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 border border-border bg-secondary/30 px-3.5 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-primary transition-all duration-300 hover:border-orange hover:bg-secondary/60 hover:text-orange"
+                        >
+                          <Icon className="h-3.5 w-3.5" />
+                          {link.key}
+                        </a>
+                      )
+                    })}
                   </div>
                 </div>
 
                 {/* Animated Stats Bar */}
                 <dl className="grid grid-cols-2 sm:grid-cols-4 border-t border-border pt-4">
                   {[
-                    ["12+", "Years Experience"],
-                    [pubCount > 0 ? `${pubCount}+` : "27+", "Publications"],
-                    ["₹ 2.0+ Cr", "Research Grants"],
-                    [studentCount > 0 ? `${studentCount}` : "5+", "Ph.D. Scholars"],
+                    [settings.yearsExperience, "Years Experience"],
+                    [settings.publicationsLabel || (pubCount > 0 ? `${pubCount}+` : "27+"), "Publications"],
+                    [settings.grantsLabel, "Research Grants"],
+                    [settings.phdScholarsLabel || (studentCount > 0 ? `${studentCount}+` : "5+"), "Ph.D. Scholars"],
                   ].map(([n, l], i) => (
                     <div
                       key={l}
@@ -220,7 +231,7 @@ export default async function Home() {
             <div className="bg-gradient-to-b from-secondary/20 to-transparent p-6 sm:p-10 lg:col-span-4 lg:flex lg:flex-col lg:justify-center lg:items-center">
               <div className="relative aspect-[3/4] w-full max-w-sm mx-auto overflow-hidden border border-primary/20 shadow-[0_12px_40px_oklch(0.36_0.13_252/0.15)] rounded-sm">
                 <Image
-                  src="/professor-portrait.png"
+                  src={settings.profileImageUrl}
                   alt="Portrait of Dr. Koushik Roy"
                   fill
                   priority
@@ -615,8 +626,8 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Site Footer with full contact details */}
-        <SiteFooter />
+        {/* Footer */}
+        <SiteFooter socialLinks={socialLinks} />
       </div>
     </div>
   )

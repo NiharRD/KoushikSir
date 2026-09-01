@@ -1,6 +1,6 @@
 import { auth, signIn, signOut } from "@/auth"
 import Link from "next/link"
-import { LogOut, Home, FileText, ArrowLeft, FlaskConical, Users, Trophy, Briefcase } from "lucide-react"
+import { LogOut, Home, FileText, ArrowLeft, FlaskConical, Users, Trophy, Briefcase, Settings } from "lucide-react"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
@@ -13,7 +13,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <p className="text-sm text-muted-foreground mb-6">
             Sign in with an authorized Google account (defined in .env as EMAIL_ADMIN or EMAIL_SIR) to manage site content.
           </p>
-          <form action={async () => { "use server"; await signIn("google") }}>
+          <form action={async () => { "use server"; await signIn("google", { redirectTo: "/admin" }) }}>
             <button type="submit" className="w-full px-6 py-3 bg-primary text-primary-foreground font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
               Sign in with Google
             </button>
@@ -33,6 +33,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <nav className="flex-1 overflow-y-auto p-4 space-y-1.5 font-mono text-xs uppercase tracking-wider">
           <Link href="/admin" className="flex items-center gap-3 px-3 py-2.5 text-foreground hover:bg-secondary/60 rounded-md transition-colors">
             <Home size={15} /> Dashboard
+          </Link>
+          <Link href="/admin/settings" className="flex items-center gap-3 px-3 py-2.5 text-foreground hover:bg-secondary/60 rounded-md transition-colors">
+            <Settings size={15} /> Site Settings
           </Link>
           <Link href="/admin/publications" className="flex items-center gap-3 px-3 py-2.5 text-foreground hover:bg-secondary/60 rounded-md transition-colors">
             <FileText size={15} /> Publications

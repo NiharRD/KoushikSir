@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { FileText, FlaskConical, Users, Trophy, Briefcase, ArrowRight } from "lucide-react"
+import { FileText, FlaskConical, Users, Trophy, Briefcase, ArrowRight, Settings } from "lucide-react"
 
 export default async function AdminDashboard() {
   const [pubCount, grantCount, studentCount, awardCount, consultancyCount] = await Promise.all([
@@ -12,6 +12,13 @@ export default async function AdminDashboard() {
   ])
 
   const sections = [
+    {
+      title: "Site Settings",
+      desc: "Manage hero stats, profile photo, and social/academic profile links.",
+      href: "/admin/settings",
+      count: "Global",
+      icon: Settings,
+    },
     {
       title: "Publications",
       desc: "Manage journal papers, conference articles, and Google Scholar / ResearchGate / DOI links.",
@@ -73,7 +80,7 @@ export default async function AdminDashboard() {
                     <Icon size={20} />
                   </div>
                   <span className="font-mono text-xs font-semibold px-2.5 py-1 bg-secondary text-primary rounded-full">
-                    {sec.count} Items
+                    {typeof sec.count === 'string' ? sec.count : `${sec.count} Items`}
                   </span>
                 </div>
                 <h2 className="font-serif text-xl text-foreground group-hover:text-primary transition-colors font-medium mb-2">
