@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { prisma } from "@/lib/prisma"
 import { SiteNav } from "@/components/site-nav"
 import { SiteFooter } from "@/components/site-footer"

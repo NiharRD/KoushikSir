@@ -1,8 +1,10 @@
+export const dynamic = "force-dynamic"
+
 import { prisma } from "@/lib/prisma"
 import { SiteNav } from "@/components/site-nav"
 import { SiteFooter } from "@/components/site-footer"
 import { AmbientBackground } from "@/components/ambient-background"
-import { ArrowLeft, GraduationCap, Users } from "lucide-react"
+import { ArrowLeft, GraduationCap, Users, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 export default async function StudentsPage() {
@@ -64,7 +66,7 @@ export default async function StudentsPage() {
                         Doctoral Thesis Topic:
                       </p>
                       <p className="text-sm text-foreground/90 leading-relaxed font-serif">
-                        "{item.thesis}"
+                        &ldquo;{item.thesis}&rdquo;
                       </p>
                     </div>
                   </div>
