@@ -344,6 +344,25 @@ export default async function Home() {
                           <span>Scholar</span>
                         </a>
                       )}
+                      {(() => {
+                        try {
+                          const customLinks = pub.links ? JSON.parse(pub.links) : [];
+                          return customLinks.map((link: any, idx: number) => (
+                            <a
+                              key={`custom-${idx}`}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
+                            >
+                              <span>{link.label}</span>
+                              <ExternalLink className="h-2.5 w-2.5" />
+                            </a>
+                          ));
+                        } catch (e) {
+                          return null;
+                        }
+                      })()}
                     </div>
                   </div>
                 </div>
@@ -412,6 +431,28 @@ export default async function Home() {
                     <p><strong className="text-foreground">Agency:</strong> {grant.agency}</p>
                     <p><strong className="text-foreground">Role:</strong> {grant.role}</p>
                   </div>
+                  {(() => {
+                    try {
+                      const customLinks = grant.links ? JSON.parse(grant.links) : [];
+                      if (customLinks.length === 0) return null;
+                      return (
+                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
+                          {customLinks.map((link: any, idx: number) => (
+                            <a
+                              key={`custom-${idx}`}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
+                            >
+                              <span>{link.label}</span>
+                              <ExternalLink className="h-2.5 w-2.5" />
+                            </a>
+                          ))}
+                        </div>
+                      );
+                    } catch (e) { return null; }
+                  })()}
                 </div>
               ))}
             </div>
@@ -481,6 +522,28 @@ export default async function Home() {
                     <span>{student.degree} Degree</span>
                     <span className="text-orange">IIT Patna</span>
                   </div>
+                  {(() => {
+                    try {
+                      const customLinks = student.links ? JSON.parse(student.links) : [];
+                      if (customLinks.length === 0) return null;
+                      return (
+                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
+                          {customLinks.map((link: any, idx: number) => (
+                            <a
+                              key={`custom-${idx}`}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
+                            >
+                              <span>{link.label}</span>
+                              <ExternalLink className="h-2.5 w-2.5" />
+                            </a>
+                          ))}
+                        </div>
+                      );
+                    } catch (e) { return null; }
+                  })()}
                 </div>
               ))}
             </div>
@@ -542,6 +605,28 @@ export default async function Home() {
                     <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                       {award.detail}
                     </p>
+                    {(() => {
+                      try {
+                        const customLinks = award.links ? JSON.parse(award.links) : [];
+                        if (customLinks.length === 0) return null;
+                        return (
+                          <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
+                            {customLinks.map((link: any, idx: number) => (
+                              <a
+                                key={`custom-${idx}`}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
+                              >
+                                <span>{link.label}</span>
+                                <ExternalLink className="h-2.5 w-2.5" />
+                              </a>
+                            ))}
+                          </div>
+                        );
+                      } catch (e) { return null; }
+                    })()}
                   </div>
                 </div>
               ))}
@@ -611,6 +696,28 @@ export default async function Home() {
                     <p><strong className="text-foreground">Client:</strong> {proj.client}</p>
                     {proj.role && <p><strong className="text-foreground">Role:</strong> {proj.role}</p>}
                   </div>
+                  {(() => {
+                    try {
+                      const customLinks = proj.links ? JSON.parse(proj.links) : [];
+                      if (customLinks.length === 0) return null;
+                      return (
+                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
+                          {customLinks.map((link: any, idx: number) => (
+                            <a
+                              key={`custom-${idx}`}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
+                            >
+                              <span>{link.label}</span>
+                              <ExternalLink className="h-2.5 w-2.5" />
+                            </a>
+                          ))}
+                        </div>
+                      );
+                    } catch (e) { return null; }
+                  })()}
                 </div>
               ))}
             </div>

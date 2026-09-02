@@ -63,6 +63,28 @@ export default async function ResearchPage() {
                       <strong className="text-foreground">Investigator Role:</strong> {item.role}
                     </p>
                   </div>
+                  {(() => {
+                    try {
+                      const customLinks = item.links ? JSON.parse(item.links) : [];
+                      if (customLinks.length === 0) return null;
+                      return (
+                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
+                          {customLinks.map((link: any, idx: number) => (
+                            <a
+                              key={`custom-${idx}`}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
+                            >
+                              <span>{link.label}</span>
+                              <ExternalLink className="h-2.5 w-2.5" />
+                            </a>
+                          ))}
+                        </div>
+                      );
+                    } catch (e) { return null; }
+                  })()}
                 </div>
               ))}
             </div>
