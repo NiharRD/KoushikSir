@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export default async function ConsultancyPage() {
   const items = await prisma.consultancyProject.findMany({
-    orderBy: { id: "asc" },
+    orderBy: { id: "desc" },
   })
 
   return (

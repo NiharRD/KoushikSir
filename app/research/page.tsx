@@ -8,7 +8,7 @@ import { ArrowLeft, FlaskConical, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 export default async function ResearchPage() {
-  const items = await prisma.researchGrant.findMany({ orderBy: { id: "asc" } })
+  const items = await prisma.researchGrant.findMany({ orderBy: { id: "desc" } })
 
   return (
     <div className="relative isolate min-h-screen font-sans text-foreground">

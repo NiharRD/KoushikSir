@@ -8,7 +8,7 @@ import { ArrowLeft, GraduationCap, Users, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 export default async function StudentsPage() {
-  const items = await prisma.student.findMany({ orderBy: { id: "asc" } })
+  const items = await prisma.student.findMany({ orderBy: { id: "desc" } })
 
   return (
     <div className="relative isolate min-h-screen font-sans text-foreground">

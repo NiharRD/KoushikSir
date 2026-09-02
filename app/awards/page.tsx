@@ -8,7 +8,7 @@ import { ArrowLeft, Award as AwardIcon } from "lucide-react"
 import Link from "next/link"
 
 export default async function AwardsPage() {
-  const items = await prisma.award.findMany({ orderBy: { id: "asc" } })
+  const items = await prisma.award.findMany({ orderBy: { id: "desc" } })
 
   return (
     <div className="relative isolate min-h-screen font-sans text-foreground">

@@ -88,11 +88,11 @@ export default async function Home() {
     prisma.student.count(),
     prisma.award.count(),
     prisma.consultancyProject.count(),
-    prisma.publication.findMany({ take: 5, orderBy: { id: "asc" } }),
-    prisma.researchGrant.findMany({ take: 4, orderBy: { id: "asc" } }),
-    prisma.student.findMany({ take: 4, orderBy: { id: "asc" } }),
-    prisma.award.findMany({ take: 4, orderBy: { id: "asc" } }),
-    prisma.consultancyProject.findMany({ take: 4, orderBy: { id: "asc" } }),
+    prisma.publication.findMany({ take: 5, orderBy: { date: "desc" } }),
+    prisma.researchGrant.findMany({ take: 4, orderBy: { id: "desc" } }),
+    prisma.student.findMany({ take: 4, orderBy: { id: "desc" } }),
+    prisma.award.findMany({ take: 4, orderBy: { id: "desc" } }),
+    prisma.consultancyProject.findMany({ take: 4, orderBy: { id: "desc" } }),
   ])
   
   const socialLinks = JSON.parse(settings.socialLinks || "[]")
