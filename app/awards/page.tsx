@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic"
+export const revalidate = 3600 // ISR: re-generate every 1 hour max; admin edits trigger instant revalidation via revalidatePath()
 
 import { prisma } from "@/lib/prisma"
 import { SiteNav } from "@/components/site-nav"
