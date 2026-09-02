@@ -78,12 +78,12 @@ export default async function ConsultancyPage() {
                           {customLinks.map((link: any, idx: number) => (
                             <a
                               key={`custom-${idx}`}
-                              href={link.url}
+                              href={link.value}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
                             >
-                              <span>{link.label}</span>
+                              <span>{link.key}</span>
                               <ExternalLink className="h-2.5 w-2.5" />
                             </a>
                           ))}
