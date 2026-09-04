@@ -7,6 +7,8 @@ import { AmbientBackground } from "@/components/ambient-background"
 import { ArrowLeft, BookOpen, GraduationCap, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
+import { PublicationsList } from "@/components/publications-list"
+
 export default async function PublicationsPage() {
   const publications = await prisma.publication.findMany({
     orderBy: { date: "desc" },
@@ -40,88 +42,7 @@ export default async function PublicationsPage() {
               </span>
             </div>
 
-            <div className="space-y-5">
-              {publications.map((pub) => (
-                <div
-                  key={pub.id}
-                  className="p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm"
-                >
-                  <div className="flex justify-between items-start gap-4 mb-3">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
-                        {pub.date}
-                      </span>
-                      <span className="font-mono text-xs bg-primary/10 text-primary px-2.5 py-0.5">
-                        {pub.ref}
-                      </span>
-                    </div>
-                  </div>
-
-                  <h2 className="font-serif text-xl text-foreground font-medium mb-2.5 leading-snug">
-                    {pub.title}
-                  </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                    {pub.cite}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2.5 pt-2 border-t border-border/40">
-                    {pub.researchGateUrl && (
-                      <a
-                        href={pub.researchGateUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                      >
-                        <BookOpen className="h-3 w-3" />
-                        <span>ResearchGate</span>
-                        <ExternalLink className="h-2.5 w-2.5" />
-                      </a>
-                    )}
-                    {pub.googleScholarUrl && (
-                      <a
-                        href={pub.googleScholarUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                      >
-                        <GraduationCap className="h-3 w-3" />
-                        <span>Google Scholar</span>
-                      </a>
-                    )}
-                    {pub.doiUrl && (
-                      <a
-                        href={pub.doiUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                      >
-                        <span>DOI Link</span>
-                        <ExternalLink className="h-2.5 w-2.5" />
-                      </a>
-                    )}
-                    {(() => {
-                      try {
-                        const customLinks = pub.links ? JSON.parse(pub.links) : [];
-                        return customLinks.map((link: any, idx: number) => (
-                          <a
-                            key={`custom-${idx}`}
-                            href={link.value}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                          >
-                            <span>{link.key}</span>
-                            <ExternalLink className="h-2.5 w-2.5" />
-                          </a>
-                        ));
-                      } catch (e) {
-                        return null;
-                      }
-                    })()}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PublicationsList publications={publications} />
           </main>
         </div>
 
