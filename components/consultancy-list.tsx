@@ -14,51 +14,85 @@ type ConsultancyProject = {
   links: string | null
 }
 
-export function ConsultancyList({ items }: { items: ConsultancyProject[] }) {
+export function ConsultancyList({ items, isCompact = false }: { items: ConsultancyProject[], isCompact?: boolean }) {
   const [selected, setSelected] = useState<ConsultancyProject | null>(null)
 
   return (
     <>
-      <div className="space-y-5">
+      <div className={isCompact ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-5"}>
         {items.map((item) => (
           <div
             key={item.id}
             onClick={() => setSelected(item)}
-            className="p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm cursor-pointer group"
+            className={
+              isCompact
+                ? "p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex flex-col justify-between cursor-pointer group"
+                : "p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm cursor-pointer group"
+            }
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
-              <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20 self-start">
-                {item.period}
-              </span>
-              <div className="flex items-center gap-3 self-start sm:self-auto">
-                {item.value && (
-                  <span className="font-mono text-sm font-semibold text-primary px-2.5 py-0.5 bg-primary/10">
-                    Value: {item.value}
+            {isCompact ? (
+              <>
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-mono text-[0.68rem] uppercase tracking-wider text-orange font-medium">
+                      {item.period}
+                    </span>
+                    {item.value && (
+                      <span className="font-mono text-xs font-semibold px-2 py-0.5 bg-primary/10 text-primary">
+                        {item.value}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-serif text-base sm:text-lg font-medium text-foreground mb-2 leading-snug group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <div className="pt-3 border-t border-border/50 text-xs font-mono text-muted-foreground space-y-1">
+                  <p><strong className="text-foreground">Client:</strong> {item.client}</p>
+                  {item.role && <p><strong className="text-foreground">Role:</strong> {item.role}</p>}
+                  <div className="pt-2 text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Details &rarr;
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+                  <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20 self-start">
+                    {item.period}
                   </span>
-                )}
-                <span className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                  <div className="flex items-center gap-3 self-start sm:self-auto">
+                    {item.value && (
+                      <span className="font-mono text-sm font-semibold text-primary px-2.5 py-0.5 bg-primary/10">
+                        Value: {item.value}
+                      </span>
+                    )}
+                    <span className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                      View Details &rarr;
+                    </span>
+                  </div>
+                </div>
+
+                <h2 className="font-serif text-xl font-medium text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
+                  {item.title}
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-border/50 text-xs font-mono text-muted-foreground">
+                  <p>
+                    <strong className="text-foreground">Client Organization:</strong> {item.client}
+                  </p>
+                  {item.role && (
+                    <p>
+                      <strong className="text-foreground">Expert Role:</strong> {item.role}
+                    </p>
+                  )}
+                </div>
+                <div className="mt-3 text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity sm:hidden">
                   View Details &rarr;
-                </span>
-              </div>
-            </div>
-
-            <h2 className="font-serif text-xl font-medium text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
-              {item.title}
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-border/50 text-xs font-mono text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Client Organization:</strong> {item.client}
-              </p>
-              {item.role && (
-                <p>
-                  <strong className="text-foreground">Expert Role:</strong> {item.role}
-                </p>
-              )}
-            </div>
-            <div className="mt-3 text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity sm:hidden">
-              View Details &rarr;
-            </div>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>

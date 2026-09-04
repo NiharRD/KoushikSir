@@ -16,50 +16,82 @@ type Student = {
   links: string | null
 }
 
-export function StudentsList({ items }: { items: Student[] }) {
+export function StudentsList({ items, isCompact = false }: { items: Student[], isCompact?: boolean }) {
   const [selected, setSelected] = useState<Student | null>(null)
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className={isCompact ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" : "grid grid-cols-1 md:grid-cols-2 gap-6"}>
         {items.map((item) => (
           <div
             key={item.id}
             onClick={() => setSelected(item)}
-            className="p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm flex flex-col justify-between cursor-pointer group"
+            className={
+              isCompact
+                ? "p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex flex-col justify-between cursor-pointer group"
+                : "p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm flex flex-col justify-between cursor-pointer group"
+            }
           >
-            <div>
-              <div className="flex justify-between items-center mb-3">
-                <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
-                  {item.year || "Ph.D."}
-                </span>
-                <span className="font-mono text-xs px-2.5 py-0.5 bg-primary/10 text-primary font-medium">
-                  {item.status}
-                </span>
-              </div>
+            {isCompact ? (
+              <>
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-mono text-[0.65rem] uppercase tracking-wider text-orange font-medium">
+                      {item.year || "Ph.D."}
+                    </span>
+                    <span className="font-mono text-[0.65rem] px-2 py-0.5 bg-primary/10 text-primary">
+                      {item.status}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-base font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {item.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 mb-3">
+                    {item.thesis}
+                  </p>
+                </div>
 
-              <h2 className="font-serif text-2xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
-                {item.name}
-              </h2>
-              <p className="text-xs font-mono text-orange mb-3">
-                {item.degree} • IIT Patna
-              </p>
+                <div className="pt-3 border-t border-border/50 flex justify-between items-center text-[0.7rem] font-mono text-muted-foreground">
+                  <span>{item.degree}</span>
+                  <span className="text-orange opacity-0 group-hover:opacity-100 transition-opacity">View Details &rarr;</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
+                      {item.year || "Ph.D."}
+                    </span>
+                    <span className="font-mono text-xs px-2.5 py-0.5 bg-primary/10 text-primary font-medium">
+                      {item.status}
+                    </span>
+                  </div>
 
-              <div className="bg-secondary/20 p-4 border border-border/60 rounded-sm mb-4">
-                <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-1">
-                  Doctoral Thesis Topic:
-                </p>
-                <p className="text-sm text-foreground/90 leading-relaxed font-serif line-clamp-3">
-                  &ldquo;{item.thesis}&rdquo;
-                </p>
-              </div>
-            </div>
+                  <h2 className="font-serif text-2xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {item.name}
+                  </h2>
+                  <p className="text-xs font-mono text-orange mb-3">
+                    {item.degree} • IIT Patna
+                  </p>
 
-            <div className="flex items-center justify-between mt-2">
-              <div className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                View Profile &rarr;
-              </div>
-            </div>
+                  <div className="bg-secondary/20 p-4 border border-border/60 rounded-sm mb-4">
+                    <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-1">
+                      Doctoral Thesis Topic:
+                    </p>
+                    <p className="text-sm text-foreground/90 leading-relaxed font-serif line-clamp-3">
+                      &ldquo;{item.thesis}&rdquo;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-2">
+                  <div className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Profile &rarr;
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>

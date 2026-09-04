@@ -21,6 +21,12 @@ import { AnimatedCounter } from "@/components/animated-counter"
 import { AmbientBackground } from "@/components/ambient-background"
 import { prisma } from "@/lib/prisma"
 
+import { PublicationsList } from "@/components/publications-list"
+import { ResearchList } from "@/components/research-list"
+import { StudentsList } from "@/components/students-list"
+import { AwardsList } from "@/components/awards-list"
+import { ConsultancyList } from "@/components/consultancy-list"
+
 function LinkedinIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg
@@ -298,78 +304,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
-              {recentPubs.map((pub) => (
-                <div
-                  key={pub.id}
-                  className="group relative p-5 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm"
-                >
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2.5 mb-2">
-                        <span className="font-mono text-[0.68rem] uppercase tracking-widest bg-orange/10 text-orange px-2 py-0.5 border border-orange/20">
-                          {pub.date}
-                        </span>
-                        <span className="font-mono text-[0.68rem] bg-primary/10 text-primary px-2 py-0.5">
-                          {pub.ref}
-                        </span>
-                      </div>
-                      <h3 className="font-serif text-lg font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
-                        {pub.title}
-                      </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                        {pub.cite}
-                      </p>
-                    </div>
-
-                    <div className="flex md:flex-col gap-2 shrink-0 self-start">
-                      {pub.researchGateUrl && (
-                        <a
-                          href={pub.researchGateUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                        >
-                          <BookOpen className="h-3 w-3" />
-                          <span>ResearchGate</span>
-                          <ExternalLink className="h-2.5 w-2.5" />
-                        </a>
-                      )}
-                      {pub.googleScholarUrl && (
-                        <a
-                          href={pub.googleScholarUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                        >
-                          <GraduationCap className="h-3 w-3" />
-                          <span>Scholar</span>
-                        </a>
-                      )}
-                      {(() => {
-                        try {
-                          const customLinks = pub.links ? JSON.parse(pub.links) : [];
-                          return customLinks.map((link: any, idx: number) => (
-                            <a
-                              key={`custom-${idx}`}
-                              href={link.value}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                            >
-                              <span>{link.key}</span>
-                              <ExternalLink className="h-2.5 w-2.5" />
-                            </a>
-                          ));
-                        } catch (e) {
-                          return null;
-                        }
-                      })()}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PublicationsList publications={recentPubs} isCompact />
 
             <div className="mt-6 text-center">
               <Link
@@ -409,55 +344,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {recentGrants.map((grant) => (
-                <div
-                  key={grant.id}
-                  className="p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex justify-between items-center mb-2.5">
-                      <span className="font-mono text-[0.68rem] uppercase tracking-wider text-orange font-medium">
-                        {grant.period}
-                      </span>
-                      <span className="font-mono text-xs font-semibold px-2 py-0.5 bg-primary/10 text-primary">
-                        {grant.grant}
-                      </span>
-                    </div>
-                    <h3 className="font-serif text-base sm:text-lg font-medium text-foreground mb-3 leading-snug">
-                      {grant.title}
-                    </h3>
-                  </div>
-
-                  <div className="pt-3 border-t border-border/50 text-xs font-mono text-muted-foreground space-y-1">
-                    <p><strong className="text-foreground">Agency:</strong> {grant.agency}</p>
-                    <p><strong className="text-foreground">Role:</strong> {grant.role}</p>
-                  </div>
-                  {(() => {
-                    try {
-                      const customLinks = grant.links ? JSON.parse(grant.links) : [];
-                      if (customLinks.length === 0) return null;
-                      return (
-                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
-                          {customLinks.map((link: any, idx: number) => (
-                            <a
-                              key={`custom-${idx}`}
-                              href={link.value}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                            >
-                              <span>{link.key}</span>
-                              <ExternalLink className="h-2.5 w-2.5" />
-                            </a>
-                          ))}
-                        </div>
-                      );
-                    } catch (e) { return null; }
-                  })()}
-                </div>
-              ))}
-            </div>
+            <ResearchList items={recentGrants} isCompact />
 
             <div className="mt-6 text-center">
               <Link
@@ -497,58 +384,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {recentStudents.map((student) => (
-                <div
-                  key={student.id}
-                  className="p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-mono text-[0.65rem] uppercase tracking-wider text-orange font-medium">
-                        {student.year || "Ph.D."}
-                      </span>
-                      <span className="font-mono text-[0.65rem] px-2 py-0.5 bg-primary/10 text-primary">
-                        {student.status}
-                      </span>
-                    </div>
-                    <h3 className="font-serif text-base font-medium text-foreground mb-2">
-                      {student.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 mb-3">
-                      {student.thesis}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-border/50 flex justify-between items-center text-[0.7rem] font-mono text-muted-foreground">
-                    <span>{student.degree} Degree</span>
-                    <span className="text-orange">IIT Patna</span>
-                  </div>
-                  {(() => {
-                    try {
-                      const customLinks = student.links ? JSON.parse(student.links) : [];
-                      if (customLinks.length === 0) return null;
-                      return (
-                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
-                          {customLinks.map((link: any, idx: number) => (
-                            <a
-                              key={`custom-${idx}`}
-                              href={link.value}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                            >
-                              <span>{link.key}</span>
-                              <ExternalLink className="h-2.5 w-2.5" />
-                            </a>
-                          ))}
-                        </div>
-                      );
-                    } catch (e) { return null; }
-                  })()}
-                </div>
-              ))}
-            </div>
+            <StudentsList items={recentStudents} isCompact />
 
             <div className="mt-6 text-center">
               <Link
@@ -588,51 +424,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {recentAwards.map((award) => (
-                <div
-                  key={award.id}
-                  className="p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex gap-4 items-start"
-                >
-                  <div className="h-9 w-9 rounded-full bg-orange/10 border border-orange/20 flex items-center justify-center shrink-0 text-orange mt-0.5">
-                    <AwardIcon className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-[0.68rem] uppercase tracking-wider text-orange mb-1">
-                      {award.date}
-                    </div>
-                    <h3 className="font-serif text-base sm:text-lg font-medium text-foreground mb-1.5">
-                      {award.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                      {award.detail}
-                    </p>
-                    {(() => {
-                      try {
-                        const customLinks = award.links ? JSON.parse(award.links) : [];
-                        if (customLinks.length === 0) return null;
-                        return (
-                          <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
-                            {customLinks.map((link: any, idx: number) => (
-                              <a
-                                key={`custom-${idx}`}
-                                href={link.value}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                              >
-                                <span>{link.key}</span>
-                                <ExternalLink className="h-2.5 w-2.5" />
-                              </a>
-                            ))}
-                          </div>
-                        );
-                      } catch (e) { return null; }
-                    })()}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <AwardsList items={recentAwards} isCompact />
 
             <div className="mt-6 text-center">
               <Link
@@ -672,57 +464,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {recentConsultancy.map((proj) => (
-                <div
-                  key={proj.id}
-                  className="p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-mono text-[0.68rem] uppercase tracking-wider text-orange font-medium">
-                        {proj.period}
-                      </span>
-                      {proj.value && (
-                        <span className="font-mono text-xs font-semibold px-2 py-0.5 bg-primary/10 text-primary">
-                          {proj.value}
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="font-serif text-base sm:text-lg font-medium text-foreground mb-2 leading-snug">
-                      {proj.title}
-                    </h3>
-                  </div>
-
-                  <div className="pt-3 border-t border-border/50 text-xs font-mono text-muted-foreground space-y-1">
-                    <p><strong className="text-foreground">Client:</strong> {proj.client}</p>
-                    {proj.role && <p><strong className="text-foreground">Role:</strong> {proj.role}</p>}
-                  </div>
-                  {(() => {
-                    try {
-                      const customLinks = proj.links ? JSON.parse(proj.links) : [];
-                      if (customLinks.length === 0) return null;
-                      return (
-                        <div className="flex flex-wrap gap-2 pt-3 mt-3 border-t border-border/40">
-                          {customLinks.map((link: any, idx: number) => (
-                            <a
-                              key={`custom-${idx}`}
-                              href={link.value}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground hover:text-orange hover:border-orange transition-colors"
-                            >
-                              <span>{link.key}</span>
-                              <ExternalLink className="h-2.5 w-2.5" />
-                            </a>
-                          ))}
-                        </div>
-                      );
-                    } catch (e) { return null; }
-                  })()}
-                </div>
-              ))}
-            </div>
+            <ConsultancyList items={recentConsultancy} isCompact />
 
             <div className="mt-6 text-center">
               <Link

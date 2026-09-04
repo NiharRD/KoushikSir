@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useRef, ReactNode } from "react"
+import { useEffect, useRef, ReactNode, useState } from "react"
+import { createPortal } from "react-dom"
 import { X } from "lucide-react"
 
 interface BaseModalProps {
@@ -14,6 +15,11 @@ interface BaseModalProps {
 
 export function BaseModal({ open, onClose, title, badge, typeBadge, children }: BaseModalProps) {
   const closeRef = useRef<HTMLButtonElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -31,17 +37,17 @@ export function BaseModal({ open, onClose, title, badge, typeBadge, children }: 
     }
   }, [open, onClose])
 
-  if (!open) return null
+  if (!open || !mounted) return null
 
-  return (
+  return createPortal(
     <div
       role="dialog" aria-modal="true"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-foreground/40 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-foreground/40 backdrop-blur-sm animate-in fade-in duration-200 sm:p-6"
     >
       <div
         onClick={e => e.stopPropagation()}
-        className="relative w-full sm:max-w-2xl max-h-[92dvh] overflow-y-auto bg-card border border-border shadow-2xl rounded-t-lg sm:rounded-sm animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-0 duration-200"
+        className="relative w-full sm:w-[60vw] lg:w-[50vw] xl:w-[40vw] max-w-4xl max-h-[92dvh] sm:max-h-[85vh] overflow-y-auto bg-card border border-border shadow-2xl rounded-t-lg sm:rounded-sm animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-0 sm:zoom-in-95 duration-200"
       >
         <div className="sticky top-0 z-10 flex items-start justify-between gap-4 bg-card/95 backdrop-blur-sm border-b border-border px-6 py-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -64,6 +70,7 @@ export function BaseModal({ open, onClose, title, badge, typeBadge, children }: 
           {children}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

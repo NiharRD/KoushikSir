@@ -12,34 +12,44 @@ type Award = {
   links: string | null
 }
 
-export function AwardsList({ items }: { items: Award[] }) {
+export function AwardsList({ items, isCompact = false }: { items: Award[], isCompact?: boolean }) {
   const [selected, setSelected] = useState<Award | null>(null)
 
   return (
     <>
-      <div className="space-y-5">
+      <div className={isCompact ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-5"}>
         {items.map((item) => (
           <div
             key={item.id}
             onClick={() => setSelected(item)}
-            className="p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm flex gap-5 items-start cursor-pointer group"
+            className={
+              isCompact
+                ? "p-5 border border-border bg-background hover:bg-secondary/25 transition-all rounded-sm flex gap-4 items-start cursor-pointer group"
+                : "p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm flex gap-5 items-start cursor-pointer group"
+            }
           >
-            <div className="h-10 w-10 rounded-full bg-orange/10 border border-orange/25 flex items-center justify-center shrink-0 text-orange mt-1">
-              <AwardIcon className="h-5 w-5" />
+            <div className={isCompact ? "h-9 w-9 rounded-full bg-orange/10 border border-orange/20 flex items-center justify-center shrink-0 text-orange mt-0.5" : "h-10 w-10 rounded-full bg-orange/10 border border-orange/25 flex items-center justify-center shrink-0 text-orange mt-1"}>
+              <AwardIcon className={isCompact ? "h-4 w-4" : "h-5 w-5"} />
             </div>
             <div className="flex-1">
               <div className="flex justify-between items-start">
-                <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
-                  {item.date}
-                </span>
+                {isCompact ? (
+                  <div className="font-mono text-[0.68rem] uppercase tracking-wider text-orange mb-1">
+                    {item.date}
+                  </div>
+                ) : (
+                  <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
+                    {item.date}
+                  </span>
+                )}
                 <span className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
                   View Details &rarr;
                 </span>
               </div>
-              <h2 className="font-serif text-xl font-medium text-foreground mt-2 mb-1.5 group-hover:text-primary transition-colors">
+              <h2 className={isCompact ? "font-serif text-base sm:text-lg font-medium text-foreground mb-1.5 group-hover:text-primary transition-colors" : "font-serif text-xl font-medium text-foreground mt-2 mb-1.5 group-hover:text-primary transition-colors"}>
                 {item.title}
               </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+              <p className={isCompact ? "text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2" : "text-sm text-muted-foreground leading-relaxed line-clamp-2"}>
                 {item.detail}
               </p>
             </div>

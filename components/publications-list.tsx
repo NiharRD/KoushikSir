@@ -16,70 +16,103 @@ type Publication = {
   links: string | null
 }
 
-export function PublicationsList({ publications }: { publications: Publication[] }) {
+export function PublicationsList({ publications, isCompact = false }: { publications: Publication[], isCompact?: boolean }) {
   const [selected, setSelected] = useState<Publication | null>(null)
 
   return (
     <>
-      <div className="space-y-5">
+      <div className={isCompact ? "grid grid-cols-1 gap-4" : "space-y-5"}>
         {publications.map((pub) => (
           <div
             key={pub.id}
             onClick={() => setSelected(pub)}
-            className="p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm cursor-pointer group"
+            className={
+              isCompact 
+                ? "group relative p-5 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm cursor-pointer"
+                : "p-6 border border-border bg-background hover:bg-secondary/25 hover:border-primary/40 transition-all rounded-sm cursor-pointer group"
+            }
           >
-            <div className="flex justify-between items-start gap-4 mb-3">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
-                  {pub.date}
-                </span>
-                <span className="font-mono text-xs bg-primary/10 text-primary px-2.5 py-0.5">
-                  {pub.ref}
-                </span>
-              </div>
-              <div className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                View Details &rarr;
-              </div>
-            </div>
-
-            <h2 className="font-serif text-xl text-foreground font-medium mb-2.5 leading-snug group-hover:text-primary transition-colors">
-              {pub.title}
-            </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
-              {pub.cite}
-            </p>
-
-            <div className="flex flex-wrap gap-2.5 pt-2 border-t border-border/40">
-              {pub.researchGateUrl && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
-                  <BookOpen className="h-3 w-3" />
-                  <span>ResearchGate</span>
-                </span>
-              )}
-              {pub.googleScholarUrl && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
-                  <GraduationCap className="h-3 w-3" />
-                  <span>Google Scholar</span>
-                </span>
-              )}
-              {pub.doiUrl && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
-                  <span>DOI Link</span>
-                </span>
-              )}
-              {(() => {
-                try {
-                  const customLinks = pub.links ? JSON.parse(pub.links) : [];
-                  return customLinks.map((link: any, idx: number) => (
-                    <span key={`custom-${idx}`} className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
-                      <span>{link.key}</span>
+            {isCompact ? (
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <span className="font-mono text-[0.68rem] uppercase tracking-widest bg-orange/10 text-orange px-2 py-0.5 border border-orange/20">
+                      {pub.date}
                     </span>
-                  ));
-                } catch (e) {
-                  return null;
-                }
-              })()}
-            </div>
+                    <span className="font-mono text-[0.68rem] bg-primary/10 text-primary px-2 py-0.5">
+                      {pub.ref}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-lg font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
+                    {pub.title}
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    {pub.cite}
+                  </p>
+                </div>
+
+                <div className="flex md:flex-col gap-2 shrink-0 md:self-center">
+                  <span className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Details &rarr;
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex justify-between items-start gap-4 mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs uppercase tracking-widest bg-orange/10 text-orange px-2.5 py-0.5 border border-orange/20">
+                      {pub.date}
+                    </span>
+                    <span className="font-mono text-xs bg-primary/10 text-primary px-2.5 py-0.5">
+                      {pub.ref}
+                    </span>
+                  </div>
+                  <div className="text-xs font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Details &rarr;
+                  </div>
+                </div>
+
+                <h2 className="font-serif text-xl text-foreground font-medium mb-2.5 leading-snug group-hover:text-primary transition-colors">
+                  {pub.title}
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+                  {pub.cite}
+                </p>
+
+                <div className="flex flex-wrap gap-2.5 pt-2 border-t border-border/40">
+                  {pub.researchGateUrl && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
+                      <BookOpen className="h-3 w-3" />
+                      <span>ResearchGate</span>
+                    </span>
+                  )}
+                  {pub.googleScholarUrl && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
+                      <GraduationCap className="h-3 w-3" />
+                      <span>Google Scholar</span>
+                    </span>
+                  )}
+                  {pub.doiUrl && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
+                      <span>DOI Link</span>
+                    </span>
+                  )}
+                  {(() => {
+                    try {
+                      const customLinks = pub.links ? JSON.parse(pub.links) : [];
+                      return customLinks.map((link: any, idx: number) => (
+                        <span key={`custom-${idx}`} className="inline-flex items-center gap-1.5 text-xs font-mono border border-border px-3 py-1 bg-secondary/30 text-muted-foreground">
+                          <span>{link.key}</span>
+                        </span>
+                      ));
+                    } catch (e) {
+                      return null;
+                    }
+                  })()}
+                </div>
+              </>
+            )}
           </div>
         ))}
       </div>
